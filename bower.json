@@ -1,0 +1,26 @@
+{
+  "name": "document-management-system",
+  "description": "Full Stack package to manage documents, users and roles.",
+  "main": "index.js",
+  "authors": [
+    "Kevin Ndung'u"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/kevgathuku/react-docms",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.0"
+  }
+}
