@@ -45,6 +45,9 @@
       }, {
         test: /\.json$/,
         loader: 'json-loader'
+      }, {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
       }],
       noParse: [pathToReact, /node_modules\/json-schema\/lib\/validate\.js/]
     },
