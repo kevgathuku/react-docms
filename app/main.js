@@ -8,12 +8,15 @@
       Route = ReactRouter.Route,
       Router = ReactRouter.Router,
       browserHistory = ReactRouter.browserHistory,
-      Landing = require('./components/Landing/index.jsx');
+      Landing = require('./components/Landing/index.jsx'),
+      Main = require('./components/Landing/Main.jsx'),
+      Authenticate = require('./components/Authenticate/index.jsx');
 
   ReactDOM.render((
     <Router history={browserHistory}>
-      <Route path="/" component={Landing} >
+      <Route path="/" component={Main} >
         <IndexRoute component={Landing} />
+        <Route path="/auth" component={Authenticate} />
       </Route>
-    </Router>) , document.getElementById('content'));
+    </Router>), document.getElementById('content'));
 })();

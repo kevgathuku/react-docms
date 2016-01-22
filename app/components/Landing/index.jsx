@@ -1,8 +1,7 @@
 (function() {
   'use strict';
   let React = require('react');
-  let NavBar = require('./NavBar.jsx');
-  let Main = require('./Main.jsx');
+  let Home = require('./Home.jsx');
 
   // Requires the CSS for it to be included in the final output
   // This specific CSS is required for the landing page only
@@ -16,8 +15,7 @@
     render() {
       return (
         <div>
-          <NavBar/>
-          <Main/>
+          <Home/>
         </div>
       );
     }
