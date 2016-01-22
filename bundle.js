@@ -29,7 +29,9 @@
       // from the build path. When proxying:
       // http://localhost:3000/build -> http://localhost:8080/build
       publicPath: '/build/',
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
       // Configure hot replacement
       hot: true,
       debug: true,
