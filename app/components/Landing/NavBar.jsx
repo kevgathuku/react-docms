@@ -17,16 +17,16 @@
                <img alt="Docue Logo" id="header-logo" src={logoSrc}/>
                 {'      Docue'}</a>
              <ul className="right hide-on-med-and-down" id="nav-mobile">
-               <li><a href="#">Home</a></li>
+               <li><a href="/">Home</a></li>
                <li><a href="#">About</a></li>
                <li><a href="#">Login</a></li>
              </ul>
              <div className="row center hide-on-large-only" id="header-mobile-links">
                 <div className="col s4">
-                    <a href="/#">About</a>
+                    <a href="/#">Home</a>
                 </div>
                 <div className="col s4">
-                    <a href="/#">Sign Up</a>
+                    <a href="/#">About</a>
                 </div>
                 <div className="col s4">
                   <a href="#">Login</a>

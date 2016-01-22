@@ -1,7 +1,9 @@
 (function() {
   'use strict';
-  var React = require('react');
-  var NavBar = require('./NavBar.jsx');
+  let React = require('react');
+  let NavBar = require('./NavBar.jsx');
+  let Main = require('./Main.jsx');
+
 
   class Landing extends React.Component {
     constructor() {
@@ -12,6 +14,7 @@
       return (
         <div>
           <NavBar />
+          <Main />
         </div>
       );
     }
