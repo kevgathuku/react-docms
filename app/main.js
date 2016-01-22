@@ -6,5 +6,4 @@
   let Index = require('./components/Landing/index.jsx');
 
   ReactDOM.render(<Index /> , document.getElementById('content'));
-  // ReactDOM.render(<Index /> , document.getElementById('contain'));
 })();
