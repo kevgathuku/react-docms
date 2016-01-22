@@ -3,6 +3,7 @@
 
   var webpack = require('webpack');
   var path = require('path');
+  let ExtractTextPlugin = require('extract-text-webpack-plugin');
   let buildPath = path.resolve(__dirname, 'public', 'build');
   var nodeModulesPath = path.resolve(__dirname, 'node_modules');
   let pathToReact = path.resolve(nodeModulesPath, 'react/dist/react.min.js');
@@ -29,6 +30,7 @@
       filename: 'bundle.js' // Name of output file
     },
     plugins: [
+      new ExtractTextPlugin('styles.css'),
       // Minify the bundle
       new webpack.optimize.UglifyJsPlugin({
         compress: {
@@ -48,8 +50,9 @@
           presets: ['es2015', 'react']
         }
       }, {
-        test: /masonry|imagesloaded|fizzy\-ui\-utils|desandro\-|outlayer|get\-size|doc\-ready|eventie|eventemitter/,
-        loader: 'imports?define=>false&this=>window'
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       }],
       noParse: [pathToReact]
     }
