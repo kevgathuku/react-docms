@@ -38,7 +38,7 @@
       loaders: [{
         test: /\.jsx?$/, // A regexp to test the require path. works for js or jsx
         loader: 'babel', // The module to load. "babel" is short for "babel-loader"
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react']
         }
@@ -46,6 +46,11 @@
         test: /\.json$/,
         loader: 'json-loader'
       }, {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader'
+      },
+       {
         test: /\.(png|jpg)$/,
         loader: 'url-loader?limit=8192'
       }],
