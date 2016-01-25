@@ -11,10 +11,6 @@
 
     signup: function(user) {
       BaseActions.post('/api/users', user, AppConstants.USER_SIGNUP);
-    },
-
-    session: function() {
-      BaseActions.get('/api/users/session', AppConstants.USER_SESSION);
     }
   };
 })();
