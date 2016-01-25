@@ -1,32 +1,31 @@
 (function() {
   'use strict';
 
-  var React = require('react');
+  let React = require('react');
 
-  var LoginForm = React.createClass({
-
-    getInitialState: function() {
-      return {
+  class LoginForm extends React.Component {
+    constructor() {
+      super();
+      this.state = {
         user: {
-          username: '',
-          password: ''
+          username: null,
+          password: null
         },
-        result: ''
+        result: null
       };
-    },
+    }
 
-    handleFieldChange: function(event) {
+    handleFieldChange(event) {
       var field = event.target.name;
       var value = event.target.value;
       this.state.user[field] = value;
-    },
+    }
 
-    render: function() {
+    render() {
       return (
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="input-field col s12">
-              <i className="material-icons prefix">mail_outline</i>
               <input className="validate"
                   id="email"
                   name="email"
@@ -34,10 +33,9 @@
                   required
                   type="text"
               />
-              <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             </div>
             <div className="input-field col s12">
-              <i className="material-icons prefix">lock_open</i>
               <input className="validate"
                   id="password"
                   name="password"
@@ -45,14 +43,13 @@
                   required
                   type="password"
               />
-              <label htmlFor="password">password</label>
+            <label htmlFor="password">Password</label>
             </div>
             <div className="col s2">
-              <button className="btn waves-effect header-btn"
+              <button className="btn waves-effect header-btn center-align"
                   name="action"
                   type="submit"
-              >
-                <i className="fa fa-sign-in"></i>
+              > Login
               </button>
             </div>
 
@@ -60,7 +57,7 @@
         </div>
       );
     }
-  });
+  }
 
   module.exports = LoginForm;
 })();

@@ -6627,3 +6627,13 @@ h2 {
     margin: 10px auto;
   }
 }
+
+/* Custom error toast styling */
+.error-toast {
+    background-color: rgba(210, 57, 57, 1);
+}
+
+/* Custom success toast styling */
+.success-toast {
+    background-color: #00cc33;
+}

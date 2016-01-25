@@ -1,110 +1,123 @@
 (function() {
   'use strict';
 
-  var React = require('react');
+  let React = require('react'),
+    UserActions = require('../../actions/UserActions'),
+    browserHistory = require('react-router').browserHistory,
+    UserStore = require('../../stores/UserStore');
 
-  var Signup = React.createClass({
+  class SignupForm extends React.Component {
 
-    getInitialState: function() {
-      return {
-        user: {
-          email: '',
-          password: '',
-          name: ''
-        },
-        result: '',
-        confirmpswd: ''
+    constructor() {
+      super();
+      this.state = {
+        username: null,
+        firstname: null,
+        lastname: null,
+        email: null,
+        password: null,
+        passwordConfirm: null,
+        result: null
       };
-    },
+      // React components using ES6 classes no longer
+      // autobind this to non React methods.
+      // This is required in the constructor
+      // to make 'this' available to non React methods
+      this.comparePassword = this.comparePassword.bind(this);
+      this.handleFieldChange = this.handleFieldChange.bind(this);
+      this.handleSignup = this.handleSignup.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-    componentDidMount: function() {
-      this.comparepswd();
-    },
+    componentDidMount() {
+      UserStore.addChangeListener(this.handleSignup);
+    }
 
-    comparepswd: function(password, confirmPassword) {
+    comparePassword(password, confirmPassword) {
       if (password !== confirmPassword) {
         window.Materialize.toast('passwords don\'t match', 2000, 'error-toast');
         return false;
       } else if (password.length >= 1 && password.length < 6) {
-        window.Materialize.toast('passwords should be > 6 characters ',
-         2000, 'error-toast');
+        window.Materialize.toast('passwords should be > 6 characters ', 2000, 'error-toast');
         return false;
       } else {
         return true;
       }
-    },
+    }
 
-    handleFieldChange: function(event) {
-      var field = event.target.name;
-      var value = event.target.value;
-      if (field === 'confirmpswd') {
-        this.setState({confirmpswd: value});
-        // this.state.confirmpswd = value;
+    handleSignup() {
+      var data = UserStore.getUser();
+      if (data.error) {
+        window.Materialize.toast(data.error, 2000, 'error-toast');
       } else {
-        this.state.user[field] = value;
+        window.Materialize.toast('User Created Successfully!', 2000, 'success-toast');
+        browserHistory.push('/');
       }
-      return this.setState({
-        user: this.state.user,
-        confirmpswd: this.state.confirmpswd
-      });
-    },
+    }
 
-    render: function() {
+    handleSubmit(event) {
+      event.preventDefault();
+      if (this.comparePassword(this.state.password, this.state.passwordConfirm)) {
+        let userPayload = {
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          username: this.state.email,
+          email: this.state.email,
+          password: this.state.password
+        };
+        UserActions.signup(userPayload);
+      }
+    }
+
+    handleFieldChange(event) {
+      if (event.target.name === 'password-confirm') {
+        this.setState({passwordConfirm: event.target.value});
+      } else {
+        // A function bound to the event object
+        let stateObject = function() {
+          let returnObj = {};
+          returnObj[this.target.name] = this.target.value;
+          return returnObj;
+        }.bind(event)();
+
+        this.setState(stateObject);
+      }
+    }
+
+    render() {
       return (
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
-            <span>{this.state.result}</span>
-             <div className="input-field col s12">
-              <input className="validate"
-                  id="name"
-                  name="name"
-                  onChange={this.handleFieldChange}
-                  required
-                  type="text"
-              />
-              <label htmlFor="name">Full Name</label>
+            <div className="input-field col m6 s12">
+              <input className="validate" id="firstname" name="firstname" onChange={this.handleFieldChange} required type="text"/>
+              <label htmlFor="firstname">First Name</label>
+            </div>
+            <div className="input-field col m6 s12">
+              <input className="validate" id="lastname" name="lastname" onChange={this.handleFieldChange} required type="text"/>
+              <label htmlFor="lastname">Last Name</label>
             </div>
             <div className="input-field col s12">
-              <input className="validate"
-                  id="email"
-                  name="email"
-                  onChange={this.handleFieldChange}
-                  required
-                  type="email"
-              />
+              <input className="validate" id="email" name="email" onChange={this.handleFieldChange} required type="email"/>
               <label htmlFor="email">Email</label>
             </div>
             <div className="input-field col s12">
-              <input className="validate"
-                  id="password"
-                  name="password"
-                  onChange={this.handleFieldChange}
-                  required
-                  type="password"
-              />
+              <input className="validate" id="password" name="password" onChange={this.handleFieldChange} required type="password"/>
               <label htmlFor="password">Password</label>
             </div>
             <div className="input-field col s12">
-              <input className="validate"
-                  id="password"
-                  name="confirmpswd"
-                  onChange={this.handleFieldChange}
-                  required
-                  type="password"
-              />
-              <label htmlFor="password">Confirm Password</label>
+              <input className="validate" id="password-confirm" name="password-confirm" onChange={this.handleFieldChange} required type="password"/>
+              <label htmlFor="password-confirm">Confirm Password</label>
             </div>
             <div className="col s12">
-              <button className="btn waves-effect waves-light"
-                  name="action"
-                  type="submit"
-              >start trimming</button>
+              <button className="btn waves-effect waves-light" name="action" type="submit">
+                Sign up
+              </button>
             </div>
           </form>
         </div>
       );
     }
-  });
+  }
 
-  module.exports = Signup;
+  module.exports = SignupForm;
 })();
