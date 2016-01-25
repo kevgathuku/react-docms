@@ -10,13 +10,13 @@
       browserHistory = ReactRouter.browserHistory,
       Landing = require('./components/Landing/index.jsx'),
       Main = require('./components/Landing/Main.jsx'),
-      Authenticate = require('./components/Authenticate/index.jsx');
+      Auth = require('./components/Auth/index.jsx');
 
   ReactDOM.render((
     <Router history={browserHistory}>
       <Route path="/" component={Main} >
         <IndexRoute component={Landing} />
-        <Route path="/auth" component={Authenticate} />
+        <Route path="/auth" component={Auth} />
       </Route>
     </Router>), document.getElementById('content'));
 })();

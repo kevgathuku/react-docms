@@ -6614,3 +6614,16 @@ h2 {
   text-align: center;
   left: -35px;
 }
+
+/* Custom Style */
+@media (min-width: 481px) {
+  .signupcard {
+    width: 50%;
+    margin: 10px auto;
+  }
+}
+@media (max-width: 480px) {
+  .signupcard {
+    margin: 10px auto;
+  }
+}
