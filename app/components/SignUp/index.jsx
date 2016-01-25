@@ -109,9 +109,11 @@
               <label htmlFor="password-confirm">Confirm Password</label>
             </div>
             <div className="col s12">
-              <button className="btn waves-effect waves-light" name="action" type="submit">
-                Sign up
-              </button>
+              <div className="center">
+                <button className="btn waves-effect waves-light blue" name="action" type="submit">
+                  Sign up
+                </button>
+            </div>
             </div>
           </form>
         </div>

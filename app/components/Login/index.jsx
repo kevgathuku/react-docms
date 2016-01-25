@@ -45,14 +45,15 @@
               />
             <label htmlFor="password">Password</label>
             </div>
-            <div className="col s2">
-              <button className="btn waves-effect header-btn center-align"
-                  name="action"
-                  type="submit"
-              > Login
-              </button>
+            <div className="col s12">
+              <div className="containter center">
+                <button className="btn waves-effect header-btn blue"
+                    name="action"
+                    type="submit"
+                > Login
+                </button>
+              </div>
             </div>
-
           </form>
         </div>
       );

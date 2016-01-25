@@ -18,8 +18,8 @@
                   <div className="row card-panel hoverable">
                     <div className="col s12">
                       <ul className="tabs">
-                        <li className="tab col s4"><a href="/auth#login">Login</a></li>
-                        <li className="tab col s4"><a className="active" href="/auth#signup">Signup</a></li>
+                        <li className="tab col s4"><a className="active blue-text" href="/auth#login">Login</a></li>
+                        <li className="tab col s4"><a className="blue-text" href="/auth#signup">Signup</a></li>
                       </ul>
                     </div>
                     <div id="login" className="col s12">
