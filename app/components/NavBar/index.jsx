@@ -2,7 +2,7 @@
   'use strict';
 
   let React = require('react');
-  let logoSrc = '../images/favicon.png';
+  let logoSrc = require('../../images/favicon.png');
 
   class NavBar extends React.Component {
     constructor() {
