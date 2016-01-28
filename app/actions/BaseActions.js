@@ -5,9 +5,10 @@
   let request = require('superagent');
 
   module.exports = {
-    get: function(url, actionType) {
+    get: function(url, actionType, token=null) {
       request
         .get(url)
+        .set('x-access-token', token)
         .end(function(err, result) {
           AppDispatcher.dispatch({
             actionType: actionType,
@@ -16,9 +17,10 @@
         });
     },
 
-    delete: function(url, data, actionType) {
+    delete: function(url, data, actionType, token=null) {
       request
         .delete(url)
+        .set('x-access-token', token)
         .send(data || {})
         .end(function(err, result) {
           AppDispatcher.dispatch({
@@ -28,9 +30,10 @@
         });
     },
 
-    put: function(url, data, actionType) {
+    put: function(url, data, actionType, token=null) {
       request
         .put(url)
+        .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
           AppDispatcher.dispatch({
@@ -40,9 +43,10 @@
         });
     },
 
-    post: function(url, data, actionType) {
+    post: function(url, data, actionType, token=null) {
       request
         .post(url)
+        .set('x-access-token', token)
         .send(data)
         .end(function(err, result) {
           AppDispatcher.dispatch({
