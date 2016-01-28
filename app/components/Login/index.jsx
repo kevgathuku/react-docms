@@ -26,13 +26,15 @@
 
     handleLogin() {
       var data = UserStore.getLoginResult();
-      if (data.error) {
-        window.Materialize.toast(data.error, 2000, 'error-toast');
-      } else {
+      if (data) {
+        if (data.error) {
+          window.Materialize.toast(data.error, 2000, 'error-toast');
+        } else {
         // The login was successful
-        localStorage.setItem(data.user._id, data.token);
+        localStorage.setItem('user', data.token);
         window.Materialize.toast('Logged in Successfully!', 2000, 'success-toast');
         browserHistory.push('/');
+        }
       }
     }
 

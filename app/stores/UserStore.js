@@ -7,15 +7,17 @@
       BaseStore = require('./BaseStore');
 
   let UserStore = assign({}, BaseStore, {
-    user: null,
+    session: null,
     loginResult: null,
-    setUser: function(user) {
-      this.user = user;
+    signupResult: null,
+
+    setSession: function(session) {
+      this.session = session;
       this.emitChange();
     },
 
-    getUser: function() {
-      return this.user;
+    getSession: function() {
+      return this.session;
     },
 
     setLoginResult: function(loginResult) {
@@ -25,6 +27,15 @@
 
     getLoginResult: function() {
       return this.loginResult;
+    },
+
+    setSignupResult: function(signupResult) {
+      this.signupResult = signupResult;
+      this.emitChange();
+    },
+
+    getSignupResult: function() {
+      return this.signupResult;
     }
   });
 
@@ -34,7 +45,10 @@
         UserStore.setLoginResult(action.data);
         break;
       case AppConstants.USER_SIGNUP:
-        UserStore.setUser(action.data);
+        UserStore.setSignupResult(action.data);
+        break;
+      case AppConstants.USER_SESSION:
+        UserStore.setSession(action.data);
         break;
       default:
         // no default action

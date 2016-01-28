@@ -46,12 +46,14 @@
     }
 
     handleSignup() {
-      var data = UserStore.getUser();
-      if (data.error) {
-        window.Materialize.toast(data.error, 2000, 'error-toast');
-      } else {
-        window.Materialize.toast('User Created Successfully!', 2000, 'success-toast');
-        browserHistory.push('/');
+      var data = UserStore.getSignupResult();
+      if (data) {
+        if (data.error) {
+          window.Materialize.toast(data.error, 2000, 'error-toast');
+        } else {
+          window.Materialize.toast('User Created Successfully!', 2000, 'success-toast');
+          browserHistory.push('/');
+        }
       }
     }
 
