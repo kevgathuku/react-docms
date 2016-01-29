@@ -4,14 +4,16 @@
     NavBar = require('../NavBar/index.jsx');
 
   class Main extends React.Component {
-    constructor() {
-      super();
+
+    constructor(props) {
+      super(props);
     }
+
 
     render() {
       return (
         <div>
-          <NavBar/>
+          <NavBar />
           {this.props.children}
         </div>
       );
