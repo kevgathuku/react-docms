@@ -11,6 +11,7 @@
     nodeModulesPath,
     'react-dom/dist/react-dom.min.js');
   let mainPath = path.resolve(__dirname, 'app', 'main.js');
+  let commonLoaders = require('./commonLoaders');
 
   var config = {
     entry: [mainPath],
@@ -42,18 +43,7 @@
       new webpack.NoErrorsPlugin()
     ],
     module: {
-      loaders: [{
-        test: /\.(js|jsx)$/, // All .js and .jsx files
-        loader: 'babel', // babel loads jsx and es6-7
-        exclude: [nodeModulesPath],
-        query: {
-          presets: ['es2015', 'react']
-        }
-      }, {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-      }],
+      loaders: commonLoaders,
       noParse: [pathToReact]
     }
   };
