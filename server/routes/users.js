@@ -8,6 +8,7 @@
 
   router.route('/users/')
     .post(Users.create)
+    //.get(Users.authenticate, Users.all);
     .get(Users.authenticate, Users.all);
 
   // Route to get whether a user is logged in or Not
