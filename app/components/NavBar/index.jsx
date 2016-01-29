@@ -2,7 +2,7 @@
   'use strict';
 
   let React = require('react');
-  let logoSrc = '../images/favicon.png';
+  let logoSrc = require('../../images/favicon.png');
 
   class NavBar extends React.Component {
     constructor() {
@@ -19,7 +19,7 @@
              <ul className="right hide-on-med-and-down" id="nav-mobile">
                <li><a href="/">Home</a></li>
                <li><a href="#">About</a></li>
-               <li><a href="#">Login</a></li>
+               <li><a href="/auth">Login</a></li>
              </ul>
              <div className="row center hide-on-large-only" id="header-mobile-links">
                 <div className="col s4">

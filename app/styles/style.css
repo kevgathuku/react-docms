@@ -4299,7 +4299,7 @@ small {
   position: absolute;
   bottom: 0;
   height: 2px;
-  background-color: #f6b2b5;
+  background-color: red;
   will-change: left, right;
 }
 .tabs .tab {
@@ -6594,7 +6594,7 @@ nav ul a {
 #hero {
   background-position: center center;
   background-size: cover;
-  background-image: url("/images/coffee.jpg");
+  background-image: url("../images/coffee.jpg");
   height: 100vh;
 }
 h2 {
@@ -6613,4 +6613,27 @@ h2 {
   position: absolute;
   text-align: center;
   left: -35px;
+}
+
+/* Custom Style */
+@media (min-width: 481px) {
+  .signupcard {
+    width: 50%;
+    margin: 10px auto;
+  }
+}
+@media (max-width: 480px) {
+  .signupcard {
+    margin: 10px auto;
+  }
+}
+
+/* Custom error toast styling */
+.error-toast {
+    background-color: rgba(210, 57, 57, 1);
+}
+
+/* Custom success toast styling */
+.success-toast {
+    background-color: #00cc33;
 }

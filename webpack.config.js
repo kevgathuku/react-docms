@@ -60,7 +60,8 @@
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       }, {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=8192' // limit of 8kb
       }],
       noParse: [pathToReact, /node_modules\/json-schema\/lib\/validate\.js/]
     },
