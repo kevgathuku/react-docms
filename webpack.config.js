@@ -10,6 +10,7 @@
     'react-dom/dist/react-dom.js');
   let buildPath = path.resolve(__dirname, 'public', 'build');
   let mainPath = path.resolve(__dirname, 'app', 'main.js');
+  let commonLoaders = require('./commonLoaders');
 
   module.exports = {
     // Makes sure errors in console map to the correct file and line number
@@ -42,27 +43,9 @@
         test: /\.jsx?$/,
         loader: 'eslint-loader',
         include: [path.resolve(__dirname, 'app')],
-        exclude: [nodeModulesPath]
+        exclude: /node_modules/
       }],
-      loaders: [{
-        test: /\.jsx?$/, // A regexp to test the require path. works for js or jsx
-        loader: 'babel', // The module to load. "babel" is short for "babel-loader"
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
-      }, {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }, {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-      }, {
-        test: /\.(png|jpg)$/,
-        exclude: /node_modules/,
-        loader: 'url-loader?limit=8192' // limit of 8kb
-      }],
+      loaders: commonLoaders,
       noParse: [pathToReact, /node_modules\/json-schema\/lib\/validate\.js/]
     },
     // eslint config options. Part of the eslint-loader package
