@@ -19,7 +19,7 @@
       this.userSession = this.userSession.bind(this);
     }
 
-  componentDidMount() {
+  componentWillMount() {
     // Get the token from localStorage
     let token = localStorage.getItem('user');
     // Send a request to check if the user is logged in
