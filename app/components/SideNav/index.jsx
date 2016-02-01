@@ -11,8 +11,8 @@
 
     render() {
       return (
-        <nav>
-          <ul className="right hide-on-med-and-down">
+        <div>
+          <ul className="right hide-on-med-and-down side-nav fixed">
             <li>
               <a href="#!">First Sidebar Link</a>
             </li>
@@ -31,7 +31,7 @@
           <a href="#" className="button-collapse" data-activates="slide-out" >
             <i className="mdi-navigation-menu"></i>
           </a>
-        </nav>
+        </div>
       );
     }
   }

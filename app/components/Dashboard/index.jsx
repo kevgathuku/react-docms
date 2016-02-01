@@ -1,8 +1,7 @@
 (() => {
   'use strict';
 
-  let React = require('react'),
-      SideNav = require('../SideNav/index.jsx');
+  let React = require('react');
 
   class Dashboard extends React.Component {
     constructor(props) {
@@ -12,9 +11,10 @@
 
     render() {
       return (
-        <div className="container">
-          <SideNav />
-          <p> Dashboard Component </p>
+        <div>
+          <div className="container">
+            <p> Dashboard Component </p>
+          </div>
         </div>
       );
     }

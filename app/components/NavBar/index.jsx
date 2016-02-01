@@ -1,4 +1,4 @@
-(() => {
+{
   'use strict';
 
   let React = require('react'),
@@ -12,9 +12,12 @@
       super(props);
 
       this.state = {
-        loggedIn: null
+        loggedIn: null,
+        user: null
       };
       this.userSession = this.userSession.bind(this);
+      this.handleLogoutResult = this.handleLogoutResult.bind(this);
+      this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -23,24 +26,56 @@
       // Send a request to check if the user is logged in
       UserActions.getSession(token);
       UserStore.addChangeListener(this.userSession);
+      UserStore.addChangeListener(this.handleLogoutResult);
     }
 
     userSession() {
-      // Returns 'true' or 'false'
+      // Returns 'true' + the user object or 'false'
       let response = UserStore.getSession();
+      this.setState({loggedIn: response.loggedIn});
       if (response && !response.error) {
-        this.setState({loggedIn: response.loggedIn});
         if (response.loggedIn === 'false') {
-          // If th user is not logged in and is not on the homepage
-          // Redirect them to the login page
+          // If there is a user token in localStorage, remove it
+          // because it is invalid now
+          localStorage.removeItem('user');
+          // If the user is not logged in and is not on the homepage
+          // redirect them to the login page
           if (window.location.pathname !== '/') {
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
+          this.setState({
+            loggedIn: response.loggedIn,
+            user: response.user
+          });
           if (window.location.pathname == '/auth') {
             browserHistory.push('/dashboard');
           }
         }
+      }
+    }
+
+    handleLogoutSubmit(event) {
+      event.preventDefault();
+      // Get the token from localStorage
+      let token = localStorage.getItem('user');
+      // Send a request to check if the user is logged in
+      UserActions.logout({}, token);
+    }
+
+    handleLogoutResult() {
+      var data = UserStore.getLogoutResult();
+      if (data && !data.error) {
+        // If the logout is successful
+        window.Materialize.toast(data.message, 2000, 'success-toast');
+        browserHistory.push('/');
+        // Remove the user's token
+        localStorage.removeItem('user');
+        // Set the state to update the navbar links
+        this.setState({
+          loggedIn: null,
+          user: null
+        });
       }
     }
 
@@ -59,18 +94,24 @@
                 <a href="#">About</a>
               </li>
               <li>
-                <a href="/auth">Login</a>
+                {this.state.loggedIn === 'true'
+                  ? <a href="#" onClick={this.handleLogoutSubmit}>Logout</a>
+                  : <a href="/auth">Login</a>
+                }
               </li>
             </ul>
             <div className="row center hide-on-large-only" id="header-mobile-links">
               <div className="col s4">
-                <a href="/#">Home</a>
+                <a href="/">Home</a>
               </div>
               <div className="col s4">
                 <a href="/#">About</a>
               </div>
               <div className="col s4">
-                <a href="#">Login</a>
+                {this.state.loggedIn === 'true'
+                  ? <a href="#" onClick={this.handleLogoutSubmit}>Logout</a>
+                  : <a href="/auth">Login</a>
+                }
               </div>
               <div className="col s12 spacer"></div>
             </div>
@@ -82,4 +123,4 @@
 
   module.exports = NavBar;
 
-})();
+}

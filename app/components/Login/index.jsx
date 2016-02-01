@@ -33,7 +33,7 @@
         // The login was successful
         localStorage.setItem('user', data.token);
         window.Materialize.toast('Logged in Successfully!', 2000, 'success-toast');
-        browserHistory.push('/');
+        browserHistory.push('/dashboard');
         }
       }
     }
