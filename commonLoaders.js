@@ -18,7 +18,7 @@
     exclude: /node_modules/,
     loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
   }, {
-    test: /\.(png|jpg)$/,
+    test: /\.(png|jpg|jpeg)$/,
     exclude: /node_modules/,
     loader: 'url-loader?limit=8192' // limit of 8kb
   }];
