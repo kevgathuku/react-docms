@@ -32,8 +32,11 @@
     userSession() {
       // Returns 'true' + the user object or 'false'
       let response = UserStore.getSession();
-      this.setState({loggedIn: response.loggedIn});
       if (response && !response.error) {
+        this.setState({
+          loggedIn: response.loggedIn,
+          user: response.user
+        });
         if (response.loggedIn === 'false') {
           // If there is a user token in localStorage, remove it
           // because it is invalid now
@@ -44,10 +47,6 @@
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
-          this.setState({
-            loggedIn: response.loggedIn,
-            user: response.user
-          });
           if (window.location.pathname == '/auth') {
             browserHistory.push('/dashboard');
           }
@@ -82,6 +81,17 @@
     render() {
       return (
         <nav className="transparent black-text" role="navigation">
+          <ul id="dropdown" className="dropdown-content">
+            <li><a href="#">one</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li className="divider"></li>
+            <li>
+              <a href=""
+                  onClick={this.handleLogoutSubmit}
+              >Logout
+              </a>
+            </li>
+          </ul>
           <div className="nav-wrapper container">
             <a className="brand-logo brand-logo-small" href="/">
               <img alt="Docue Logo" id="header-logo" src={logoSrc}/>
@@ -91,12 +101,13 @@
                 <a href="/">Home</a>
               </li>
               <li>
-                <a href="#">About</a>
-              </li>
-              <li>
                 {this.state.loggedIn === 'true'
-                  ? <a href="#" onClick={this.handleLogoutSubmit}>Logout</a>
-                  : <a href="/auth">Login</a>
+                  ? <a className="dropdown-button"
+                      data-activates="dropdown"
+                      href="#"
+                    > {this.state.user.name.first}
+                    </a>
+                  : <a className="dropdown-button" data-activates="dropdown" href="/auth">Login</a>
                 }
               </li>
             </ul>
