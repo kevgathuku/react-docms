@@ -82,13 +82,13 @@
       return (
         <nav className="transparent black-text" role="navigation">
           <ul id="dropdown" className="dropdown-content">
-            <li><a href="#">one</a></li>
-            <li><a href="#">My Profile</a></li>
+            <li><a href="/#">My Profile</a></li>
+            <li><a href="/#">My Documents</a></li>
             <li className="divider"></li>
             <li>
-              <a href=""
+              <a href="/#"
                   onClick={this.handleLogoutSubmit}
-              >Logout
+              > Logout
               </a>
             </li>
           </ul>
@@ -98,14 +98,14 @@
               {'      Docue'}</a>
             <ul className="right hide-on-med-and-down" id="nav-mobile">
               <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
                 {this.state.loggedIn === 'true'
                   ? <a className="dropdown-button"
                       data-activates="dropdown"
-                      href="#"
-                    > {this.state.user.name.first}
+                      data-beloworigin="true"
+                      data-constrainwidth="false"
+                      href="/#"
+                    >{this.state.user.name.first}
+                    <i className="material-icons right">arrow_drop_down</i>
                     </a>
                   : <a className="dropdown-button" data-activates="dropdown" href="/auth">Login</a>
                 }
@@ -120,7 +120,7 @@
               </div>
               <div className="col s4">
                 {this.state.loggedIn === 'true'
-                  ? <a href="#" onClick={this.handleLogoutSubmit}>Logout</a>
+                  ? <a href="/#" onClick={this.handleLogoutSubmit}>Logout</a>
                   : <a href="/auth">Login</a>
                 }
               </div>
