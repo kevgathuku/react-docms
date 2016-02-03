@@ -8,7 +8,7 @@
     loader: 'babel', // The module to load. "babel" is short for "babel-loader"
     exclude: /node_modules/,
     query: {
-      presets: ['es2015', 'react']
+      presets: ['es2015', 'react', 'stage-0']
     }
   }, {
     test: /\.json$/,
