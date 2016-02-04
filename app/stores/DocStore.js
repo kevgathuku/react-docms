@@ -1,12 +1,15 @@
 (() => {
   'use strict';
 
-  let assign = require('object-assign'),
-      AppConstants = require('../constants/AppConstants'),
+  let AppConstants = require('../constants/AppConstants'),
       AppDispatcher = require('../dispatcher/AppDispatcher'),
       BaseStore = require('./BaseStore');
 
-  let UserStore = assign({}, BaseStore, {
+  if (!Object.assign) {
+    Object.assign = require('object-assign');
+  }
+
+  let UserStore = Object.assign({}, BaseStore, {
     docs: null,
 
     setDocs: function(docs) {
