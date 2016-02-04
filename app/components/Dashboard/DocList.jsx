@@ -13,6 +13,11 @@
     constructor(props) {
       super(props);
 
+      this.state = {
+        docs: this.props.docs,
+        deletedDoc: null
+      };
+
       this.handleDeleteClick = this.handleDeleteClick.bind(this);
       this.handleDeleteResult = this.handleDeleteResult.bind(this);
     }
@@ -25,8 +30,11 @@
       });
     }
 
+    componentWillUnmount() {
+        DocStore.removeChangeListener(this.handleDeleteResult);
+    }
+
     handleDeleteClick(doc, event) {
-      let token = localStorage.getItem('user');
       // Prevent the default action for clicking on a link
       event.preventDefault();
       window.swal({
@@ -38,6 +46,11 @@
         confirmButtonText: 'Yes, delete it!',
         closeOnConfirm: false
         }, () => {
+          let token = localStorage.getItem('user');
+          // Save the doc scheduled for deletion in the state
+          this.setState({
+            deletedDoc: doc._id
+          });
           DocActions.deleteDoc(doc._id, token);
         });
     }
@@ -45,6 +58,12 @@
     handleDeleteResult() {
       var result = DocStore.getDocDeleteResult();
       if (result.statusCode === 204) {
+        // Remove the deleted doc from the docs in the state
+        let newState = this.state.docs.filter((value) => {
+          return value._id !== this.state.deletedDoc;
+        });
+        this.setState({deletedDoc: null});
+        this.setState({docs: newState});
         window.swal('Deleted!', 'Your document has been deleted.', 'success');
       }
     }
@@ -87,7 +106,7 @@
         );
       };
       return (
-        <div>{this.props.docs.map(renderDoc, this)}</div>
+        <div>{this.state.docs.map(renderDoc, this)}</div>
       );
     }
   }
