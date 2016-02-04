@@ -12,6 +12,13 @@
       super(props);
     }
 
+    componentDidMount() {
+      // Activate the materialize tooltips
+      window.$('.tooltipped').each(function() {
+        window.$(this).tooltip({'delay': 50});
+      });
+    }
+
     render() {
       let renderDoc = function(doc) {
         return (
