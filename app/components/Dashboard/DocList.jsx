@@ -1,7 +1,9 @@
 {
   'use strict';
 
-  var React = require('react');
+  var React = require('react'),
+      DocActions = require('../../actions/DocActions'),
+      DocStore = require('../../stores/DocStore');
 
   class DocList extends React.Component {
     static propTypes = {
@@ -12,16 +14,19 @@
       super(props);
 
       this.handleDeleteClick = this.handleDeleteClick.bind(this);
+      this.handleDeleteResult = this.handleDeleteResult.bind(this);
     }
 
     componentDidMount() {
+      DocStore.addChangeListener(this.handleDeleteResult);
       // Activate the materialize tooltips
       window.$('.tooltipped').each(function() {
         window.$(this).tooltip({'delay': 50});
       });
     }
 
-    handleDeleteClick(event) {
+    handleDeleteClick(doc, event) {
+      let token = localStorage.getItem('user');
       // Prevent the default action for clicking on a link
       event.preventDefault();
       window.swal({
@@ -33,8 +38,15 @@
         confirmButtonText: 'Yes, delete it!',
         closeOnConfirm: false
         }, () => {
-          window.swal('Deleted!', 'Your document has been deleted.', 'success');
+          DocActions.deleteDoc(doc._id, token);
         });
+    }
+
+    handleDeleteResult() {
+      var result = DocStore.getDocDeleteResult();
+      if (result.statusCode === 204) {
+        window.swal('Deleted!', 'Your document has been deleted.', 'success');
+      }
     }
 
     render() {
@@ -65,7 +77,7 @@
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Delete"
-                    onClick={this.handleDeleteClick}
+                    onClick={this.handleDeleteClick.bind(this, doc)}
                 >
                   <i className="material-icons">delete</i>
                 </a>
