@@ -19,11 +19,10 @@
             <div className="card">
               <div className="card-image">
                 <img src="http://lorempixel.com/484/363/" />
-                <span className="card-title">{doc.title}</span>
               </div>
               <div className="card-content">
-                <p>I am a very simple card. This will contain the doc's content preview.
-                I am convenient because I require little markup to use effectively.</p>
+                <h5>{doc.title}</h5>
+                <p>Creator: {`${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
               </div>
               <div className="card-action">
                 <a className="tooltipped" data-position="top" data-delay="50" data-tooltip="Details">
