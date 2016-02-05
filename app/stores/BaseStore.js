@@ -2,9 +2,11 @@
   'use strict';
 
   let EventEmitter = require('events').EventEmitter;
-  let assign = require('object-assign');
+  if (!Object.assign) {
+    Object.assign = require('object-assign');
+  }
 
-  let BaseStore = assign({}, EventEmitter.prototype, {
+  let BaseStore = Object.assign({}, EventEmitter.prototype, {
     data: null,
     setData: function(data) {
       this.data = data;

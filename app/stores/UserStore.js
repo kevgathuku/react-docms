@@ -1,14 +1,18 @@
 (() =>{
   'use strict';
 
-  let assign = require('object-assign'),
-      AppConstants = require('../constants/AppConstants'),
+  let AppConstants = require('../constants/AppConstants'),
       AppDispatcher = require('../dispatcher/AppDispatcher'),
       BaseStore = require('./BaseStore');
 
-  let UserStore = assign({}, BaseStore, {
+  if (!Object.assign) {
+    Object.assign = require('object-assign');
+  }
+
+  let UserStore = Object.assign({}, BaseStore, {
     session: null,
     loginResult: null,
+    logoutResult: null,
     signupResult: null,
 
     setSession: function(session) {
@@ -29,6 +33,15 @@
       return this.loginResult;
     },
 
+    setLogoutResult: function(logoutResult) {
+      this.logoutResult = logoutResult;
+      this.emitChange();
+    },
+
+    getLogoutResult: function() {
+      return this.logoutResult;
+    },
+
     setSignupResult: function(signupResult) {
       this.signupResult = signupResult;
       this.emitChange();
@@ -43,6 +56,9 @@
     switch (action.actionType) {
       case AppConstants.USER_LOGIN:
         UserStore.setLoginResult(action.data);
+        break;
+      case AppConstants.USER_LOGOUT:
+        UserStore.setLogoutResult(action.data);
         break;
       case AppConstants.USER_SIGNUP:
         UserStore.setSignupResult(action.data);
