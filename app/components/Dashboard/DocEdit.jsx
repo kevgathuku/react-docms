@@ -17,7 +17,7 @@
         token: localStorage.getItem('user'),
         title: this.props.doc.title,
         content: this.props.doc.content,
-        role: this.props.doc.role.title
+        role: this.props.doc.role
       };
 
       this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -59,7 +59,7 @@
           <div className="modal-content">
             <h4 className="center-align">Edit Document</h4>
             <div className="row">
-              <form className="col s12" onSubmit={this.handleSubmit}>
+              <form className="col s12">
                 <div className="input-field col s6">
                   <input className="validate"
                       id="title"
@@ -98,7 +98,9 @@
           </div>
           <div className="modal-footer">
             <div className="container">
-              <button className="btn modal-action modal-close waves-effect blue right">
+              <button className="btn modal-action modal-close waves-effect blue right"
+                  onClick={this.handleSubmit}
+              >
                 update
               </button>
               <button className="btn modal-action modal-close waves-effect red accent-2 left">
