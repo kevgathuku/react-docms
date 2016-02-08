@@ -2,7 +2,8 @@
   'use strict';
 
   let React = require('react'),
-      DocActions = require('../../actions/DocActions');
+      DocActions = require('../../actions/DocActions'),
+      DocStore = require('../../stores/DocStore');
 
   class DocEdit extends React.Component {
     static propTypes = {
@@ -20,12 +21,18 @@
         role: this.props.doc.role
       };
 
+      this.handleEditResult = this.handleEditResult.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
+      DocStore.addChangeListener(this.handleEditResult);
       window.$('select').material_select();
+    }
+
+    componentWillUnmount() {
+      DocStore.removeChangeListener(this.handleEditResult);
     }
 
     handleFieldChange(event) {
@@ -51,6 +58,17 @@
           documentPayload,
           this.state.token
         );
+    }
+
+    handleEditResult() {
+      let result = DocStore.getDocEditResult();
+      if (result.data._id === this.props.doc._id) {
+        if (result.statusCode === 200) {
+          window.Materialize.toast('Document Updated!', 4000);
+        } else {
+          window.Materialize.toast(result.error, 2000, 'error-toast');
+        }
+      }
     }
 
     render() {

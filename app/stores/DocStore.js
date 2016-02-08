@@ -12,6 +12,7 @@
   let DocStore = Object.assign({}, BaseStore, {
     docs: null,
     docDeleteResult: null,
+    docEditResult: null,
 
     setDocs: function(docs) {
       this.docs = docs;
@@ -20,6 +21,15 @@
 
     getDocs: function() {
       return this.docs;
+    },
+
+    setDocEditResult: function(result) {
+      this.docEditResult = result;
+      this.emitChange();
+    },
+
+    getDocEditResult: function() {
+      return this.docEditResult;
     },
 
     setDocDeleteResult: function(result) {
@@ -39,6 +49,12 @@
         break;
       case AppConstants.DELETE_DOC:
         DocStore.setDocDeleteResult({
+          data: action.data,
+          statusCode: action.statusCode
+        });
+        break;
+      case AppConstants.EDIT_DOC:
+        DocStore.setDocEditResult({
           data: action.data,
           statusCode: action.statusCode
         });
