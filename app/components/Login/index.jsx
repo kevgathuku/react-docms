@@ -1,4 +1,4 @@
-(function() {
+(() => {
   'use strict';
 
   let React = require('react'),
@@ -83,7 +83,7 @@
             <label htmlFor="password">Password</label>
             </div>
             <div className="col s12">
-              <div className="containter center">
+              <div className="container center">
                 <button className="btn waves-effect header-btn blue"
                     name="action"
                     type="submit"

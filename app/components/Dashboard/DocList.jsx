@@ -3,7 +3,11 @@
 
   var React = require('react'),
       DocActions = require('../../actions/DocActions'),
-      DocStore = require('../../stores/DocStore');
+      DocStore = require('../../stores/DocStore'),
+      DocEdit = require('./DocEdit.jsx'),
+      RoleActions = require('../../actions/RoleActions'),
+      RoleStore = require('../../stores/RoleStore'),
+      cardImage = require('../../images/soccer.jpeg');
 
   class DocList extends React.Component {
     static propTypes = {
@@ -15,15 +19,23 @@
 
       this.state = {
         docs: this.props.docs,
-        deletedDoc: null
+        deletedDoc: null,
+        roles: null
       };
 
-      this.handleDeleteClick = this.handleDeleteClick.bind(this);
       this.handleDeleteResult = this.handleDeleteResult.bind(this);
+      this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
+      this.handleRolesResult = this.handleRolesResult.bind(this);
     }
 
     componentDidMount() {
+      // Get the token from localStorage
       DocStore.addChangeListener(this.handleDeleteResult);
+      RoleStore.addChangeListener(this.handleRolesResult);
+
+      let token = localStorage.getItem('user');
+      RoleActions.getRoles(token);
+      DocActions.getDocs(token);
       // Activate the materialize tooltips
       window.$('.tooltipped').each(function() {
         window.$(this).tooltip({'delay': 50});
@@ -31,10 +43,18 @@
     }
 
     componentWillUnmount() {
-        DocStore.removeChangeListener(this.handleDeleteResult);
+      DocStore.removeChangeListener(this.handleDeleteResult);
+      RoleStore.removeChangeListener(this.handleRolesResult);
     }
 
-    handleDeleteClick(doc, event) {
+    handleRolesResult() {
+      let roles = RoleStore.getRoles();
+      this.setState({
+        roles: roles
+      });
+    }
+
+    handleDocumentDelete(doc, event) {
       // Prevent the default action for clicking on a link
       event.preventDefault();
       window.swal({
@@ -55,6 +75,12 @@
         });
     }
 
+    handleDocumentEdit(doc, event) {
+      // Prevent the default action for clicking on a link
+      event.preventDefault();
+      window.$('#edit-modal').openModal();
+    }
+
     handleDeleteResult() {
       var result = DocStore.getDocDeleteResult();
       if (result.statusCode === 204) {
@@ -72,31 +98,35 @@
       let renderDoc = function(doc) {
         return (
           <div className="col s12 m6 l4" key={doc._id}>
+            <div id="edit-modal" className="modal">
+              <DocEdit doc={doc} roles={this.state.roles}/>
+            </div>
             <div className="card">
               <div className="card-image">
-                <img src="http://lorempixel.com/484/363/"/>
+                <img src={cardImage}/>
               </div>
               <div className="card-content">
                 <h5>{doc.title}</h5>
-                <p>Creator:
-                  {`${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
+                <p>{`Creator:  ${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
               </div>
               <div className="card-action">
                 <a className="tooltipped" data-position="top" data-delay="50" data-tooltip="Details">
                   <i className="material-icons">info</i>
                 </a>
-                <a className="tooltipped"
+                <a className="tooltipped modal-trigger"
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Edit"
+                    href="#edit-modal"
+                    onClick={this.handleDocumentEdit.bind(this, doc)}
                 >
                   <i className="material-icons">mode_edit</i>
                 </a>
-                <a className="modal-trigger tooltipped"
+                <a className="tooltipped"
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Delete"
-                    onClick={this.handleDeleteClick.bind(this, doc)}
+                    onClick={this.handleDocumentDelete.bind(this, doc)}
                 >
                   <i className="material-icons">delete</i>
                 </a>
@@ -110,6 +140,7 @@
       );
     }
   }
+
   module.exports = DocList;
 
 }
