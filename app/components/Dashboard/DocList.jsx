@@ -78,7 +78,10 @@
     handleDocumentEdit(doc, event) {
       // Prevent the default action for clicking on a link
       event.preventDefault();
-      window.$('#edit-modal').openModal();
+      // Get the id of the <a> tag that triggered the modal
+      let id = `#${event.currentTarget.getAttribute('href')}`;
+      // Open the specific modal when the link is clicked
+      window.$(id).openModal();
     }
 
     handleDeleteResult() {
@@ -98,7 +101,7 @@
       let renderDoc = function(doc) {
         return (
           <div className="col s12 m6 l4" key={doc._id}>
-            <div id="edit-modal" className="modal">
+            <div id={`edit-modal-${doc._id}`} className="modal">
               <DocEdit doc={doc} roles={this.state.roles}/>
             </div>
             <div className="card">
@@ -117,7 +120,7 @@
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Edit"
-                    href="#edit-modal"
+                    href={`edit-modal-${doc._id}`}
                     onClick={this.handleDocumentEdit.bind(this, doc)}
                 >
                   <i className="material-icons">mode_edit</i>

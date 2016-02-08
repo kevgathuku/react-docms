@@ -5,12 +5,29 @@
       BaseActions  = require('./BaseActions');
 
   module.exports = {
-    getDocs: function(token) {
-      BaseActions.get('/api/documents', AppConstants.USER_DOCS, token);
+    getDocs: (token) => {
+      BaseActions.get(
+        '/api/documents',
+        AppConstants.USER_DOCS,
+        token
+      );
     },
 
-    deleteDoc: function(docID, token) {
-      BaseActions.delete(`/api/documents/${docID}`, AppConstants.DELETE_DOC, token);
+    deleteDoc: (docID, token) => {
+      BaseActions.delete(
+        `/api/documents/${docID}`,
+        AppConstants.DELETE_DOC,
+        token
+      );
+    },
+
+    editDoc: (docID, updatedDoc, token) => {
+      BaseActions.put(
+        `/api/documents/${docID}`,
+        updatedDoc,
+        AppConstants.EDIT_DOC,
+        token
+      );
     }
   };
 })();

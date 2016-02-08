@@ -9,7 +9,7 @@
     Object.assign = require('object-assign');
   }
 
-  let UserStore = Object.assign({}, BaseStore, {
+  let DocStore = Object.assign({}, BaseStore, {
     docs: null,
     docDeleteResult: null,
 
@@ -35,10 +35,10 @@
   AppDispatcher.register(function(action) {
     switch (action.actionType) {
       case AppConstants.USER_DOCS:
-        UserStore.setDocs(action.data);
+        DocStore.setDocs(action.data);
         break;
       case AppConstants.DELETE_DOC:
-        UserStore.setDocDeleteResult({
+        DocStore.setDocDeleteResult({
           data: action.data,
           statusCode: action.statusCode
         });
@@ -50,5 +50,5 @@
     return true;
   });
 
-  module.exports = UserStore;
+  module.exports = DocStore;
 })();
