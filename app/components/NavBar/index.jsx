@@ -12,6 +12,7 @@
       super(props);
 
       this.state = {
+        token: localStorage.getItem('user'),
         loggedIn: null,
         user: null
       };
@@ -21,10 +22,8 @@
     }
 
     componentWillMount() {
-      // Get the token from localStorage
-      let token = localStorage.getItem('user');
       // Send a request to check if the user is logged in
-      UserActions.getSession(token);
+      UserActions.getSession(this.state.token);
       UserStore.addChangeListener(this.userSession);
       UserStore.addChangeListener(this.handleLogoutResult);
     }
@@ -56,10 +55,8 @@
 
     handleLogoutSubmit(event) {
       event.preventDefault();
-      // Get the token from localStorage
-      let token = localStorage.getItem('user');
       // Send a request to check if the user is logged in
-      UserActions.logout({}, token);
+      UserActions.logout({}, this.state.token);
     }
 
     handleLogoutResult() {

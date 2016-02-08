@@ -54,7 +54,7 @@
           // The signup was successful. Save user's token in localStorage
           localStorage.setItem('user', data.token);
           window.Materialize.toast('Your Account has been created successfully!', 2000, 'success-toast');
-          browserHistory.push('/');
+          browserHistory.push('/dashboard');
         }
       }
     }
