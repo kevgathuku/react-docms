@@ -28,6 +28,7 @@
       this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
       this.handleRolesResult = this.handleRolesResult.bind(this);
       this.handleUserFetch = this.handleUserFetch.bind(this);
+      this.updateDocs = this.updateDocs.bind(this);
     }
 
     componentDidMount() {
@@ -119,6 +120,19 @@
       }
     }
 
+    updateDocs(doc) {
+      let updatedDocs = this.state.docs.map((value) => {
+        if (value._id == doc._id) {
+          return doc;
+        } else {
+          return value;
+        }
+      });
+      this.setState({
+        docs: updatedDocs
+      });
+    }
+
     render() {
       let renderDoc = function(doc) {
         var disabled;
@@ -130,7 +144,7 @@
         return (
           <div className="col s12 m6 l4" key={doc._id}>
             <div id={`edit-modal-${doc._id}`} className="modal">
-              <DocEdit doc={doc} roles={this.state.roles}/>
+              <DocEdit doc={doc} roles={this.state.roles} updateDocs={this.updateDocs}/>/>
             </div>
             <div className="card">
               <div className="card-image">
