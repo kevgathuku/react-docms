@@ -7,6 +7,8 @@
       DocEdit = require('./DocEdit.jsx'),
       RoleActions = require('../../actions/RoleActions'),
       RoleStore = require('../../stores/RoleStore'),
+      UserActions = require('../../actions/UserActions'),
+      UserStore = require('../../stores/UserStore'),
       cardImage = require('../../images/soccer.jpeg');
 
   class DocList extends React.Component {
@@ -20,20 +22,26 @@
       this.state = {
         docs: this.props.docs,
         deletedDoc: null,
-        roles: null
+        roles: null,
+        user: null
       };
 
       this.handleDeleteResult = this.handleDeleteResult.bind(this);
       this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
       this.handleRolesResult = this.handleRolesResult.bind(this);
+      this.handleUserFetch = this.handleUserFetch.bind(this);
     }
 
     componentDidMount() {
-      // Get the token from localStorage
       DocStore.addChangeListener(this.handleDeleteResult);
       RoleStore.addChangeListener(this.handleRolesResult);
+      // Add a change listener for the user session
+      UserStore.addChangeListener(this.handleUserFetch);
 
+      // Get the token from localStorage
       let token = localStorage.getItem('user');
+      // Send a request to check if the user is logged in
+      UserActions.getSession(token);
       RoleActions.getRoles(token);
       DocActions.getDocs(token);
       // Activate the materialize tooltips
@@ -45,6 +53,16 @@
     componentWillUnmount() {
       DocStore.removeChangeListener(this.handleDeleteResult);
       RoleStore.removeChangeListener(this.handleRolesResult);
+      UserStore.removeChangeListener(this.handleUserFetch);
+    }
+
+    handleUserFetch() {
+      let response = UserStore.getSession();
+      if (response && !response.error) {
+        this.setState({
+          user: response.user
+        });
+      }
     }
 
     handleRolesResult() {
@@ -99,6 +117,10 @@
 
     render() {
       let renderDoc = function(doc) {
+        var disabled;
+        if (this.state.user) {
+          disabled = this.state.user._id == doc.ownerId._id ? false : true;
+        }
         return (
           <div className="col s12 m6 l4" key={doc._id}>
             <div id={`edit-modal-${doc._id}`} className="modal">
@@ -129,15 +151,15 @@
                 >
                   <i className="material-icons">mode_edit</i>
                 </a>
-                <a className="tooltipped btn-floating disabled"
+                <button disabled={disabled}
+                    className="tooltipped btn-floating"
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Delete"
-                    disabled
                     onClick={this.handleDocumentDelete.bind(this, doc)}
                 >
                   <i className="material-icons">delete</i>
-                </a>
+                </button>
               </div>
             </div>
           </div>
