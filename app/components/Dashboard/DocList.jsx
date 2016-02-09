@@ -113,10 +113,14 @@
                 <p>{`Creator:  ${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
               </div>
               <div className="card-action">
-                <a className="tooltipped" data-position="top" data-delay="50" data-tooltip="Details">
-                  <i className="material-icons">info</i>
+                <a className="btn-floating tooltipped"
+                    data-position="top"
+                    data-delay="50"
+                    data-tooltip="Details"
+                >
+                  <i className="material-icons">info_outline</i>
                 </a>
-                <a className="tooltipped modal-trigger"
+                <a className="btn-floating modal-trigger tooltipped"
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Edit"
@@ -125,10 +129,11 @@
                 >
                   <i className="material-icons">mode_edit</i>
                 </a>
-                <a className="tooltipped"
+                <a className="tooltipped btn-floating disabled"
                     data-position="top"
                     data-delay="50"
                     data-tooltip="Delete"
+                    disabled
                     onClick={this.handleDocumentDelete.bind(this, doc)}
                 >
                   <i className="material-icons">delete</i>
