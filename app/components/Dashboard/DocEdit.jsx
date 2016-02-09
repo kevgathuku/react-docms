@@ -62,7 +62,7 @@
 
     handleEditResult() {
       let result = DocStore.getDocEditResult();
-      if (result.data._id === this.props.doc._id) {
+      if (result && result.data._id === this.props.doc._id) {
         if (result.statusCode === 200) {
           window.Materialize.toast('Document Updated!', 4000);
         } else {
