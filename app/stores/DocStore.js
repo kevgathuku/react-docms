@@ -25,7 +25,7 @@
 
     setDocEditResult: function(result) {
       this.docEditResult = result;
-      this.emitChange();
+      this.emitChange('editDoc');
     },
 
     getDocEditResult: function() {
@@ -55,6 +55,7 @@
         break;
       case AppConstants.EDIT_DOC:
         DocStore.setDocEditResult({
+          actionType: action.actionType,
           data: action.data,
           statusCode: action.statusCode
         });

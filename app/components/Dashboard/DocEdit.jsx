@@ -32,10 +32,7 @@
     }
 
     componentDidMount() {
-      DocStore.addChangeListener(this.handleEditResult);
-      setTimeout(function() {
-        window.$('select').material_select();
-      }, 1000);
+      DocStore.addChangeListener(this.handleEditResult, 'editDoc');
     }
 
     componentWillUnmount() {
@@ -70,7 +67,7 @@
     handleEditResult() {
       let result = DocStore.getDocEditResult();
       if (result && result.data._id === this.props.doc._id) {
-        if (result.statusCode === 200) {
+        if (result.statusCode === 200 && result.actionType) {
           this.props.updateDocs(result.data);
           window.Materialize.toast('Document Updated!', 4000);
         } else {
