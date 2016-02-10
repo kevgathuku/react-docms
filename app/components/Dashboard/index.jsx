@@ -144,7 +144,7 @@
         return (
           <div className="col s12 m6 l4" key={doc._id}>
             <div id={`edit-modal-${doc._id}`} className="modal">
-              <DocEdit doc={doc} roles={this.state.roles} updateDocs={this.updateDocs}/>/>
+              <DocEdit doc={doc} roles={this.state.roles} updateDocs={this.updateDocs}/>
             </div>
             <div className="card">
               <div className="card-image">

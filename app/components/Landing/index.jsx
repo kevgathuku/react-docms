@@ -4,6 +4,7 @@
   let Home = require('./Home.jsx');
 
   // Requires the CSS for it to be included in the final output
+  require('../../styles/select.css');
   require('../../styles/style.css');
 
   class Landing extends React.Component {

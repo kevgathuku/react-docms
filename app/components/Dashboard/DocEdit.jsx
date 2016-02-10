@@ -2,6 +2,7 @@
   'use strict';
 
   let React = require('react'),
+      Select = require('react-select'),
       DocActions = require('../../actions/DocActions'),
       DocStore = require('../../stores/DocStore');
 
@@ -19,12 +20,15 @@
         token: localStorage.getItem('user'),
         title: this.props.doc.title,
         content: this.props.doc.content,
-        role: this.props.doc.role
+        role: this.props.doc.role,
+        options: []
       };
 
       this.handleEditResult = this.handleEditResult.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.getOptions = this.getOptions.bind(this);
+      this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
     componentDidMount() {
@@ -75,6 +79,23 @@
       }
     }
 
+    getOptions(input, callback) {
+      setTimeout(() => {
+        callback(null, {
+          options: this.props.roles,
+          // CAREFUL! Only set this to true when there are no more options,
+          // or more specific queries will not be sent to the server.
+          complete: true
+        });
+      }, 1000);
+    }
+
+    handleSelectChange(val) {
+      this.setState({
+        role: val
+      });
+    }
+
     render() {
       return (
         <div>
@@ -93,18 +114,16 @@
                 <label className="active" htmlFor="title">Title</label>
                 </div>
                 <div className="input-field col s6">
-                  <select>
-                    {/* TODO: fix showing select with correct roles */}
-                    <option value="" disabled defaultValue>Choose a Role</option>
-                      {this.props.roles ? this.props.roles.map((role) => {
-                        <option value={role.title}> role.title </option>;}
-                        ) : null
-                      }
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                <label>Role</label>
+                  <Select.Async style={{top: 10}}
+                      labelKey="title"
+                      valueKey="_id"
+                      loadOptions={this.getOptions}
+                      name="role"
+                      options={this.state.options}
+                      onChange={this.handleSelectChange}
+                      placeholder="Select Role"
+                      value={this.state.role}
+                  />
                 </div>
                 <div className="input-field col s12">
                   <textarea className="validate materialize-textarea"
