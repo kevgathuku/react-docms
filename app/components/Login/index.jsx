@@ -26,7 +26,6 @@
 
     handleLogin() {
       var data = UserStore.getLoginResult();
-      console.log('Login Data', data);
       if (data) {
         if (data.error) {
           window.Materialize.toast(data.error, 2000, 'error-toast');

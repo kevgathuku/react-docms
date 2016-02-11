@@ -17,7 +17,7 @@
 
     setDocs: function(docs) {
       this.docs = docs;
-      this.emitChange();
+      this.emitChange('fetchDocs');
     },
 
     getDocs: function() {

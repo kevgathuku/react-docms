@@ -38,7 +38,6 @@
       DocStore.addChangeListener(this.handleDeleteResult);
       RoleStore.addChangeListener(this.handleRolesResult);
 
-      DocActions.getDocs(this.state.token);
       // Send a request to check the logged in user
       RoleActions.getRoles(this.state.token);
       // Activate the materialize tooltips
@@ -80,9 +79,19 @@
         closeOnConfirm: false
       }, () => {
         // Save the doc scheduled for deletion in the state
-        this.setState({deletedDoc: doc._id});
+        this.setState({deletedDoc: doc});
         DocActions.deleteDoc(doc._id, this.state.token);
       });
+    }
+
+    handleDeleteResult() {
+      var result = DocStore.getDocDeleteResult();
+      if (result && result.statusCode === 204) {
+        // Doc already deleted. Inform parent component to update state
+        this.props.deleteDoc(this.state.deletedDoc);
+        window.swal('Deleted!', 'Your document has been deleted.', 'success');
+        this.setState({deletedDoc: null});
+      }
     }
 
     handleDocumentEdit(doc, event) {
@@ -92,15 +101,6 @@
       let id = `#${event.currentTarget.getAttribute('href')}`;
       // Open the specific modal when the link is clicked
       window.$(id).openModal();
-    }
-
-    handleDeleteResult() {
-      var result = DocStore.getDocDeleteResult();
-      if (result && result.statusCode === 204 && this.state.deletedDoc) {
-        this.props.deleteDoc(this.state.deletedDoc);
-        this.setState({deletedDoc: null});
-        window.swal('Deleted!', 'Your document has been deleted.', 'success');
-      }
     }
 
     render() {
@@ -122,7 +122,7 @@
               </div>
               <div className="card-content">
                 <h5 style={{fontSize: '1.44rem'}}>{doc.title}</h5>
-                <p>{`Creator:  ${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
+                <p>{`Owner:  ${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
               </div>
               <div className="card-action">
                 <a className="btn-floating tooltipped blue lighten-1" data-position="top" data-delay="50" data-tooltip="Details">

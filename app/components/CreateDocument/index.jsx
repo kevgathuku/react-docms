@@ -127,6 +127,7 @@
                       onChange={this.handleSelectChange}
                       placeholder="Select Role"
                       value={this.state.role}
+                      searchable={false}
                   />
                 </div>
                 <div className="input-field col s12">

@@ -7,16 +7,12 @@
       DocList = require('./DocList.jsx');
 
   class Dashboard extends React.Component {
-
-    static propTypes = {
-      updateDocs: React.PropTypes.func
-    };
-
     constructor(props) {
       super(props);
 
       this.state = {
-        docs: null
+        docs: null,
+        deletedDoc: null
       };
 
       this.deleteDoc = this.deleteDoc.bind(this);
@@ -24,15 +20,15 @@
       this.updateDocs = this.updateDocs.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
       // Get the token from localStorage
       let token = localStorage.getItem('user');
       DocActions.getDocs(token);
-      DocStore.addChangeListener(this.handleDocsResult);
+      DocStore.addChangeListener(this.handleDocsResult, 'fetchDocs');
     }
 
     componentWillUnmount() {
-      DocStore.removeChangeListener(this.handleDocsResult);
+      DocStore.removeChangeListener(this.handleDocsResult, 'fetchDocs');
     }
 
     handleDocsResult() {
@@ -58,13 +54,15 @@
       });
     }
 
-    deleteDoc(docId) {
+    deleteDoc(doc) {
+      this.setState({deletedDoc: doc});
       // Remove the deleted doc from the docs in the state
       let updatedDocs = this.state.docs.filter((value) => {
-        return value._id !== docId;
+        return value._id !== doc._id;
       });
       this.setState({
-        docs: updatedDocs
+        docs: updatedDocs,
+        deletedDoc: doc
       });
     }
 
@@ -72,7 +70,7 @@
       return (
         <div className="container">
           <div className="row">
-            <h2 className="header center-align">My Documents</h2>
+            <h2 className="header center-align">All Documents</h2>
           </div>
           <div className="row">
             {this.state.docs
