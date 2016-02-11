@@ -84,6 +84,7 @@
                 data-delay="50"
                 data-position="left"
                 data-tooltip="Create Document"
+                href="/documents/create"
             >
               <i className="material-icons">add</i>
             </a>

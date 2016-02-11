@@ -5,6 +5,15 @@
       BaseActions  = require('./BaseActions');
 
   module.exports = {
+    createDoc: (body, token) => {
+      BaseActions.post(
+        '/api/documents',
+        body,
+        AppConstants.CREATE_DOC,
+        token
+      );
+    },
+
     getDocs: (token) => {
       BaseActions.get(
         '/api/documents',

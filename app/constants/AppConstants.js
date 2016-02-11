@@ -2,6 +2,7 @@
   'use strict';
 
   module.exports = require('keymirror')({
+    CREATE_DOC: null,
     DELETE_DOC: null,
     EDIT_DOC: null,
     GET_ROLES: null,

@@ -11,6 +11,7 @@
 
   let DocStore = Object.assign({}, BaseStore, {
     docs: null,
+    docCreateResult: null,
     docDeleteResult: null,
     docEditResult: null,
 
@@ -21,6 +22,15 @@
 
     getDocs: function() {
       return this.docs;
+    },
+
+    setDocCreateResult: function(result) {
+      this.docCreateResult = result;
+      this.emitChange();
+    },
+
+    getDocCreateResult: function() {
+      return this.docCreateResult;
     },
 
     setDocEditResult: function(result) {
@@ -46,6 +56,9 @@
     switch (action.actionType) {
       case AppConstants.USER_DOCS:
         DocStore.setDocs(action.data);
+        break;
+      case AppConstants.CREATE_DOC:
+        DocStore.setDocCreateResult(action.data);
         break;
       case AppConstants.DELETE_DOC:
         DocStore.setDocDeleteResult({
