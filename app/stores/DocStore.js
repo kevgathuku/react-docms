@@ -55,7 +55,6 @@
         break;
       case AppConstants.EDIT_DOC:
         DocStore.setDocEditResult({
-          actionType: action.actionType,
           data: action.data,
           statusCode: action.statusCode
         });

@@ -36,7 +36,7 @@
     }
 
     componentWillUnmount() {
-      DocStore.removeChangeListener(this.handleEditResult);
+      DocStore.removeChangeListener(this.handleEditResult, 'editDoc');
     }
 
     handleFieldChange(event) {
@@ -67,7 +67,7 @@
     handleEditResult() {
       let result = DocStore.getDocEditResult();
       if (result && result.data._id === this.props.doc._id) {
-        if (result.statusCode === 200 && result.actionType) {
+        if (result.statusCode === 200) {
           this.props.updateDocs(result.data);
           window.Materialize.toast('Document Updated!', 4000);
         } else {
