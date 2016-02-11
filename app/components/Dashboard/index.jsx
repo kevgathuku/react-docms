@@ -78,7 +78,7 @@
               : <p>Loading...</p>}
           </div>
           <div className="fixed-action-btn" style={{bottom: 45, right: 24}}>
-            <a className="btn-floating btn-large tooltipped red"
+            <a className="btn-floating btn-large tooltipped pink"
                 data-delay="50"
                 data-position="left"
                 data-tooltip="Create Document"
