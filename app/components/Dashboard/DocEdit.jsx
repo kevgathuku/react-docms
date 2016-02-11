@@ -52,16 +52,16 @@
 
     handleSubmit(event) {
       event.preventDefault();
-        let documentPayload = {
-          title: this.state.title,
-          content: this.state.content,
-          role: this.state.role
-        };
-        DocActions.editDoc(
-          this.props.doc._id,
-          documentPayload,
-          this.state.token
-        );
+      let documentPayload = {
+        title: this.state.title,
+        content: this.state.content,
+        role: this.state.role
+      };
+      DocActions.editDoc(
+        this.props.doc._id,
+        documentPayload,
+        this.state.token
+      );
     }
 
     handleEditResult() {

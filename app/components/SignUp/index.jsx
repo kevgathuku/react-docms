@@ -51,8 +51,9 @@
         if (data.error) {
           window.Materialize.toast(data.error, 2000, 'error-toast');
         } else {
-          // The signup was successful. Save user's token in localStorage
+          // The signup was successful. Save user's info in localStorage
           localStorage.setItem('user', data.token);
+          localStorage.setItem('userInfo', JSON.stringify(data.user));
           window.Materialize.toast('Your Account has been created successfully!', 2000, 'success-toast');
           browserHistory.push('/dashboard');
         }

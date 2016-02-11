@@ -7,8 +7,6 @@
     DocEdit = require('./DocEdit.jsx'),
     RoleActions = require('../../actions/RoleActions'),
     RoleStore = require('../../stores/RoleStore'),
-    UserActions = require('../../actions/UserActions'),
-    UserStore = require('../../stores/UserStore'),
     cardImage = require('../../images/soccer.jpeg');
 
   class DocList extends React.Component {
@@ -27,34 +25,28 @@
         docs: this.props.docs,
         deletedDoc: null,
         roles: null,
-        user: null
+        user: JSON.parse(localStorage.getItem('userInfo')),
+        token: localStorage.getItem('user')
       };
 
       this.handleDeleteResult = this.handleDeleteResult.bind(this);
       this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
       this.handleRolesResult = this.handleRolesResult.bind(this);
-      this.handleUserFetch = this.handleUserFetch.bind(this);
     }
 
     componentDidMount() {
       DocStore.addChangeListener(this.handleDeleteResult);
       RoleStore.addChangeListener(this.handleRolesResult);
-      // Add a change listener for the user session
-      UserStore.addChangeListener(this.handleUserFetch);
 
-      // Get the token from localStorage
-      let token = localStorage.getItem('user');
-      DocActions.getDocs(token);
+      DocActions.getDocs(this.state.token);
       // Send a request to check the logged in user
-      RoleActions.getRoles(token);
+      RoleActions.getRoles(this.state.token);
       // Activate the materialize tooltips
       setTimeout(function() {
         window.$('.tooltipped').each(function() {
           window.$(this).tooltip({'delay': 50});
         });
       }, 1000);
-
-      UserActions.getSession(token);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -68,14 +60,6 @@
     componentWillUnmount() {
       DocStore.removeChangeListener(this.handleDeleteResult);
       RoleStore.removeChangeListener(this.handleRolesResult);
-      UserStore.removeChangeListener(this.handleUserFetch);
-    }
-
-    handleUserFetch() {
-      let response = UserStore.getSession();
-      if (response && !response.error) {
-        this.setState({user: response.user});
-      }
     }
 
     handleRolesResult() {
@@ -95,10 +79,9 @@
         confirmButtonText: 'Yes, delete it!',
         closeOnConfirm: false
       }, () => {
-        let token = localStorage.getItem('user');
         // Save the doc scheduled for deletion in the state
         this.setState({deletedDoc: doc._id});
-        DocActions.deleteDoc(doc._id, token);
+        DocActions.deleteDoc(doc._id, this.state.token);
       });
     }
 
