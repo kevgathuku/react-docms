@@ -125,7 +125,12 @@
                 <p>{`Owner:  ${doc.ownerId.name.first} ${doc.ownerId.name.last}`}</p>
               </div>
               <div className="card-action">
-                <a className="btn-floating tooltipped blue lighten-1" data-position="top" data-delay="50" data-tooltip="Details">
+                <a className="btn-floating tooltipped blue lighten-1"
+                    data-position="top"
+                    data-delay="50"
+                    data-tooltip="View"
+                    href={`/documents/${doc._id}`}
+                >
                   <i className="material-icons">info_outline</i>
                 </a>
                 <a className="btn-floating modal-trigger tooltipped blue lighten-1" data-position="top" data-delay="50" data-tooltip="Edit" href={`edit-modal-${doc._id}`} onClick={this.handleDocumentEdit.bind(this, doc)}>

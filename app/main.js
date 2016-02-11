@@ -9,6 +9,7 @@
       Router = ReactRouter.Router,
       browserHistory = ReactRouter.browserHistory,
       CreateDocument = require('./components/CreateDocument/index.jsx'),
+      DocumentPage = require('./components/DocumentPage/index.jsx'),
       Dashboard = require('./components/Dashboard/index.jsx'),
       Landing = require('./components/Landing/index.jsx'),
       Main = require('./components/Landing/Main.jsx'),
@@ -21,6 +22,7 @@
         <Route path="/auth" component={Auth} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/documents/create" component={CreateDocument} />
+        <Route path="/documents/:id" component={DocumentPage} />
       </Route>
     </Router>), document.getElementById('content'));
 })();

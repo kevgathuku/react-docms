@@ -5,6 +5,7 @@
     CREATE_DOC: null,
     DELETE_DOC: null,
     EDIT_DOC: null,
+    GET_DOC: null,
     GET_ROLES: null,
     USER_DOCS: null,
     USER_LOGIN: null,

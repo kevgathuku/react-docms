@@ -10,6 +10,7 @@
   }
 
   let DocStore = Object.assign({}, BaseStore, {
+    doc: null,
     docs: null,
     docCreateResult: null,
     docDeleteResult: null,
@@ -22,6 +23,15 @@
 
     getDocs: function() {
       return this.docs;
+    },
+
+    setDoc: function(doc) {
+      this.doc = doc;
+      this.emitChange('getDoc');
+    },
+
+    getDoc: function() {
+      return this.doc;
     },
 
     setDocCreateResult: function(result) {
@@ -70,6 +80,11 @@
         DocStore.setDocEditResult({
           data: action.data,
           statusCode: action.statusCode
+        });
+        break;
+      case AppConstants.GET_DOC:
+        DocStore.setDoc({
+          data: action.data
         });
         break;
       default:

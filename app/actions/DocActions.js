@@ -22,6 +22,14 @@
       );
     },
 
+    fetchDoc: (docId, token) => {
+      BaseActions.get(
+        `/api/documents/${docId}`,
+        AppConstants.GET_DOC,
+        token
+      );
+    },
+
     deleteDoc: (docID, token) => {
       BaseActions.delete(
         `/api/documents/${docID}`,
