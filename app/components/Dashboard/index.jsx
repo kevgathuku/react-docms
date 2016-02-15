@@ -11,11 +11,9 @@
       super(props);
 
       this.state = {
-        docs: null,
-        deletedDoc: null
+        docs: null
       };
 
-      this.deleteDoc = this.deleteDoc.bind(this);
       this.handleDocsResult = this.handleDocsResult.bind(this);
       this.updateDocs = this.updateDocs.bind(this);
     }
@@ -54,18 +52,6 @@
       });
     }
 
-    deleteDoc(doc) {
-      this.setState({deletedDoc: doc});
-      // Remove the deleted doc from the docs in the state
-      let updatedDocs = this.state.docs.filter((value) => {
-        return value._id !== doc._id;
-      });
-      this.setState({
-        docs: updatedDocs,
-        deletedDoc: doc
-      });
-    }
-
     render() {
       return (
         <div className="container">
@@ -74,7 +60,7 @@
           </div>
           <div className="row">
             {this.state.docs
-              ? <DocList docs={this.state.docs} deleteDoc={this.deleteDoc} updateDocs={this.updateDocs}/>
+              ? <DocList docs={this.state.docs} updateDocs={this.updateDocs}/>
               : <p>Loading...</p>}
           </div>
           <div className="fixed-action-btn" style={{bottom: 45, right: 24}}>

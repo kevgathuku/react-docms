@@ -1,7 +1,8 @@
 (() => {
   'use strict';
 
-  let React = require('react'),
+  let browserHistory = require('react-router').browserHistory,
+      React = require('react'),
       DocActions = require('../../actions/DocActions'),
       DocStore = require('../../stores/DocStore');
 
@@ -15,20 +16,24 @@
 
       this.state = {
         doc: null,
-        parsedDate: null
+        parsedDate: null,
+        token: localStorage.getItem('user'),
+        user: JSON.parse(localStorage.getItem('userInfo'))
       };
 
+      this.handleDeleteResult = this.handleDeleteResult.bind(this);
+      this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
       this.handleDocumentFetch = this.handleDocumentFetch.bind(this);
     }
 
     componentWillMount() {
-      // Get the token from localStorage
-      let token = localStorage.getItem('user');
-      DocActions.fetchDoc(this.props.params.id, token);
+      DocActions.fetchDoc(this.props.params.id, this.state.token);
+      DocStore.addChangeListener(this.handleDeleteResult);
       DocStore.addChangeListener(this.handleDocumentFetch, 'getDoc');
     }
 
     componentWillUnmount() {
+      DocStore.removeChangeListener(this.handleDeleteResult);
       DocStore.removeChangeListener(this.handleDocumentFetch, 'getDoc');
     }
 
@@ -44,21 +49,37 @@
       });
     }
 
-    htmlFromPlainText(subject) {
-       // Step 1 (plain text searches)
-       subject = subject.replace(/&/g, '&amp;').
-       replace(/</g, '&lt;').
-       replace(/>/g, '&gt;');
-       // Step 2
-       subject = subject.replace(/\r\n?|\n/g, '<br>');
-       // Step 3
-       subject = subject.replace(/<br>\s*<br>/g, '</p><p>');
-       // Step 4
-       subject = '<p>' + subject + '</p>';
-       return subject;
+    handleDocumentDelete(doc, event) {
+      // Prevent the default action for clicking on a link
+      event.preventDefault();
+      window.swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this document!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Yes, delete it!',
+        closeOnConfirm: false
+      }, () => {
+        DocActions.deleteDoc(doc._id, this.state.token);
+      });
+    }
+
+    handleDeleteResult() {
+      var result = DocStore.getDocDeleteResult();
+      if (result && result.statusCode === 204) {
+        window.swal('Deleted!', 'Your document has been deleted.', 'success');
+        browserHistory.push('/dashboard');
+      }
     }
 
     render() {
+      var owner;
+      if (this.state.user && this.state.doc) {
+        owner = this.state.user._id == this.state.doc.ownerId._id
+          ? true
+          : false;
+      }
       let ownerName = this.state.doc
                         ? `${this.state.doc.ownerId.name.first} ${this.state.doc.ownerId.name.last}`
                         : 'User';
@@ -80,10 +101,20 @@
               <i className="material-icons">toc</i>
             </a>
             <ul>
-              <li><a className="btn-floating red"><i className="material-icons">mode_edit</i></a></li>
-              <li><a className="btn-floating yellow darken-1"><i className="material-icons">format_quote</i></a></li>
-              <li><a className="btn-floating green"><i className="material-icons">publish</i></a></li>
-              <li><a className="btn-floating blue"><i className="material-icons">attach_file</i></a></li>
+                {/* If this user is the owner, display the delete button */}
+                {owner
+                  ? <li>
+                      <button className="btn-floating tooltipped red"
+                          data-position="left"
+                          data-delay="50"
+                          data-tooltip="Delete"
+                          onClick={this.handleDocumentDelete.bind(this, this.state.doc)}
+                      >
+                      <i className="material-icons">delete</i></button>
+                    </li>
+                  : null
+                }
+              <li><a className="btn-floating tooltipped blue" data-position="left" data-delay="50" data-tooltip="Edit"><i className="material-icons">edit</i></a></li>
             </ul>
           </div>
         </div>
