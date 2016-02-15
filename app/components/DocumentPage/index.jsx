@@ -3,8 +3,11 @@
 
   let browserHistory = require('react-router').browserHistory,
       React = require('react'),
+      DocEdit = require('./DocEdit.jsx'),
       DocActions = require('../../actions/DocActions'),
-      DocStore = require('../../stores/DocStore');
+      DocStore = require('../../stores/DocStore'),
+      RoleActions = require('../../actions/RoleActions'),
+      RoleStore = require('../../stores/RoleStore');
 
   class DocumentPage extends React.Component {
     static propTypes = {
@@ -17,24 +20,31 @@
       this.state = {
         doc: null,
         parsedDate: null,
+        roles: null,
         token: localStorage.getItem('user'),
         user: JSON.parse(localStorage.getItem('userInfo'))
       };
 
       this.handleDeleteResult = this.handleDeleteResult.bind(this);
       this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
+      this.handleDocumentEdit = this.handleDocumentEdit.bind(this);
       this.handleDocumentFetch = this.handleDocumentFetch.bind(this);
+      this.handleRolesResult = this.handleRolesResult.bind(this);
+      this.onEditUpdate = this.onEditUpdate.bind(this);
     }
 
     componentWillMount() {
       DocActions.fetchDoc(this.props.params.id, this.state.token);
+      RoleActions.getRoles(this.state.token);
       DocStore.addChangeListener(this.handleDeleteResult);
       DocStore.addChangeListener(this.handleDocumentFetch, 'getDoc');
+      RoleStore.addChangeListener(this.handleRolesResult);
     }
 
     componentWillUnmount() {
       DocStore.removeChangeListener(this.handleDeleteResult);
       DocStore.removeChangeListener(this.handleDocumentFetch, 'getDoc');
+      RoleStore.removeChangeListener(this.handleRolesResult);
     }
 
     handleDocumentFetch() {
@@ -73,6 +83,26 @@
       }
     }
 
+    handleDocumentEdit(doc, event) {
+      // Prevent the default action for clicking on a link
+      event.preventDefault();
+      // Get the id of the <a> tag that triggered the modal
+      let id = `#${event.currentTarget.getAttribute('href')}`;
+      // Open the specific modal when the link is clicked
+      window.$(id).openModal();
+    }
+
+    handleRolesResult() {
+      let roles = RoleStore.getRoles();
+      this.setState({roles: roles});
+    }
+
+    onEditUpdate(doc) {
+      this.setState({
+        doc: doc
+      });
+    }
+
     render() {
       var owner;
       if (this.state.user && this.state.doc) {
@@ -83,6 +113,12 @@
       let ownerName = this.state.doc
                         ? `${this.state.doc.ownerId.name.first} ${this.state.doc.ownerId.name.last}`
                         : 'User';
+      let docEdit = this.state.doc && this.state.roles
+                  ?
+                  <div id={`edit-modal-${this.state.doc._id}`} className="modal">
+                    <DocEdit doc={this.state.doc} roles={this.state.roles} updateDoc={this.onEditUpdate}/>
+                  </div>
+                : null;
       return (
         <div className="container">
           <div className="card-panel">
@@ -96,6 +132,7 @@
               {this.state.doc ? this.state.doc.content : 'Loading...'}
             </div>
           </div>
+          {docEdit}
           <div className="fixed-action-btn" style={{bottom: 45, right: 24}}>
             <a className="btn-floating btn-large pink">
               <i className="material-icons">toc</i>
@@ -114,7 +151,20 @@
                     </li>
                   : null
                 }
-              <li><a className="btn-floating tooltipped blue" data-position="left" data-delay="50" data-tooltip="Edit"><i className="material-icons">edit</i></a></li>
+              <li>
+                {this.state.doc
+                  ? <a className="btn-floating tooltipped blue"
+                      data-position="left"
+                      data-delay="50"
+                      data-tooltip="Edit"
+                      href={`edit-modal-${this.state.doc._id}`}
+                      onClick={this.handleDocumentEdit.bind(this, this.state.doc)}
+                    >
+                    <i className="material-icons">edit</i>
+                  </a>
+                  : null
+                }
+              </li>
             </ul>
           </div>
         </div>

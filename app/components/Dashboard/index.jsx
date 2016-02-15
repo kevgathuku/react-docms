@@ -15,7 +15,6 @@
       };
 
       this.handleDocsResult = this.handleDocsResult.bind(this);
-      this.updateDocs = this.updateDocs.bind(this);
     }
 
     componentDidMount() {
@@ -38,20 +37,6 @@
       }
     }
 
-    updateDocs(doc) {
-      let updatedDocs = this.state.docs.map((value) => {
-        if (value._id == doc._id) {
-          // Return the changed doc
-          return doc;
-        } else {
-          return value;
-        }
-      });
-      this.setState({
-        docs: updatedDocs
-      });
-    }
-
     render() {
       return (
         <div className="container">
@@ -60,7 +45,7 @@
           </div>
           <div className="row">
             {this.state.docs
-              ? <DocList docs={this.state.docs} updateDocs={this.updateDocs}/>
+              ? <DocList docs={this.state.docs} />
               : <p>Loading...</p>}
           </div>
           <div className="fixed-action-btn" style={{bottom: 45, right: 24}}>

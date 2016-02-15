@@ -10,7 +10,7 @@
     static propTypes = {
       doc: React.PropTypes.object,
       roles: React.PropTypes.arrayOf(React.PropTypes.object),
-      updateDocs: React.PropTypes.func
+      updateDoc: React.PropTypes.func
     };
 
     constructor(props) {
@@ -68,7 +68,7 @@
       let result = DocStore.getDocEditResult();
       if (result && result.data._id === this.props.doc._id) {
         if (result.statusCode === 200) {
-          this.props.updateDocs(result.data);
+          this.props.updateDoc(result.data);
           window.Materialize.toast('Document Updated!', 4000);
         } else {
           window.Materialize.toast(result.error, 2000, 'error-toast');
