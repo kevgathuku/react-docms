@@ -4485,8 +4485,8 @@ button.btn-floating {
   background-color: #eee;
 }
 .dropdown-content li > a, .dropdown-content li > span {
-  font-size: 1.2rem;
-  color: #26a69a;
+  font-size: 1rem;
+  color: #039be5;
   display: block;
   padding: 1rem 1rem;
 }
@@ -6636,4 +6636,8 @@ h2 {
 /* Custom success toast styling */
 .success-toast {
     background-color: #00cc33;
+}
+
+body {
+  background-color: #efefef;
 }

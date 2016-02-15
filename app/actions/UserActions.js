@@ -9,6 +9,10 @@
       BaseActions.post('/api/users/login', user, AppConstants.USER_LOGIN);
     },
 
+    logout: function(data, token) {
+      BaseActions.post('/api/users/logout', data, AppConstants.USER_LOGOUT, token);
+    },
+
     signup: function(user) {
       BaseActions.post('/api/users', user, AppConstants.USER_SIGNUP);
     },

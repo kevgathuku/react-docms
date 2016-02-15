@@ -17,15 +17,15 @@
         });
     },
 
-    delete: function(url, data, actionType, token=null) {
+    delete: function(url, actionType, token=null) {
       request
         .delete(url)
         .set('x-access-token', token)
-        .send(data || {})
         .end(function(err, result) {
           AppDispatcher.dispatch({
             actionType: actionType,
-            data: result.body
+            data: result.body,
+            statusCode: result.statusCode
           });
         });
     },
@@ -38,7 +38,8 @@
         .end(function(err, result) {
           AppDispatcher.dispatch({
             actionType: actionType,
-            data: result.body
+            data: result.body,
+            statusCode: result.statusCode
           });
         });
     },

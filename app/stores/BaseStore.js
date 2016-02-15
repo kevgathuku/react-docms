@@ -2,29 +2,22 @@
   'use strict';
 
   let EventEmitter = require('events').EventEmitter;
-  let assign = require('object-assign');
+  if (!Object.assign) {
+    Object.assign = require('object-assign');
+  }
 
-  let BaseStore = assign({}, EventEmitter.prototype, {
-    data: null,
-    setData: function(data) {
-      this.data = data;
-      this.emitChange();
+  let BaseStore = Object.assign({}, EventEmitter.prototype, {
+
+    emitChange(event='change') {
+      this.emit(event);
     },
 
-    getData: function() {
-      return this.data;
+    addChangeListener(callback, event='change') {
+      this.on(event, callback);
     },
 
-    emitChange: function() {
-      this.emit('change');
-    },
-
-    addChangeListener: function(callback) {
-      this.on('change', callback);
-    },
-
-    removeChangeListener: function(callback) {
-      this.removeListener('change', callback);
+    removeChangeListener(callback, event='change') {
+      this.removeListener(event, callback);
     }
   });
 
