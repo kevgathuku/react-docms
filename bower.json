@@ -22,8 +22,6 @@
   ],
   "dependencies": {
     "jquery": "~2.2.0",
-    "Materialize": "materialize#~0.97.5",
-    "sweetalert": "~1.1.3",
-    "moment": "^2.11.2"
+    "Materialize": "materialize#~0.97.5"
   }
 }

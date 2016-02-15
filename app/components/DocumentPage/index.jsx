@@ -3,6 +3,8 @@
 
   let browserHistory = require('react-router').browserHistory,
       React = require('react'),
+      moment = require('moment'),
+      swal = require('sweetalert'),
       DocEdit = require('./DocEdit.jsx'),
       DocActions = require('../../actions/DocActions'),
       DocStore = require('../../stores/DocStore'),
@@ -53,7 +55,7 @@
         doc: result.data
       });
       let createdDate = this.state.doc.dateCreated;
-      let m = window.moment(new Date(createdDate));
+      let m = moment(new Date(createdDate));
       this.setState({
         parsedDate: m.fromNow()
       });
@@ -62,7 +64,7 @@
     handleDocumentDelete(doc, event) {
       // Prevent the default action for clicking on a link
       event.preventDefault();
-      window.swal({
+      swal({
         title: 'Are you sure?',
         text: 'You will not be able to recover this document!',
         type: 'warning',
@@ -78,7 +80,7 @@
     handleDeleteResult() {
       var result = DocStore.getDocDeleteResult();
       if (result && result.statusCode === 204) {
-        window.swal('Deleted!', 'Your document has been deleted.', 'success');
+        swal('Deleted!', 'Your document has been deleted.', 'success');
         browserHistory.push('/dashboard');
       }
     }
