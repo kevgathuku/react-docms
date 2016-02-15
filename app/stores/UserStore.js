@@ -26,7 +26,7 @@
 
     setLoginResult: function(loginResult) {
       this.loginResult = loginResult;
-      this.emitChange();
+      this.emitChange('login');
     },
 
     getLoginResult: function() {
@@ -44,7 +44,7 @@
 
     setSignupResult: function(signupResult) {
       this.signupResult = signupResult;
-      this.emitChange();
+      this.emitChange('signup');
     },
 
     getSignupResult: function() {

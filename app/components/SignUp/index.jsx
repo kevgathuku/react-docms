@@ -30,7 +30,7 @@
     }
 
     componentDidMount() {
-      UserStore.addChangeListener(this.handleSignup);
+      UserStore.addChangeListener(this.handleSignup, 'signup');
     }
 
     comparePassword(password, confirmPassword) {

@@ -21,7 +21,7 @@
     }
 
     componentDidMount() {
-      UserStore.addChangeListener(this.handleLogin);
+      UserStore.addChangeListener(this.handleLogin, 'login');
     }
 
     handleLogin() {

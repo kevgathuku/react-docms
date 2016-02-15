@@ -16,23 +16,57 @@
         loggedIn: null,
         user: null
       };
+      this.afterLoginUpdate = this.afterLoginUpdate.bind(this);
       this.userSession = this.userSession.bind(this);
       this.handleDropdownClick = this.handleDropdownClick.bind(this);
       this.handleLogoutResult = this.handleLogoutResult.bind(this);
       this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
+      this.afterSignupUpdate = this.afterSignupUpdate.bind(this);
     }
 
     componentWillMount() {
       // Send a request to check if the user is logged in
       UserActions.getSession(this.state.token);
       UserStore.addChangeListener(this.userSession);
+      UserStore.addChangeListener(this.afterLoginUpdate, 'login');
+      UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
     }
 
     componentDidMount() {
-      setTimeout(function() {
+      setTimeout(() => {
         window.$('.dropdown-button').dropdown();
       }, 1000);
+    }
+
+    componentDidUpdate() {
+      setTimeout(() => {
+        window.$('.dropdown-button').dropdown();
+      }, 1000);
+    }
+
+    afterLoginUpdate() {
+      // Update the state after a user login event
+      var data = UserStore.getLoginResult();
+      if (data && !data.error) {
+        this.setState({
+          loggedIn: 'true',
+          token: data.token,
+          user: data.user
+        });
+      }
+    }
+
+    afterSignupUpdate() {
+      // Update the state after a user signs up
+      var data = UserStore.getSignupResult();
+      if (data && !data.error) {
+        this.setState({
+          loggedIn: 'true',
+          token: data.token,
+          user: data.user
+        });
+      }
     }
 
     userSession() {
@@ -77,7 +111,6 @@
       if (data && !data.error) {
         // If the logout is successful
         window.Materialize.toast(data.message, 2000, 'success-toast');
-        browserHistory.push('/');
         // Remove the user's token and info
         localStorage.removeItem('user');
         localStorage.removeItem('userInfo');
@@ -86,6 +119,7 @@
           loggedIn: null,
           user: null
         });
+        browserHistory.push('/');
       }
     }
 
