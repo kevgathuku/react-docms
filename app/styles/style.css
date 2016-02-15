@@ -6637,3 +6637,7 @@ h2 {
 .success-toast {
     background-color: #00cc33;
 }
+
+body {
+  background-color: #efefef;
+}

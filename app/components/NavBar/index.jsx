@@ -12,6 +12,7 @@
       super(props);
 
       this.state = {
+        token: localStorage.getItem('user'),
         loggedIn: null,
         user: null
       };
@@ -21,10 +22,8 @@
     }
 
     componentWillMount() {
-      // Get the token from localStorage
-      let token = localStorage.getItem('user');
       // Send a request to check if the user is logged in
-      UserActions.getSession(token);
+      UserActions.getSession(this.state.token);
       UserStore.addChangeListener(this.userSession);
       UserStore.addChangeListener(this.handleLogoutResult);
     }
@@ -41,6 +40,7 @@
           // If there is a user token in localStorage, remove it
           // because it is invalid now
           localStorage.removeItem('user');
+          localStorage.removeItem('userInfo');
           // If the user is not logged in and is not on the homepage
           // redirect them to the login page
           if (window.location.pathname !== '/') {
@@ -56,10 +56,8 @@
 
     handleLogoutSubmit(event) {
       event.preventDefault();
-      // Get the token from localStorage
-      let token = localStorage.getItem('user');
       // Send a request to check if the user is logged in
-      UserActions.logout({}, token);
+      UserActions.logout({}, this.state.token);
     }
 
     handleLogoutResult() {
@@ -68,8 +66,9 @@
         // If the logout is successful
         window.Materialize.toast(data.message, 2000, 'success-toast');
         browserHistory.push('/');
-        // Remove the user's token
+        // Remove the user's token and info
         localStorage.removeItem('user');
+        localStorage.removeItem('userInfo');
         // Set the state to update the navbar links
         this.setState({
           loggedIn: null,

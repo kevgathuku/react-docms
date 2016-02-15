@@ -9,17 +9,47 @@
     Object.assign = require('object-assign');
   }
 
-  let UserStore = Object.assign({}, BaseStore, {
+  let DocStore = Object.assign({}, BaseStore, {
+    doc: null,
     docs: null,
+    docCreateResult: null,
     docDeleteResult: null,
+    docEditResult: null,
 
     setDocs: function(docs) {
       this.docs = docs;
-      this.emitChange();
+      this.emitChange('fetchDocs');
     },
 
     getDocs: function() {
       return this.docs;
+    },
+
+    setDoc: function(doc) {
+      this.doc = doc;
+      this.emitChange('getDoc');
+    },
+
+    getDoc: function() {
+      return this.doc;
+    },
+
+    setDocCreateResult: function(result) {
+      this.docCreateResult = result;
+      this.emitChange();
+    },
+
+    getDocCreateResult: function() {
+      return this.docCreateResult;
+    },
+
+    setDocEditResult: function(result) {
+      this.docEditResult = result;
+      this.emitChange('editDoc');
+    },
+
+    getDocEditResult: function() {
+      return this.docEditResult;
     },
 
     setDocDeleteResult: function(result) {
@@ -35,12 +65,26 @@
   AppDispatcher.register(function(action) {
     switch (action.actionType) {
       case AppConstants.USER_DOCS:
-        UserStore.setDocs(action.data);
+        DocStore.setDocs(action.data);
+        break;
+      case AppConstants.CREATE_DOC:
+        DocStore.setDocCreateResult(action.data);
         break;
       case AppConstants.DELETE_DOC:
-        UserStore.setDocDeleteResult({
+        DocStore.setDocDeleteResult({
           data: action.data,
           statusCode: action.statusCode
+        });
+        break;
+      case AppConstants.EDIT_DOC:
+        DocStore.setDocEditResult({
+          data: action.data,
+          statusCode: action.statusCode
+        });
+        break;
+      case AppConstants.GET_DOC:
+        DocStore.setDoc({
+          data: action.data
         });
         break;
       default:
@@ -50,5 +94,5 @@
     return true;
   });
 
-  module.exports = UserStore;
+  module.exports = DocStore;
 })();

@@ -38,7 +38,8 @@
         .end(function(err, result) {
           AppDispatcher.dispatch({
             actionType: actionType,
-            data: result.body
+            data: result.body,
+            statusCode: result.statusCode
           });
         });
     },

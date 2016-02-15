@@ -1,4 +1,4 @@
-(function() {
+(() => {
   'use strict';
 
   let React = require('react'),
@@ -30,10 +30,11 @@
         if (data.error) {
           window.Materialize.toast(data.error, 2000, 'error-toast');
         } else {
-        // The login was successful
-        localStorage.setItem('user', data.token);
-        window.Materialize.toast('Logged in Successfully!', 2000, 'success-toast');
-        browserHistory.push('/dashboard');
+          // The login was successful. Store user data in localStorage
+          localStorage.setItem('user', data.token);
+          localStorage.setItem('userInfo', JSON.stringify(data.user));
+          window.Materialize.toast('Logged in Successfully!', 2000, 'success-toast');
+          browserHistory.push('/dashboard');
         }
       }
     }
@@ -83,7 +84,7 @@
             <label htmlFor="password">Password</label>
             </div>
             <div className="col s12">
-              <div className="containter center">
+              <div className="container center">
                 <button className="btn waves-effect header-btn blue"
                     name="action"
                     type="submit"
