@@ -29,6 +29,12 @@
       UserStore.addChangeListener(this.handleLogoutResult);
     }
 
+    componentDidMount() {
+      setTimeout(function() {
+        window.$('.dropdown-button').dropdown();
+      }, 1000);
+    }
+
     userSession() {
       // Returns 'true' + the user object or 'false'
       let response = UserStore.getSession();
@@ -110,7 +116,6 @@
                           data-activates="dropdown"
                           data-beloworigin="true"
                           data-constrainwidth="false"
-                          onClick={this.handleDropdownClick}
                       >{this.state.user.name.first}
                         <i className="material-icons right">arrow_drop_down</i>
                       </a>
