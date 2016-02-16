@@ -131,7 +131,9 @@
               </h6>
             </div>
             <div className="row">
-              {this.state.doc ? this.state.doc.content : 'Loading...'}
+              <div className="col s10 offset-s1">
+                {this.state.doc ? this.state.doc.content : 'Loading...'}
+              </div>
             </div>
           </div>
           {docEdit}
@@ -140,8 +142,8 @@
               <i className="material-icons">toc</i>
             </a>
             <ul>
-                {/* If this user is the owner, display the delete button */}
-                {owner
+                {/* If this user is the owner, display the delete button */
+                  owner
                   ? <li>
                       <button className="btn-floating tooltipped red"
                           data-position="left"

@@ -6641,3 +6641,7 @@ h2 {
 body {
   background-color: #efefef;
 }
+.icon-align {
+  position: relative;
+  top: 10px;
+}

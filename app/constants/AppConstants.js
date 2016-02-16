@@ -11,6 +11,7 @@
     USER_LOGIN: null,
     USER_LOGOUT: null,
     USER_SIGNUP: null,
+    USER_UPDATE: null,
     USER_SESSION: null
   });
 }
