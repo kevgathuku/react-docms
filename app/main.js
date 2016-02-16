@@ -12,7 +12,7 @@
       DocumentPage = require('./components/DocumentPage/index.jsx'),
       Dashboard = require('./components/Dashboard/index.jsx'),
       Landing = require('./components/Landing/index.jsx'),
-      ProfileEdit = require('./components/ProfileEdit/index.jsx'),
+      Profile = require('./components/Profile/index.jsx'),
       Main = require('./components/Landing/Main.jsx'),
       Auth = require('./components/Auth/index.jsx');
 
@@ -22,7 +22,7 @@
         <IndexRoute component={Landing} />
         <Route path="/auth" component={Auth} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/profile/edit" component={ProfileEdit} />
+        <Route path="/profile" component={Profile} />
         <Route path="/documents/create" component={CreateDocument} />
         <Route path="/documents/:id" component={DocumentPage} />
       </Route>

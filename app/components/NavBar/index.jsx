@@ -136,7 +136,7 @@
                 {this.state.loggedIn === 'true'
                   ? <div>
                       <ul id="dropdown" className="dropdown-content">
-                        <li><a href="/#">My Profile</a></li>
+                        <li><a href="/profile">My Profile</a></li>
                         <li><a href="/#">My Documents</a></li>
                         <li className="divider"></li>
                         <li>

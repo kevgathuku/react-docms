@@ -142,8 +142,8 @@
               <i className="material-icons">toc</i>
             </a>
             <ul>
-                {/* If this user is the owner, display the delete button */}
-                {owner
+                {/* If this user is the owner, display the delete button */
+                  owner
                   ? <li>
                       <button className="btn-floating tooltipped red"
                           data-position="left"
