@@ -17,6 +17,10 @@
       BaseActions.post('/api/users', user, AppConstants.USER_SIGNUP);
     },
 
+    update: function(userID, user, token) {
+      BaseActions.put(`/api/users/${userID}`, user, AppConstants.USER_UPDATE, token);
+    },
+
     getSession: function(token) {
       BaseActions.get('/api/users/session', AppConstants.USER_SESSION, token);
     }

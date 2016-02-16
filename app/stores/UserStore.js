@@ -14,6 +14,7 @@
     loginResult: null,
     logoutResult: null,
     signupResult: null,
+    updateResult: null,
 
     setSession: function(session) {
       this.session = session;
@@ -49,6 +50,15 @@
 
     getSignupResult: function() {
       return this.signupResult;
+    },
+
+    setUpdateResult: function(updateResult) {
+      this.updateResult = updateResult;
+      this.emitChange('update');
+    },
+
+    getUpdateResult: function() {
+      return this.updateResult;
     }
   });
 
@@ -65,6 +75,9 @@
         break;
       case AppConstants.USER_SESSION:
         UserStore.setSession(action.data);
+        break;
+      case AppConstants.USER_UPDATE:
+        UserStore.setUpdateResult(action.data);
         break;
       default:
         // no default action
