@@ -3,6 +3,7 @@
 
   module.exports = require('keymirror')({
     CREATE_DOC: null,
+    CREATE_ROLE: null,
     DELETE_DOC: null,
     EDIT_DOC: null,
     GET_DOC: null,

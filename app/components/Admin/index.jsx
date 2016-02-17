@@ -1,4 +1,4 @@
-(function() {
+(() => {
   'use strict';
   var React = require('react'),
   DocActions = require('../../actions/DocActions'),
@@ -55,7 +55,7 @@
       return (
         <div className="container">
           <div className="card-panel">
-              <h2 className="header center-align">Admin Panel</h2>
+            <h2 className="header center-align">Admin Panel</h2>
             <div className="row">
               <div className="col s4 center-align">
                 <h5>Total Users</h5>
@@ -67,14 +67,14 @@
               <div className="col s4 center-align">
                 <h5>Total Documents</h5>
                 <p className="flow-text">{this.state.docs ? this.state.docs.length : 0}</p>
-                <a className="waves-effect waves-light btn blue">
+                <a className="waves-effect waves-light btn blue" href="/dashboard">
                   <i className="material-icons left">drafts</i>
                   Manage Documents</a>
               </div>
               <div className="col s4 center-align">
                 <h5>Total Roles</h5>
                 <p className="flow-text">{this.state.roles ? this.state.roles.length : 0}</p>
-                <a className="waves-effect waves-light btn blue">
+                <a className="waves-effect waves-light btn blue" href="/admin/roles">
                   <i className="material-icons left">settings</i>
                   Manage Roles</a>
               </div>
