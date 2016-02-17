@@ -8,6 +8,7 @@
       Route = ReactRouter.Route,
       Router = ReactRouter.Router,
       browserHistory = ReactRouter.browserHistory,
+      Admin = require('./components/Admin/index.jsx'),
       CreateDocument = require('./components/CreateDocument/index.jsx'),
       DocumentPage = require('./components/DocumentPage/index.jsx'),
       Dashboard = require('./components/Dashboard/index.jsx'),
@@ -21,10 +22,11 @@
       <Route path="/" component={Main} >
         <IndexRoute component={Landing} />
         <Route path="/auth" component={Auth} />
+        <Route path="/admin" component={Admin} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/profile" component={Profile} />
         <Route path="/documents/create" component={CreateDocument} />
         <Route path="/documents/:id" component={DocumentPage} />
+        <Route path="/profile" component={Profile} />
       </Route>
     </Router>), document.getElementById('content'));
 })();

@@ -23,6 +23,10 @@
 
     getSession: function(token) {
       BaseActions.get('/api/users/session', AppConstants.USER_SESSION, token);
+    },
+
+    fetchAllUsers: function(token) {
+      BaseActions.get('/api/users', AppConstants.GET_USERS, token);
     }
   };
 })();

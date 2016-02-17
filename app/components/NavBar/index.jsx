@@ -138,6 +138,11 @@
                       <ul id="dropdown" className="dropdown-content">
                         <li><a href="/profile">My Profile</a></li>
                         <li><a href="/#">My Documents</a></li>
+                        {
+                          this.state.user.role.title == 'admin'
+                          ? <li><a href="/admin">Settings</a></li>
+                          : null
+                        }
                         <li className="divider"></li>
                         <li>
                           <a href="/#"
