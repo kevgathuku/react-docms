@@ -88,7 +88,7 @@
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
-          if (window.location.pathname == '/auth') {
+          if (window.location.pathname == '/auth' || window.location.pathname === '/') {
             browserHistory.push('/dashboard');
           }
         }
@@ -154,7 +154,7 @@
                         <i className="material-icons right">arrow_drop_down</i>
                       </a>
                     </div>
-                  : <a href="/auth">Login</a>
+                  : null
                 }
               </li>
             </ul>
