@@ -20,13 +20,6 @@
         role: null,
         roles: null
       };
-
-      this.getOptions = this.getOptions.bind(this);
-      this.handleFieldChange = this.handleFieldChange.bind(this);
-      this.handleDocumentCreateResult = this.handleDocumentCreateResult.bind(this);
-      this.handleRolesResult = this.handleRolesResult.bind(this);
-      this.handleSelectChange = this.handleSelectChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -40,8 +33,8 @@
       RoleStore.removeChangeListener(this.handleRolesResult);
     }
 
-    handleDocumentCreateResult() {
-      var data = DocStore.getDocCreateResult();
+    handleDocumentCreateResult = () => {
+      let data = DocStore.getDocCreateResult();
       if (data) {
         if (data.error) {
           window.Materialize.toast(data.error, 2000, 'error-toast');
@@ -52,12 +45,12 @@
       }
     }
 
-    handleRolesResult() {
+    handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
       event.preventDefault();
       if (!this.state.role) {
         window.Materialize.toast('Please Select a Role', 2000, 'error-toast');
@@ -70,7 +63,7 @@
       DocActions.createDoc(documentPayload, this.state.token);
     }
 
-    handleFieldChange(event) {
+    handleFieldChange = (event) => {
       // A function bound to the event object
       let stateObject = function() {
         let returnObj = {};
@@ -81,7 +74,7 @@
       this.setState(stateObject);
     }
 
-    getOptions(input, callback) {
+    getOptions = (input, callback) => {
       setTimeout(() => {
         callback(null, {
           options: this.state.roles,
@@ -92,7 +85,7 @@
       }, 1000);
     }
 
-    handleSelectChange(val) {
+    handleSelectChange = (val) => {
       this.setState({
         role: val
       });

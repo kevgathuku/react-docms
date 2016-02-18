@@ -14,18 +14,14 @@
         password: null,
         result: null
       };
-
-      this.handleFieldChange = this.handleFieldChange.bind(this);
-      this.handleLogin = this.handleLogin.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
       UserStore.addChangeListener(this.handleLogin, 'login');
     }
 
-    handleLogin() {
-      var data = UserStore.getLoginResult();
+    handleLogin = () => {
+      let data = UserStore.getLoginResult();
       if (data) {
         if (data.error) {
           window.Materialize.toast(data.error, 2000, 'error-toast');
@@ -39,7 +35,7 @@
       }
     }
 
-    handleFieldChange(event) {
+    handleFieldChange = (event) => {
       // A function bound to the event object
       let stateObject = function() {
         let returnObj = {};
@@ -50,7 +46,7 @@
       this.setState(stateObject);
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
       event.preventDefault();
         let loginPayload = {
           username: this.state.email,

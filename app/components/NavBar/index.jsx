@@ -16,12 +16,6 @@
         loggedIn: null,
         user: null
       };
-      this.afterLoginUpdate = this.afterLoginUpdate.bind(this);
-      this.userSession = this.userSession.bind(this);
-      this.handleDropdownClick = this.handleDropdownClick.bind(this);
-      this.handleLogoutResult = this.handleLogoutResult.bind(this);
-      this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
-      this.afterSignupUpdate = this.afterSignupUpdate.bind(this);
     }
 
     componentWillMount() {
@@ -39,15 +33,15 @@
       }, 1000);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate = () => {
       setTimeout(() => {
         window.$('.dropdown-button').dropdown();
       }, 1000);
     }
 
-    afterLoginUpdate() {
+    afterLoginUpdate = () => {
       // Update the state after a user login event
-      var data = UserStore.getLoginResult();
+      let data = UserStore.getLoginResult();
       if (data && !data.error) {
         this.setState({
           loggedIn: 'true',
@@ -57,9 +51,9 @@
       }
     }
 
-    afterSignupUpdate() {
+    afterSignupUpdate = () => {
       // Update the state after a user signs up
-      var data = UserStore.getSignupResult();
+      let data = UserStore.getSignupResult();
       if (data && !data.error) {
         this.setState({
           loggedIn: 'true',
@@ -69,7 +63,7 @@
       }
     }
 
-    userSession() {
+    userSession = () => {
       // Returns 'true' + the user object or 'false'
       let response = UserStore.getSession();
       if (response && !response.error) {
@@ -95,19 +89,19 @@
       }
     }
 
-    handleDropdownClick(event) {
+    handleDropdownClick = (event) => {
       event.preventDefault();
       window.$('.dropdown-button').dropdown();
     }
 
-    handleLogoutSubmit(event) {
+    handleLogoutSubmit = (event) => {
       event.preventDefault();
       // Send a request to check if the user is logged in
       UserActions.logout({}, this.state.token);
     }
 
-    handleLogoutResult() {
-      var data = UserStore.getLogoutResult();
+    handleLogoutResult = () => {
+      let data = UserStore.getLogoutResult();
       if (data && !data.error) {
         // If the logout is successful
         window.Materialize.toast(data.message, 2000, 'success-toast');
@@ -137,7 +131,7 @@
                   ? <div>
                       <ul id="dropdown" className="dropdown-content">
                         <li><a href="/profile">My Profile</a></li>
-                        <li><a href="/#">My Documents</a></li>
+                        <li><a href="/dashboard">My Documents</a></li>
                         {
                           this.state.user.role.title == 'admin'
                           ? <li><a href="/admin">Settings</a></li>
