@@ -1,5 +1,6 @@
-(function() {
+(() => {
   'use strict';
+
   let React = require('react');
 
   // Requires the CSS for it to be included in the final output

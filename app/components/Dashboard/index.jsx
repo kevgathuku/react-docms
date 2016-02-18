@@ -13,8 +13,6 @@
       this.state = {
         docs: null
       };
-
-      this.handleDocsResult = this.handleDocsResult.bind(this);
     }
 
     componentDidMount() {
@@ -28,7 +26,7 @@
       DocStore.removeChangeListener(this.handleDocsResult, 'fetchDocs');
     }
 
-    handleDocsResult() {
+    handleDocsResult = () => {
       let docs = DocStore.getDocs();
       if (docs && !docs.error) {
         this.setState({

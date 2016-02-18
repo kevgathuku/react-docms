@@ -17,62 +17,62 @@
     signupResult: null,
     updateResult: null,
 
-    getUsers: function() {
+    getUsers() {
       return this.users;
     },
 
-    setUsers: function(users) {
+    setUsers(users) {
       this.users = users;
       this.emitChange();
     },
 
-    setSession: function(session) {
+    setSession(session) {
       this.session = session;
       this.emitChange();
     },
 
-    getSession: function() {
+    getSession() {
       return this.session;
     },
 
-    setLoginResult: function(loginResult) {
+    setLoginResult(loginResult) {
       this.loginResult = loginResult;
       this.emitChange('login');
     },
 
-    getLoginResult: function() {
+    getLoginResult() {
       return this.loginResult;
     },
 
-    setLogoutResult: function(logoutResult) {
+    setLogoutResult(logoutResult) {
       this.logoutResult = logoutResult;
       this.emitChange();
     },
 
-    getLogoutResult: function() {
+    getLogoutResult() {
       return this.logoutResult;
     },
 
-    setSignupResult: function(signupResult) {
+    setSignupResult(signupResult) {
       this.signupResult = signupResult;
       this.emitChange('signup');
     },
 
-    getSignupResult: function() {
+    getSignupResult() {
       return this.signupResult;
     },
 
-    setUpdateResult: function(updateResult) {
+    setUpdateResult(updateResult) {
       this.updateResult = updateResult;
       this.emitChange('update');
     },
 
-    getUpdateResult: function() {
+    getUpdateResult() {
       return this.updateResult;
     }
   });
 
-  AppDispatcher.register(function(action) {
+  AppDispatcher.register((action) => {
     switch (action.actionType) {
       case AppConstants.USER_LOGIN:
         UserStore.setLoginResult(action.data);

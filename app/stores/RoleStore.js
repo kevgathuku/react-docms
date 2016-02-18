@@ -33,7 +33,7 @@
 
   });
 
-  AppDispatcher.register(function(action) {
+  AppDispatcher.register((action) => {
     switch (action.actionType) {
       case AppConstants.CREATE_ROLE:
         RoleStore.setCreatedRole(action.data);

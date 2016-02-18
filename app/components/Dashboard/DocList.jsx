@@ -1,8 +1,8 @@
 {
   'use strict';
 
-  var React = require('react'),
-    cardImage = require('../../images/soccer.jpeg');
+  let React = require('react'),
+      cardImage = require('../../images/soccer.jpeg');
 
   class DocList extends React.Component {
 

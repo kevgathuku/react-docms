@@ -1,12 +1,13 @@
 (() => {
   'use strict';
-  var React = require('react'),
-  DocActions = require('../../actions/DocActions'),
-  DocStore = require('../../stores/DocStore'),
-  RoleActions = require('../../actions/RoleActions'),
-  RoleStore = require('../../stores/RoleStore'),
-  UserActions = require('../../actions/UserActions'),
-  UserStore = require('../../stores/UserStore');
+
+  let React = require('react'),
+      DocActions = require('../../actions/DocActions'),
+      DocStore = require('../../stores/DocStore'),
+      RoleActions = require('../../actions/RoleActions'),
+      RoleStore = require('../../stores/RoleStore'),
+      UserActions = require('../../actions/UserActions'),
+      UserStore = require('../../stores/UserStore');
 
   class Admin extends React.Component {
     constructor() {

@@ -23,12 +23,6 @@
         role: this.props.doc.role,
         options: []
       };
-
-      this.handleEditResult = this.handleEditResult.bind(this);
-      this.handleFieldChange = this.handleFieldChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.getOptions = this.getOptions.bind(this);
-      this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +33,7 @@
       DocStore.removeChangeListener(this.handleEditResult, 'editDoc');
     }
 
-    handleFieldChange(event) {
+    handleFieldChange = (event) => {
       // A function bound to the event object
       let stateObject = function() {
         let returnObj = {};
@@ -50,7 +44,7 @@
       this.setState(stateObject);
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
       event.preventDefault();
       let documentPayload = {
         title: this.state.title,
@@ -64,7 +58,7 @@
       );
     }
 
-    handleEditResult() {
+    handleEditResult = () => {
       let result = DocStore.getDocEditResult();
       if (result && result.data._id === this.props.doc._id) {
         if (result.statusCode === 200) {
@@ -76,7 +70,7 @@
       }
     }
 
-    getOptions(input, callback) {
+    getOptions = (input, callback) => {
       setTimeout(() => {
         callback(null, {
           options: this.props.roles,
@@ -87,7 +81,7 @@
       }, 1000);
     }
 
-    handleSelectChange(val) {
+    handleSelectChange = (val) => {
       this.setState({
         role: val
       });

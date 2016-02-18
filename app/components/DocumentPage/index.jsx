@@ -26,13 +26,6 @@
         token: localStorage.getItem('user'),
         user: JSON.parse(localStorage.getItem('userInfo'))
       };
-
-      this.handleDeleteResult = this.handleDeleteResult.bind(this);
-      this.handleDocumentDelete = this.handleDocumentDelete.bind(this);
-      this.handleDocumentEdit = this.handleDocumentEdit.bind(this);
-      this.handleDocumentFetch = this.handleDocumentFetch.bind(this);
-      this.handleRolesResult = this.handleRolesResult.bind(this);
-      this.onEditUpdate = this.onEditUpdate.bind(this);
     }
 
     componentWillMount() {
@@ -49,7 +42,7 @@
       RoleStore.removeChangeListener(this.handleRolesResult);
     }
 
-    handleDocumentFetch() {
+    handleDocumentFetch = () => {
       let result = DocStore.getDoc();
       this.setState({
         doc: result.data
@@ -61,7 +54,7 @@
       });
     }
 
-    handleDocumentDelete(doc, event) {
+    handleDocumentDelete = (doc, event) => {
       // Prevent the default action for clicking on a link
       event.preventDefault();
       swal({
@@ -77,15 +70,15 @@
       });
     }
 
-    handleDeleteResult() {
-      var result = DocStore.getDocDeleteResult();
+    handleDeleteResult = () => {
+      let result = DocStore.getDocDeleteResult();
       if (result && result.statusCode === 204) {
         swal('Deleted!', 'Your document has been deleted.', 'success');
         browserHistory.push('/dashboard');
       }
     }
 
-    handleDocumentEdit(doc, event) {
+    handleDocumentEdit = (doc, event) => {
       // Prevent the default action for clicking on a link
       event.preventDefault();
       // Get the id of the <a> tag that triggered the modal
@@ -94,12 +87,12 @@
       window.$(id).openModal();
     }
 
-    handleRolesResult() {
+    handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
     }
 
-    onEditUpdate(doc) {
+    onEditUpdate = (doc) => {
       this.setState({
         doc: doc
       });

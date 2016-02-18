@@ -16,48 +16,48 @@
     docDeleteResult: null,
     docEditResult: null,
 
-    setDocs: function(docs) {
+    setDocs(docs) {
       this.docs = docs;
       this.emitChange('fetchDocs');
     },
 
-    getDocs: function() {
+    getDocs() {
       return this.docs;
     },
 
-    setDoc: function(doc) {
+    setDoc(doc) {
       this.doc = doc;
       this.emitChange('getDoc');
     },
 
-    getDoc: function() {
+    getDoc() {
       return this.doc;
     },
 
-    setDocCreateResult: function(result) {
+    setDocCreateResult(result) {
       this.docCreateResult = result;
       this.emitChange();
     },
 
-    getDocCreateResult: function() {
+    getDocCreateResult() {
       return this.docCreateResult;
     },
 
-    setDocEditResult: function(result) {
+    setDocEditResult(result) {
       this.docEditResult = result;
       this.emitChange('editDoc');
     },
 
-    getDocEditResult: function() {
+    getDocEditResult() {
       return this.docEditResult;
     },
 
-    setDocDeleteResult: function(result) {
+    setDocDeleteResult(result) {
       this.docDeleteResult = result;
       this.emitChange();
     },
 
-    getDocDeleteResult: function() {
+    getDocDeleteResult() {
       return this.docDeleteResult;
     }
   });

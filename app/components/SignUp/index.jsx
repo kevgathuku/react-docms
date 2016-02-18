@@ -1,4 +1,4 @@
-(function() {
+(() => {
   'use strict';
 
   let React = require('react'),
@@ -19,21 +19,13 @@
         passwordConfirm: null,
         result: null
       };
-      // React components using ES6 classes no longer
-      // autobind this to non React methods.
-      // This is required in the constructor
-      // to make 'this' available to non React methods
-      this.comparePassword = this.comparePassword.bind(this);
-      this.handleFieldChange = this.handleFieldChange.bind(this);
-      this.handleSignup = this.handleSignup.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
       UserStore.addChangeListener(this.handleSignup, 'signup');
     }
 
-    comparePassword(password, confirmPassword) {
+    comparePassword = (password, confirmPassword) => {
       if (password !== confirmPassword) {
         window.Materialize.toast('passwords don\'t match', 2000, 'error-toast');
         return false;
@@ -45,8 +37,8 @@
       }
     }
 
-    handleSignup() {
-      var data = UserStore.getSignupResult();
+    handleSignup = () => {
+      let data = UserStore.getSignupResult();
       if (data) {
         if (data.error) {
           window.Materialize.toast(data.error, 2000, 'error-toast');
@@ -60,7 +52,7 @@
       }
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
       event.preventDefault();
       if (this.comparePassword(this.state.password, this.state.passwordConfirm)) {
         let userPayload = {
@@ -74,7 +66,7 @@
       }
     }
 
-    handleFieldChange(event) {
+    handleFieldChange = (event) => {
       if (event.target.name === 'password-confirm') {
         this.setState({passwordConfirm: event.target.value});
       } else {
