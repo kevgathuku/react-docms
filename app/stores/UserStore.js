@@ -10,11 +10,21 @@
   }
 
   let UserStore = Object.assign({}, BaseStore, {
+    users: null,
     session: null,
     loginResult: null,
     logoutResult: null,
     signupResult: null,
     updateResult: null,
+
+    getUsers: function() {
+      return this.users;
+    },
+
+    setUsers: function(users) {
+      this.users = users;
+      this.emitChange();
+    },
 
     setSession: function(session) {
       this.session = session;
@@ -78,6 +88,9 @@
         break;
       case AppConstants.USER_UPDATE:
         UserStore.setUpdateResult(action.data);
+        break;
+      case AppConstants.GET_USERS:
+        UserStore.setUsers(action.data);
         break;
       default:
         // no default action

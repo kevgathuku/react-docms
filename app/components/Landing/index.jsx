@@ -28,9 +28,9 @@
             <div className="row">
               <div className="col s12">
                 <div className="center-align">
-                  <a className="btn btn-large create-list-link hero-btn" href="/auth"> Get Started
+                  <a className="btn btn-large create-list-link hero-btn" href="/auth">
+                    Get Started
                   </a>
-                  <a className="btn btn-large white grey-text hero-btn" href="#">Learn More</a>
                 </div>
               </div>
             </div>

@@ -88,7 +88,7 @@
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
-          if (window.location.pathname == '/auth') {
+          if (window.location.pathname == '/auth' || window.location.pathname === '/') {
             browserHistory.push('/dashboard');
           }
         }
@@ -138,6 +138,11 @@
                       <ul id="dropdown" className="dropdown-content">
                         <li><a href="/profile">My Profile</a></li>
                         <li><a href="/#">My Documents</a></li>
+                        {
+                          this.state.user.role.title == 'admin'
+                          ? <li><a href="/admin">Settings</a></li>
+                          : null
+                        }
                         <li className="divider"></li>
                         <li>
                           <a href="/#"
@@ -154,7 +159,7 @@
                         <i className="material-icons right">arrow_drop_down</i>
                       </a>
                     </div>
-                  : <a href="/auth">Login</a>
+                  : null
                 }
               </li>
             </ul>
