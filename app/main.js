@@ -17,7 +17,8 @@
       Landing = require('./components/Landing/index.jsx'),
       Profile = require('./components/Profile/index.jsx'),
       Main = require('./components/Landing/Main.jsx'),
-      RolesAdmin = require('./components/RolesAdmin/index.jsx');
+      RolesAdmin = require('./components/RolesAdmin/index.jsx'),
+      UsersAdmin = require('./components/UsersAdmin/index.jsx');
 
   ReactDOM.render((
     <Router history={browserHistory}>
@@ -26,6 +27,7 @@
         <Route path="/auth" component={Auth} />
         <Route path="/admin" component={Admin} />
         <Route path="/admin/roles" component={RolesAdmin} />
+        <Route path="/admin/users" component={UsersAdmin} />
         <Route path="/admin/roles/create" component={CreateRole} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/documents/create" component={CreateDocument} />

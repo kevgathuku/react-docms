@@ -60,7 +60,7 @@
               <div className="col s4 center-align">
                 <h5>Total Users</h5>
                 <p className="flow-text ">{this.state.users ? this.state.users.length : 0}</p>
-                <a className="waves-effect waves-light btn blue">
+                <a className="waves-effect waves-light btn blue" href="/admin/users">
                   <i className="material-icons left">face</i>
                   Manage Users</a>
               </div>
