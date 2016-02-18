@@ -4,7 +4,6 @@
   let browserHistory = require('react-router').browserHistory,
       React = require('react'),
       moment = require('moment'),
-      swal = require('sweetalert'),
       DocEdit = require('./DocEdit.jsx'),
       DocActions = require('../../actions/DocActions'),
       DocStore = require('../../stores/DocStore'),
@@ -57,7 +56,7 @@
     handleDocumentDelete = (doc, event) => {
       // Prevent the default action for clicking on a link
       event.preventDefault();
-      swal({
+      window.swal({
         title: 'Are you sure?',
         text: 'You will not be able to recover this document!',
         type: 'warning',
@@ -73,7 +72,7 @@
     handleDeleteResult = () => {
       let result = DocStore.getDocDeleteResult();
       if (result && result.statusCode === 204) {
-        swal('Deleted!', 'Your document has been deleted.', 'success');
+        window.swal('Deleted!', 'Your document has been deleted.', 'success');
         browserHistory.push('/dashboard');
       }
     }
