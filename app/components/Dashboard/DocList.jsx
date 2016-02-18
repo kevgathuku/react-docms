@@ -2,7 +2,7 @@
   'use strict';
 
   let React = require('react'),
-      cardImage = require('../../images/soccer.jpeg');
+      cardImage = require('../../images/abstract.jpeg');
 
   class DocList extends React.Component {
 

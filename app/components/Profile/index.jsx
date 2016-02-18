@@ -4,7 +4,7 @@
   let React = require('react'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
-    cardImage = require('../../images/soccer.jpeg');
+    cardImage = require('../../images/mountain.jpg');
 
   class Profile extends React.Component {
 
@@ -222,7 +222,7 @@
                         data-tooltip="Edit Profile"
                         onClick={this.handleEditToggle}
                     >
-                      <i className="material-icons">edit</i>
+                      <i className="material-icons cyan lighten-1">edit</i>
                     </a>
                     <span className="card-title activator grey-text text-darken-4">
                       <i className="material-icons right icon-align">more_vert</i>
