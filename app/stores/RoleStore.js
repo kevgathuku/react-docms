@@ -10,6 +10,7 @@
     }
 
   let RoleStore = Object.assign({}, BaseStore, {
+    createdRole: null,
     roles: null,
 
     setRoles(roles) {
@@ -19,12 +20,24 @@
 
     getRoles() {
       return this.roles;
+    },
+
+    setCreatedRole(role) {
+      this.createdRole = role;
+      this.emitChange();
+    },
+
+    getCreatedRole() {
+      return this.createdRole;
     }
 
   });
 
   AppDispatcher.register(function(action) {
     switch (action.actionType) {
+      case AppConstants.CREATE_ROLE:
+        RoleStore.setCreatedRole(action.data);
+        break;
       case AppConstants.GET_ROLES:
         RoleStore.setRoles(action.data);
         break;
