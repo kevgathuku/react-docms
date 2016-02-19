@@ -1,4 +1,4 @@
-(() =>{
+(() => {
   'use strict';
 
   let AppConstants = require('../constants/AppConstants'),
