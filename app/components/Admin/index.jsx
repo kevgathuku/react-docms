@@ -40,17 +40,17 @@
           docs: docs
         });
       }
-    }
+    };
 
     handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
-    }
+    };
 
     handleUsersResult = () => {
       let users = UserStore.getUsers();
       this.setState({users: users});
-    }
+    };
 
     render() {
       return (

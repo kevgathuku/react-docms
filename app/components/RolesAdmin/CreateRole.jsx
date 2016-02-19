@@ -35,7 +35,7 @@
           browserHistory.push('/admin/roles');
         }
       }
-    }
+    };
 
     handleFieldChange = (event) => {
       // A function bound to the event object
@@ -46,7 +46,7 @@
       }.bind(event)();
 
       this.setState(stateObject);
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -57,7 +57,7 @@
         title: this.state.title
       };
       RoleActions.create(role, this.state.token);
-    }
+    };
 
     render() {
       return (

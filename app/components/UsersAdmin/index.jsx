@@ -40,12 +40,12 @@
     handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
-    }
+    };
 
     handleUsersResult = () => {
       let users = UserStore.getUsers();
       this.setState({users: users});
-    }
+    };
 
     getOptions = (input, callback) => {
       setTimeout(() => {
@@ -56,7 +56,7 @@
           complete: true
         });
       }, 1000);
-    }
+    };
 
     // Prepend the user object to the function arguments through bind
     handleSelectChange = (user, val) => {
@@ -72,7 +72,7 @@
         user.role = val;
         UserActions.update(user._id, user, this.state.token);
       }
-    }
+    };
 
     render() {
       let renderUser = (user) => {

@@ -51,7 +51,7 @@
       this.setState({
         parsedDate: m.fromNow()
       });
-    }
+    };
 
     handleDocumentDelete = (doc, event) => {
       // Prevent the default action for clicking on a link
@@ -67,7 +67,7 @@
       }, () => {
         DocActions.deleteDoc(doc._id, this.state.token);
       });
-    }
+    };
 
     handleDeleteResult = () => {
       let result = DocStore.getDocDeleteResult();
@@ -75,7 +75,7 @@
         window.swal('Deleted!', 'Your document has been deleted.', 'success');
         browserHistory.push('/dashboard');
       }
-    }
+    };
 
     handleDocumentEdit = (doc, event) => {
       // Prevent the default action for clicking on a link
@@ -84,18 +84,18 @@
       let id = `#${event.currentTarget.getAttribute('href')}`;
       // Open the specific modal when the link is clicked
       window.$(id).openModal();
-    }
+    };
 
     handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
-    }
+    };
 
     onEditUpdate = (doc) => {
       this.setState({
         doc: doc
       });
-    }
+    };
 
     render() {
       var owner;

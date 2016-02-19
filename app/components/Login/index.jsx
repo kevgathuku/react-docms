@@ -33,7 +33,7 @@
           browserHistory.push('/dashboard');
         }
       }
-    }
+    };
 
     handleFieldChange = (event) => {
       // A function bound to the event object
@@ -44,7 +44,7 @@
       }.bind(event)();
 
       this.setState(stateObject);
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -53,7 +53,7 @@
           password: this.state.password
         };
         UserActions.login(loginPayload);
-    }
+    };
 
     render() {
       return (
