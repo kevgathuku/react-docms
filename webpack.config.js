@@ -25,7 +25,8 @@
       alias: {
         'react': pathToReact,
         'react-dom': pathToReactDOM
-      }
+      },
+      root: __dirname
     },
     output: {
       //We use the buildPath as that points to where the files will eventually
