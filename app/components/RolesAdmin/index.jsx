@@ -26,7 +26,7 @@
     handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
-    }
+    };
 
     render() {
       let renderRole = (role) => {

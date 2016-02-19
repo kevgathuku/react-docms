@@ -35,7 +35,7 @@
       } else {
         return true;
       }
-    }
+    };
 
     handleSignup = () => {
       let data = UserStore.getSignupResult();
@@ -50,7 +50,7 @@
           browserHistory.push('/dashboard');
         }
       }
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -64,7 +64,7 @@
         };
         UserActions.signup(userPayload);
       }
-    }
+    };
 
     handleFieldChange = (event) => {
       if (event.target.name === 'password-confirm') {
@@ -79,7 +79,7 @@
 
         this.setState(stateObject);
       }
-    }
+    };
 
     render() {
       return (

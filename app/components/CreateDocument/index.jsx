@@ -43,12 +43,12 @@
           browserHistory.push('/dashboard');
         }
       }
-    }
+    };
 
     handleRolesResult = () => {
       let roles = RoleStore.getRoles();
       this.setState({roles: roles});
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -61,7 +61,7 @@
         role: this.state.role.title
       };
       DocActions.createDoc(documentPayload, this.state.token);
-    }
+    };
 
     handleFieldChange = (event) => {
       // A function bound to the event object
@@ -72,7 +72,7 @@
       }.bind(event)();
 
       this.setState(stateObject);
-    }
+    };
 
     getOptions = (input, callback) => {
       setTimeout(() => {
@@ -83,13 +83,13 @@
           complete: true
         });
       }, 1000);
-    }
+    };
 
     handleSelectChange = (val) => {
       this.setState({
         role: val
       });
-    }
+    };
 
     render() {
       return (

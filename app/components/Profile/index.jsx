@@ -44,7 +44,7 @@
           return true;
         }
       }
-    }
+    };
 
     handleFieldChange = (event) => {
       if (event.target.name === 'confirm-password') {
@@ -59,7 +59,7 @@
 
         this.setState(stateObject);
       }
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -81,7 +81,7 @@
         };
         UserActions.update(this.state.user._id, userPayload, this.state.token);
       }
-    }
+    };
 
     handleEditToggle = (event) => {
       event.preventDefault();
@@ -96,7 +96,7 @@
           profileDisplay: 'block'
         });
       }
-    }
+    };
 
     handleEditResult = () => {
       let result = UserStore.getUpdateResult();
@@ -115,7 +115,7 @@
           window.Materialize.toast(result.error, 2000, 'error-toast');
         }
       }
-    }
+    };
 
     render() {
       let editForm  = (

@@ -33,7 +33,7 @@
       }, 1000);
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate() {
       setTimeout(() => {
         window.$('.dropdown-button').dropdown();
       }, 1000);
@@ -49,7 +49,7 @@
           user: data.user
         });
       }
-    }
+    };
 
     afterSignupUpdate = () => {
       // Update the state after a user signs up
@@ -61,7 +61,7 @@
           user: data.user
         });
       }
-    }
+    };
 
     userSession = () => {
       // Returns 'true' + the user object or 'false'
@@ -87,18 +87,18 @@
           }
         }
       }
-    }
+    };
 
     handleDropdownClick = (event) => {
       event.preventDefault();
       window.$('.dropdown-button').dropdown();
-    }
+    };
 
     handleLogoutSubmit = (event) => {
       event.preventDefault();
       // Send a request to check if the user is logged in
       UserActions.logout({}, this.state.token);
-    }
+    };
 
     handleLogoutResult = () => {
       let data = UserStore.getLogoutResult();
@@ -115,7 +115,7 @@
         });
         browserHistory.push('/');
       }
-    }
+    };
 
     render() {
       return (
