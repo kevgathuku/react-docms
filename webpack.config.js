@@ -59,6 +59,11 @@
       new ExtractTextPlugin('styles.css'),
       new Webpack.HotModuleReplacementPlugin(),
       new Webpack.NoErrorsPlugin()
-    ]
+    ],
+    externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  }
   };
 })();
