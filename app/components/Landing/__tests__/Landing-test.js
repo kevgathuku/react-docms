@@ -18,8 +18,7 @@
 
       // Check whether we have the right content
       expect(headingNode.textContent)
-      .toEqual(
-        'Docue    is the simplest way for anyone to manage their documents online');
+      .toMatch(/Docue\s+is the simplest way for anyone to manage their documents online/);
       });
 
   });
