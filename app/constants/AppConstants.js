@@ -1,6 +1,6 @@
 {
   'use strict';
-  let keyMirror = require('keyMirror');
+  let keyMirror = require('keymirror');
   module.exports = keyMirror({
     CREATE_DOC: null,
     CREATE_ROLE: null,
