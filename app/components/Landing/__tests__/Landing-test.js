@@ -1,26 +1,18 @@
-(() => {
-  'use strict';
+'use strict';
 
-  jest.dontMock('../index.jsx');
+import React from 'react';
+import expect from 'expect';
+import { shallow, mount } from 'enzyme';
+import Landing from '../index.jsx';
 
-  let React = require('react');
-  let ReactDOM = require('react-dom');
-  let TestUtils = require('react-addons-test-utils');
-  let Landing = require('../index.jsx');
-
-  describe('Landing', () => {
-
-    it('renders the Landing component', () => {
-      // Render the Landing Page in the document
-      let landing = TestUtils.renderIntoDocument(<Landing />);
-      let heading = TestUtils.findRenderedDOMComponentWithTag(landing, 'h1');
-      let headingNode = ReactDOM.findDOMNode(heading);
-
-      // Check whether we have the right content
-      expect(headingNode.textContent)
-      .toEqual(
-        'Docue    is the simplest way for anyone to manage their documents online');
-      });
-
+describe('Landing component', function() {
+  it('renders the correct content', function() {
+    expect(shallow(<Landing />).text()).toMatch(/Docue\s+is the simplest way for anyone to manage their documents online/);
+    expect(shallow(<Landing />).text()).toMatch(/Get\s+Started/);
   });
-})();
+
+  it('renders the correct component', function() {
+    expect(shallow(<Landing />).is('#hero')).toEqual(true);
+    expect(mount(<Landing />).find('#hero').length).toEqual(1);
+  });
+});
