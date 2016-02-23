@@ -21,7 +21,7 @@
     componentDidMount() {
       // Send a request to check if the user is logged in
       UserActions.getSession(this.state.token);
-      UserStore.addChangeListener(this.userSession);
+      UserStore.addChangeListener(this.userSession, 'session');
       UserStore.addChangeListener(this.afterLoginUpdate, 'login');
       UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
@@ -79,7 +79,7 @@
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
-          if (window.location.pathname == '/auth' || window.location.pathname === '/') {
+          if (window.location.pathname === '/auth' || window.location.pathname === '/') {
             browserHistory.push('/dashboard');
           }
         }

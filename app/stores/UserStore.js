@@ -28,7 +28,7 @@
 
     setSession(session) {
       this.session = session;
-      this.emitChange();
+      this.emitChange('session');
     },
 
     getSession() {
