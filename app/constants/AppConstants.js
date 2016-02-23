@@ -1,5 +1,6 @@
-{
+(() => {
   'use strict';
+
   let keyMirror = require('keymirror');
   module.exports = keyMirror({
     CREATE_DOC: null,
@@ -16,4 +17,5 @@
     USER_UPDATE: null,
     USER_SESSION: null
   });
-}
+
+})();

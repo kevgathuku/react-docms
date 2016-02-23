@@ -18,16 +18,13 @@
       };
     }
 
-    componentWillMount() {
+    componentDidMount() {
       // Send a request to check if the user is logged in
       UserActions.getSession(this.state.token);
       UserStore.addChangeListener(this.userSession);
       UserStore.addChangeListener(this.afterLoginUpdate, 'login');
       UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
-    }
-
-    componentDidMount() {
       setTimeout(() => {
         window.$('.dropdown-button').dropdown();
       }, 1000);
