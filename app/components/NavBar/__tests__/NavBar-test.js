@@ -7,6 +7,7 @@ import { mount, shallow } from 'enzyme';
 import NavBar from '../index.jsx';
 import UserActions from '../../../actions/UserActions';
 import UserStore from '../../../stores/UserStore';
+import { browserHistory } from 'react-router';
 
 describe('NavBar', function() {
 
@@ -93,31 +94,33 @@ describe('NavBar', function() {
         expect(navBar.state().user).toNotExist();
       });
 
-      it('redirects correcty if the user is not logged in', function(done) {
-        let navBar = mount(<NavBar />); // Mount the component
-        const inst = navBar.instance();
-        expect(inst.hasOwnProperty('redirect')).toBe(true);
-        sinon.spy(inst, 'redirect');
-        expect(inst).toBeA(NavBar);
-        // navBar.update(); // Force a re-render.
-        // expect(Object.keys(NavBar.prototype)).toBe([]);
-        // // let mountedNavBar = shallow(navBar);
+      it('responds correctly if the user is not logged in', function() {
+        sinon.spy(localStorage, 'removeItem');
+        mount(<NavBar />);
         // Trigger a change in the UserStore
         UserStore.setSession({
           loggedIn: 'false'
         });
-        expect(navBar.state().loggedIn).toEqual('false');
-        // console.log(navBar).debug();
-        // navigate to a page other than the homepage
-        // browserHistory.push('/not-found');
-        window.location.pathname = '/not-found';
-        setTimeout(function() {
-          expect(window.location.pathname).toBe('/auth');
-          expect(inst.redirect.called).toBe(true);
-          done();
-        }, 200);
-        // // The redirect function should be called
-        inst.redirect.restore();
+        expect(localStorage.removeItem.withArgs('user').called).toBe(true);
+        expect(localStorage.removeItem.withArgs('userInfo').called).toBe(true);
+      });
+
+      it('responds correctly if the user is logged in', function() {
+        sinon.spy(browserHistory, 'push');
+        // sinon.spy(localStorage, 'removeItem');
+        mount(<NavBar />);
+        // Trigger a change in the UserStore
+        UserStore.setSession({
+          loggedIn: 'true',
+          user: {
+            name: 'Kevin',
+            role: {
+              title: 'viewer'
+            }
+          }
+        });
+        expect(browserHistory.push.called).toBe(true);
+        expect(browserHistory.push.withArgs('/dashboard').called).toBe(true);
       });
     });
   });
