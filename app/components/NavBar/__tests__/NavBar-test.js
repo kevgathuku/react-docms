@@ -50,7 +50,7 @@ describe('NavBar', function() {
     });
 
     it('calls registered callbacks on mount', () => {
-      sinon.spy(UserActions, 'getSession');
+      sinon.stub(UserActions, 'getSession').returns(true);
       sinon.spy(UserStore, 'addChangeListener');
       mount(<NavBar />); // Mount the component
       expect(UserActions.getSession.calledOnce).toBe(true);
@@ -81,7 +81,7 @@ describe('NavBar', function() {
     describe('userSession', function() {
       it('calls the user session change listener', () => {
         sinon.spy(UserStore, 'getSession');
-        mount(<NavBar />); // Mount the component
+        shallow(<NavBar />); // Mount the component
         // Trigger a change in the UserStore
         UserStore.setSession({});
         // The getSession function should be called
