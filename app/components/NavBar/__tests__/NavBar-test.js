@@ -41,6 +41,14 @@ describe('NavBar', function() {
       NavBar.prototype.componentDidMount.restore();
     });
 
+    it('calls componentWillUnmount', () => {
+      sinon.spy(NavBar.prototype, 'componentWillUnmount');
+      let navBar = mount(<NavBar />); // Mount the component
+      navBar.unmount();
+      expect(NavBar.prototype.componentWillUnmount.calledOnce).toBe(true);
+      NavBar.prototype.componentWillUnmount.restore();
+    });
+
     it('calls registered callbacks on mount', () => {
       sinon.spy(UserActions, 'getSession');
       sinon.spy(UserStore, 'addChangeListener');
@@ -49,6 +57,21 @@ describe('NavBar', function() {
       expect(UserStore.addChangeListener.callCount).toBe(4);
       UserStore.addChangeListener.restore();
       UserActions.getSession.restore();
+    });
+
+    it('renders relevant links if user is logged in', function() {
+      let navBar = mount(<NavBar />);
+      UserStore.setSession({
+        loggedIn: 'true',
+        user: {
+          name: 'Kevin',
+          role: {
+            title: 'admin'
+          }
+        }
+      });
+      expect(navBar.text()).toMatch(/Settings/);
+      expect(navBar.text()).toMatch(/Profile/);
     });
 
   });
@@ -96,19 +119,20 @@ describe('NavBar', function() {
 
       it('responds correctly if the user is not logged in', function() {
         sinon.spy(localStorage, 'removeItem');
-        mount(<NavBar />);
+        shallow(<NavBar />);
         // Trigger a change in the UserStore
         UserStore.setSession({
           loggedIn: 'false'
         });
         expect(localStorage.removeItem.withArgs('user').called).toBe(true);
         expect(localStorage.removeItem.withArgs('userInfo').called).toBe(true);
+        localStorage.removeItem.restore();
       });
 
       it('responds correctly if the user is logged in', function() {
         sinon.spy(browserHistory, 'push');
         // sinon.spy(localStorage, 'removeItem');
-        mount(<NavBar />);
+        shallow(<NavBar />);
         // Trigger a change in the UserStore
         UserStore.setSession({
           loggedIn: 'true',
@@ -123,6 +147,113 @@ describe('NavBar', function() {
         expect(browserHistory.push.withArgs('/dashboard').called).toBe(true);
       });
     });
-  });
+    });
 
+    describe('afterLoginUpdate', function() {
+      it('sets the correct state after login', function() {
+        let navBar = mount(<NavBar />);
+        // Trigger a change in the UserStore
+        UserStore.setLoginResult({
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+          user: {
+            name: 'Kevin',
+            role: {
+              title: 'viewer'
+            }
+          }
+        });
+        expect(UserStore.getLoginResult()).toBeA('object');
+        expect(navBar.state().loggedIn).toEqual('true');
+        expect(navBar.state().user).toBeA('object');
+        expect(navBar.state().token).toBeA('string');
+      });
+
+      it('does not change state if response has error', function() {
+        let navBar = mount(<NavBar />);
+        // Trigger a change in the UserStore
+        UserStore.setLoginResult({
+          error: 'Error!'
+        });
+        expect(navBar.state().loggedIn).toNotExist();
+        expect(navBar.state().user).toNotExist();
+        expect(navBar.state().token).toNotExist();
+      });
+    });
+
+    describe('afterSignupUpdate', function() {
+      it('sets the correct state after signup', function() {
+        let navBar = mount(<NavBar />);
+        // Trigger a change in the UserStore
+        UserStore.setSignupResult({
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+          user: {
+            name: 'Kevin',
+            role: {
+              title: 'viewer'
+            }
+          }
+        });
+        expect(UserStore.getSignupResult()).toBeA('object');
+        expect(navBar.state().loggedIn).toEqual('true');
+        expect(navBar.state().user).toBeA('object');
+        expect(navBar.state().token).toBeA('string');
+      });
+
+      it('does not change state if response has error', function() {
+        let navBar = mount(<NavBar />);
+        // Trigger a change in the UserStore
+        UserStore.setSignupResult({
+          error: 'Error!'
+        });
+        expect(navBar.state().loggedIn).toNotExist();
+        expect(navBar.state().user).toNotExist();
+        expect(navBar.state().token).toNotExist();
+      });
+    });
+
+    describe('handleLogout', function() {
+
+      it('should logout the user on click', function() {
+        sinon.spy(localStorage, 'removeItem');
+        sinon.spy(UserStore, 'getSession');
+        let navBar = shallow(<NavBar />);
+        // Trigger a change in the logout store
+        UserStore.setLogoutResult({
+          message: 'Successfully logged out'
+        });
+        // Should set the state correctly
+        expect(UserStore.getLogoutResult()).toBeA('object');
+        expect(navBar.state().loggedIn).toNotExist();
+        expect(navBar.state().user).toNotExist();
+        expect(localStorage.removeItem.withArgs('user').called).toBe(true);
+        expect(localStorage.removeItem.withArgs('userInfo').called).toBe(true);
+      });
+
+      it('should call the logout action on click', function() {
+        let mockEvent = {
+          preventDefault: function() {}
+        };
+        sinon.stub(UserActions, 'logout').returns(true);
+        let user = {
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+          user: {
+            name: 'Kevin',
+            role: {
+              title: 'viewer'
+            }
+          }
+        };
+        sinon.spy(mockEvent, 'preventDefault');
+        let navBar = mount(<NavBar />);
+        const inst = navBar.instance();
+        sinon.spy(inst, 'handleLogoutSubmit');
+        UserStore.setLoginResult(user);
+        // The logout button should be in the DOM
+        expect(navBar.find('#logout-btn').length).toBe(1);
+        navBar.find('#logout-btn').simulate('click', mockEvent);
+        expect(mockEvent.preventDefault.called).toBe(true);
+        expect(UserActions.logout.withArgs({}, user.token).called).toBe(true);
+        expect(inst.handleLogoutSubmit.calledOnce).toBe(true);
+      });
+    });
 });

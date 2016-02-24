@@ -36,6 +36,13 @@
       }, 1000);
     }
 
+    componentWillUnmount() {
+      UserStore.removeChangeListener(this.userSession, 'session');
+      UserStore.removeChangeListener(this.afterLoginUpdate, 'login');
+      UserStore.removeChangeListener(this.afterSignupUpdate, 'signup');
+      UserStore.removeChangeListener(this.handleLogoutResult);
+    }
+
     afterLoginUpdate = () => {
       // Update the state after a user login event
       let data = UserStore.getLoginResult();
@@ -86,11 +93,6 @@
       }
     };
 
-    handleDropdownClick = (event) => {
-      event.preventDefault();
-      window.$('.dropdown-button').dropdown();
-    };
-
     handleLogoutSubmit = (event) => {
       event.preventDefault();
       // Send a request to check if the user is logged in
@@ -100,8 +102,6 @@
     handleLogoutResult = () => {
       let data = UserStore.getLogoutResult();
       if (data && !data.error) {
-        // If the logout is successful
-        window.Materialize.toast(data.message, 2000, 'success-toast');
         // Remove the user's token and info
         localStorage.removeItem('user');
         localStorage.removeItem('userInfo');
@@ -136,7 +136,7 @@
                         }
                         <li className="divider"></li>
                         <li>
-                          <a href="/#"
+                          <a href="/#" id="logout-btn"
                               onClick={this.handleLogoutSubmit}
                           > Logout
                           </a>
