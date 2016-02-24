@@ -60,6 +60,12 @@
       }
     };
 
+    redirect = (path) => {
+      if(path) {
+        return browserHistory.push(path);
+      }
+    };
+
     userSession = () => {
       // Returns 'true' + the user object or 'false'
       let response = UserStore.getSession();
@@ -76,11 +82,11 @@
           // If the user is not logged in and is not on the homepage
           // redirect them to the login page
           if (window.location.pathname !== '/') {
-            browserHistory.push('/auth');
+            this.redirect('/auth');
           }
         } else if (response.loggedIn === 'true') {
           if (window.location.pathname === '/auth' || window.location.pathname === '/') {
-            browserHistory.push('/dashboard');
+            this.redirect('/dashboard');
           }
         }
       }
