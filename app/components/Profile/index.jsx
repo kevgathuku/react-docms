@@ -47,6 +47,7 @@
     };
 
     handleFieldChange = (event) => {
+      event.preventDefault();
       if (event.target.name === 'confirm-password') {
         this.setState({passwordConfirm: event.target.value});
       } else {
@@ -63,7 +64,7 @@
 
     handleSubmit = (event) => {
       event.preventDefault();
-      if (this.state.password && this.state.confirmPassword) {
+      if (this.state.password && this.state.passwordConfirm) {
         if (this.comparePassword(this.state.password, this.state.passwordConfirm)) {
           let userPayload = {
             firstname: this.state.firstname,
