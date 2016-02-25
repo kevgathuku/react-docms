@@ -27,7 +27,7 @@
       };
     }
 
-    componentWillMount() {
+    componentDidMount() {
       DocActions.fetchDoc(this.props.params.id, this.state.token);
       RoleActions.getRoles(this.state.token);
       DocStore.addChangeListener(this.handleDeleteResult);

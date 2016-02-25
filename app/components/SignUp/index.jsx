@@ -25,6 +25,10 @@
       UserStore.addChangeListener(this.handleSignup, 'signup');
     }
 
+    componentWillUnmount() {
+      UserStore.removeChangeListener(this.handleSignup, 'signup');
+    }
+
     comparePassword = (password, confirmPassword) => {
       if (password !== confirmPassword) {
         window.Materialize.toast('passwords don\'t match', 2000, 'error-toast');

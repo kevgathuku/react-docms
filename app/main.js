@@ -12,7 +12,7 @@
       Auth = require('./components/Auth/index.jsx'),
       Admin = require('./components/Admin/index.jsx'),
       CreateDocument = require('./components/CreateDocument/index.jsx'),
-      CreateRole = require('./components/RolesAdmin/CreateRole.jsx'),
+      CreateRole = require('./components/CreateRole/index.jsx'),
       DocumentPage = require('./components/DocumentPage/index.jsx'),
       Dashboard = require('./components/Dashboard/index.jsx'),
       Landing = require('./components/Landing/index.jsx'),
