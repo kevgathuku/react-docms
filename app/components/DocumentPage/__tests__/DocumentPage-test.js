@@ -39,7 +39,6 @@ describe('DocumentPage', function() {
 
     beforeEach(function() {
       window.Materialize.toast = sinon.spy();
-      window.swal = sinon.spy();
       docPage = mount(<DocumentPage params={{id: 4}}/>);
     });
 
@@ -76,6 +75,7 @@ describe('DocumentPage', function() {
 
     describe('handleDeleteResult', function() {
       it('should set state correctly on doc fetch', function() {
+        window.swal = sinon.spy();
         sinon.spy(DocStore, 'getDocDeleteResult');
         sinon.spy(browserHistory, 'push');
         let result = {
