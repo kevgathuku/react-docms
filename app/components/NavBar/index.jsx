@@ -27,6 +27,7 @@
       UserStore.addChangeListener(this.handleLogoutResult);
       setTimeout(() => {
         window.$('.dropdown-button').dropdown();
+        window.$('.button-collapse').sideNav();
       }, 1000);
     }
 
@@ -122,13 +123,31 @@
               <img alt="Docue Logo" id="header-logo" src={logoSrc}/>
               {'      Docue'}
             </a>
+            <a href="#" data-activates="mobile-demo" className="button-collapse">
+              <i className="material-icons" style={{color: 'grey'}}>menu</i>
+            </a>
+            <ul className="side-nav" id="mobile-demo">
+              <li><a href="/">Home</a></li>
+              <li>
+                {this.state.loggedIn === 'true'
+                  ? <a href="/profile" >Profile</a>
+                  : <a href="/auth">Login</a>
+                }
+              </li>
+              <li>
+                {this.state.loggedIn === 'true'
+                  ? <a href="/#" onClick={this.handleLogoutSubmit}>Logout</a>
+                  : <a href="/auth">Sign Up</a>
+                }
+              </li>
+            </ul>
             <ul className="right hide-on-med-and-down" id="nav-mobile">
               <li>
                 {this.state.loggedIn === 'true'
                   ? <div>
                       <ul id="dropdown" className="dropdown-content">
                         <li><a href="/profile">My Profile</a></li>
-                        <li><a href="/dashboard">My Documents</a></li>
+                        <li><a href="/dashboard">All Documents</a></li>
                         {
                           this.state.user.role.title == 'admin'
                           ? <li><a href="/admin">Settings</a></li>
@@ -154,29 +173,6 @@
                 }
               </li>
             </ul>
-            { // Don't display the menu on the login page
-              window.location.pathname !== '/auth'
-              ?
-              <div className="row center hide-on-large-only" id="header-mobile-links" style={{top: 52}}>
-                <div className="col s4">
-                  <a href="/">Home</a>
-                </div>
-                <div className="col s4">
-                  {this.state.loggedIn === 'true'
-                    ? <a href="/profile" >Profile</a>
-                    : <a href="/auth">Login</a>
-                  }
-                </div>
-                <div className="col s4">
-                  {this.state.loggedIn === 'true'
-                    ? <a href="/#" onClick={this.handleLogoutSubmit}>Logout</a>
-                  : <a href="/auth">Sign Up</a>
-                  }
-                </div>
-                <div className="col s12 spacer"></div>
-              </div>
-            : null
-          }
           </div>
         </nav>
       );
