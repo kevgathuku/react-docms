@@ -20,6 +20,10 @@
       UserStore.addChangeListener(this.handleLogin, 'login');
     }
 
+    componentWillUnmount() {
+      UserStore.removeChangeListener(this.handleLogin, 'login');
+    }
+
     handleLogin = () => {
       let data = UserStore.getLoginResult();
       if (data) {

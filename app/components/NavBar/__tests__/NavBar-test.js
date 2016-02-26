@@ -12,6 +12,10 @@ import { browserHistory } from 'react-router';
 describe('NavBar', function() {
 
   describe('Component Rendering', function() {
+    beforeEach(function() {
+      localStorage.clear();
+    });
+
     it('renders the correct mobile links', function() {
       // It should find the correct title
       expect(shallow(<NavBar />).text()).toMatch(/Docue/);
@@ -151,6 +155,11 @@ describe('NavBar', function() {
     });
 
     describe('afterLoginUpdate', function() {
+      beforeEach(function() {
+        // Start with an empty localStorage instance
+        localStorage.clear();
+      });
+
       it('sets the correct state after login', function() {
         let navBar = mount(<NavBar />);
         // Trigger a change in the UserStore
