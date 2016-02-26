@@ -18,25 +18,29 @@
       };
     }
 
-    componentWillMount() {
+    componentDidMount() {
       // Send a request to check if the user is logged in
       UserActions.getSession(this.state.token);
-      UserStore.addChangeListener(this.userSession);
+      UserStore.addChangeListener(this.userSession, 'session');
       UserStore.addChangeListener(this.afterLoginUpdate, 'login');
       UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
-    }
-
-    componentDidMount() {
       setTimeout(() => {
         window.$('.dropdown-button').dropdown();
       }, 1000);
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate() {
       setTimeout(() => {
         window.$('.dropdown-button').dropdown();
       }, 1000);
+    }
+
+    componentWillUnmount() {
+      UserStore.removeChangeListener(this.userSession, 'session');
+      UserStore.removeChangeListener(this.afterLoginUpdate, 'login');
+      UserStore.removeChangeListener(this.afterSignupUpdate, 'signup');
+      UserStore.removeChangeListener(this.handleLogoutResult);
     }
 
     afterLoginUpdate = () => {
@@ -49,7 +53,7 @@
           user: data.user
         });
       }
-    }
+    };
 
     afterSignupUpdate = () => {
       // Update the state after a user signs up
@@ -61,7 +65,7 @@
           user: data.user
         });
       }
-    }
+    };
 
     userSession = () => {
       // Returns 'true' + the user object or 'false'
@@ -82,29 +86,22 @@
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
-          if (window.location.pathname == '/auth' || window.location.pathname === '/') {
+          if (window.location.pathname === '/auth' || window.location.pathname === '/') {
             browserHistory.push('/dashboard');
           }
         }
       }
-    }
-
-    handleDropdownClick = (event) => {
-      event.preventDefault();
-      window.$('.dropdown-button').dropdown();
-    }
+    };
 
     handleLogoutSubmit = (event) => {
       event.preventDefault();
       // Send a request to check if the user is logged in
       UserActions.logout({}, this.state.token);
-    }
+    };
 
     handleLogoutResult = () => {
       let data = UserStore.getLogoutResult();
       if (data && !data.error) {
-        // If the logout is successful
-        window.Materialize.toast(data.message, 2000, 'success-toast');
         // Remove the user's token and info
         localStorage.removeItem('user');
         localStorage.removeItem('userInfo');
@@ -115,7 +112,7 @@
         });
         browserHistory.push('/');
       }
-    }
+    };
 
     render() {
       return (
@@ -139,7 +136,7 @@
                         }
                         <li className="divider"></li>
                         <li>
-                          <a href="/#"
+                          <a href="/#" id="logout-btn"
                               onClick={this.handleLogoutSubmit}
                           > Logout
                           </a>
@@ -157,21 +154,29 @@
                 }
               </li>
             </ul>
-            <div className="row center hide-on-large-only" id="header-mobile-links">
-              <div className="col s4">
-                <a href="/">Home</a>
+            { // Don't display the menu on the login page
+              window.location.pathname !== '/auth'
+              ?
+              <div className="row center hide-on-large-only" id="header-mobile-links" style={{top: 52}}>
+                <div className="col s4">
+                  <a href="/">Home</a>
+                </div>
+                <div className="col s4">
+                  {this.state.loggedIn === 'true'
+                    ? <a href="/profile" >Profile</a>
+                    : <a href="/auth">Login</a>
+                  }
+                </div>
+                <div className="col s4">
+                  {this.state.loggedIn === 'true'
+                    ? <a href="/#" onClick={this.handleLogoutSubmit}>Logout</a>
+                  : <a href="/auth">Sign Up</a>
+                  }
+                </div>
+                <div className="col s12 spacer"></div>
               </div>
-              <div className="col s4">
-                <a href="/#">About</a>
-              </div>
-              <div className="col s4">
-                {this.state.loggedIn === 'true'
-                  ? <a href="/#" onClick={this.handleLogoutSubmit}>Logout</a>
-                  : <a href="/auth">Login</a>
-                }
-              </div>
-              <div className="col s12 spacer"></div>
-            </div>
+            : null
+          }
           </div>
         </nav>
       );

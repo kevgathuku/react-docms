@@ -1,5 +1,4 @@
 (() => {
-  'use strict';
 
   let React = require('react');
 
@@ -22,7 +21,7 @@
                   <span className="bold" >{'Docue    '}</span>
                   <span className="thin">
                     is the simplest way for <br />
-                  anyone to manage their documents online </span>
+                  anyone to manage their documents online</span>
                 </h1>
               </div>
             </div>

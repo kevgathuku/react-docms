@@ -44,9 +44,10 @@
           return true;
         }
       }
-    }
+    };
 
     handleFieldChange = (event) => {
+      event.preventDefault();
       if (event.target.name === 'confirm-password') {
         this.setState({passwordConfirm: event.target.value});
       } else {
@@ -59,11 +60,11 @@
 
         this.setState(stateObject);
       }
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
-      if (this.state.password && this.state.confirmPassword) {
+      if (this.state.password && this.state.passwordConfirm) {
         if (this.comparePassword(this.state.password, this.state.passwordConfirm)) {
           let userPayload = {
             firstname: this.state.firstname,
@@ -81,7 +82,7 @@
         };
         UserActions.update(this.state.user._id, userPayload, this.state.token);
       }
-    }
+    };
 
     handleEditToggle = (event) => {
       event.preventDefault();
@@ -96,7 +97,7 @@
           profileDisplay: 'block'
         });
       }
-    }
+    };
 
     handleEditResult = () => {
       let result = UserStore.getUpdateResult();
@@ -115,7 +116,7 @@
           window.Materialize.toast(result.error, 2000, 'error-toast');
         }
       }
-    }
+    };
 
     render() {
       let editForm  = (

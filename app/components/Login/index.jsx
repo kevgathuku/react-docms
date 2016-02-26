@@ -20,6 +20,10 @@
       UserStore.addChangeListener(this.handleLogin, 'login');
     }
 
+    componentWillUnmount() {
+      UserStore.removeChangeListener(this.handleLogin, 'login');
+    }
+
     handleLogin = () => {
       let data = UserStore.getLoginResult();
       if (data) {
@@ -33,7 +37,7 @@
           browserHistory.push('/dashboard');
         }
       }
-    }
+    };
 
     handleFieldChange = (event) => {
       // A function bound to the event object
@@ -44,7 +48,7 @@
       }.bind(event)();
 
       this.setState(stateObject);
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -53,7 +57,7 @@
           password: this.state.password
         };
         UserActions.login(loginPayload);
-    }
+    };
 
     render() {
       return (

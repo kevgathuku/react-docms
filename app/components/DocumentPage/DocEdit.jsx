@@ -42,7 +42,7 @@
       }.bind(event)();
 
       this.setState(stateObject);
-    }
+    };
 
     handleSubmit = (event) => {
       event.preventDefault();
@@ -56,7 +56,7 @@
         documentPayload,
         this.state.token
       );
-    }
+    };
 
     handleEditResult = () => {
       let result = DocStore.getDocEditResult();
@@ -68,7 +68,7 @@
           window.Materialize.toast(result.error, 2000, 'error-toast');
         }
       }
-    }
+    };
 
     getOptions = (input, callback) => {
       setTimeout(() => {
@@ -79,13 +79,13 @@
           complete: true
         });
       }, 1000);
-    }
+    };
 
     handleSelectChange = (val) => {
       this.setState({
         role: val
       });
-    }
+    };
 
     render() {
       return (

@@ -1,7 +1,8 @@
-{
+(() => {
   'use strict';
 
-  module.exports = require('keymirror')({
+  let keyMirror = require('keymirror');
+  module.exports = keyMirror({
     CREATE_DOC: null,
     CREATE_ROLE: null,
     DELETE_DOC: null,
@@ -16,4 +17,5 @@
     USER_UPDATE: null,
     USER_SESSION: null
   });
-}
+
+})();
