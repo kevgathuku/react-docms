@@ -145,6 +145,7 @@ describe('NavBar', function() {
         });
         expect(browserHistory.push.called).toBe(true);
         expect(browserHistory.push.withArgs('/dashboard').called).toBe(true);
+        browserHistory.push.restore();
       });
     });
     });
@@ -227,6 +228,7 @@ describe('NavBar', function() {
         expect(navBar.state().user).toNotExist();
         expect(localStorage.removeItem.withArgs('user').called).toBe(true);
         expect(localStorage.removeItem.withArgs('userInfo').called).toBe(true);
+        UserStore.getSession.restore();
       });
 
       it('should call the logout action on click', function() {

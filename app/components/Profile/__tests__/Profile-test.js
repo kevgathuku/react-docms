@@ -94,7 +94,7 @@ describe('Profile', function() {
     });
 
     describe('comparePassword', function() {
-      it('should return false if the passwords don\'t match', function() {
+      it('should return true if the passwords match', function() {
         const instance = profile.instance();
         sinon.spy(instance, 'comparePassword');
         instance.comparePassword('password', 'password');
@@ -102,7 +102,7 @@ describe('Profile', function() {
         instance.comparePassword.restore();
       });
 
-      it('should return true if the passwords match', function() {
+      it('should return false if the passwords don\'t match', function() {
         const instance = profile.instance();
         sinon.spy(instance, 'comparePassword');
         instance.comparePassword('password', 'paewewjwenfssword');
@@ -133,7 +133,7 @@ describe('Profile', function() {
           passwordConfirm: 'pass'
         });
         expect(profile.state().password).toEqual('pass');
-        expect(profile.state().password).toEqual('pass');
+        expect(profile.state().passwordConfirm).toEqual('pass');
         // Submit the edit form
         profile.find('button.btn.blue.center').simulate('click', editProfileEvent);
         expect(editProfileEvent.preventDefault.called).toBe(true);
