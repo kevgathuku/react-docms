@@ -44,7 +44,7 @@
     handleDocumentFetch = () => {
       let result = DocStore.getDoc();
       this.setState({
-        doc: result.data
+        doc: result
       });
       let createdDate = this.state.doc.dateCreated;
       let m = moment(new Date(createdDate));

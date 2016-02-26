@@ -83,9 +83,7 @@
         });
         break;
       case AppConstants.GET_DOC:
-        DocStore.setDoc({
-          data: action.data
-        });
+        DocStore.setDoc(action.data);
         break;
       default:
         // no default action

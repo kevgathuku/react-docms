@@ -25,9 +25,13 @@
       // Activate the materialize tooltips
       setTimeout(function() {
         window.$('.tooltipped').each(function() {
-          window.$(this).tooltip({'delay': 50});
+          window.$(this).tooltip();
         });
       }, 1000);
+    }
+
+    componentWillUnmount() {
+      window.$('.tooltipped').tooltip('remove');
     }
 
     render() {
