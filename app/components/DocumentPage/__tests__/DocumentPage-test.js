@@ -50,25 +50,23 @@ describe('DocumentPage', function() {
       it('should correctly handle document fetch', function() {
         sinon.spy(DocStore, 'getDoc');
         let result = {
-          data: {
-            content: 'Hello from the other side',
-            dateCreated: '2016-02-15T15:10:34.000Z',
-            ownerId: {
-              _id: 3,
-              name: {
-                first: 'Kevin',
-                last: 'wkejbfekjwbf'
-              }
+          content: 'Hello from the other side',
+          dateCreated: '2016-02-15T15:10:34.000Z',
+          ownerId: {
+            _id: 3,
+            name: {
+              first: 'Kevin',
+              last: 'wkejbfekjwbf'
             }
           }
         };
         DocStore.setDoc(result);
         // Should set the state correctly
         expect(DocStore.getDoc.called).toBe(true);
-        expect(docPage.state().doc).toBe(result.data);
+        expect(docPage.state().doc).toBe(result);
         // Ensure the content is displayed
         expect(docPage.find('div.col.s10.offset-s1').text())
-          .toInclude(result.data.content);
+          .toInclude(result.content);
         DocStore.getDoc.restore();
       });
     });
