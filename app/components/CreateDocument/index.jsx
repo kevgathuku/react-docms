@@ -100,7 +100,7 @@
           </div>
           <div className="row">
             <form className="col s12" onSubmit={this.handleSubmit}>
-                <div className="input-field col s6">
+                <div className="input-field col s12 m6">
                   <input className="validate"
                       id="title"
                       name="title"
@@ -110,8 +110,7 @@
                   />
                 <label className="active" htmlFor="title">Title</label>
                 </div>
-                <div className="input-field col s6">
-                  <label className="active" htmlFor="role">Role</label>
+                <div className="input-field col s12 m6">
                   <Select.Async style={{top: 10}}
                       labelKey="title"
                       valueKey="_id"
