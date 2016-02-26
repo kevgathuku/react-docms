@@ -19,6 +19,7 @@ describe('DocStore', function() {
 
   after(function() {
     AppDispatcher.dispatch.restore();
+    AppDispatcher.register.restore();
     registerSpy.restore();
   });
 
