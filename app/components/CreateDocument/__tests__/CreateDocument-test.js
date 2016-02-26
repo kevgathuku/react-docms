@@ -38,7 +38,7 @@ describe('CreateDocument', function() {
     });
   });
 
-  describe('Class Functions', function() {
+  describe('Component Functions', function() {
     window.Materialize = {};
 
     var createDoc;
