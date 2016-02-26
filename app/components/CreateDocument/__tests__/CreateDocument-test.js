@@ -6,9 +6,7 @@ import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import { browserHistory } from 'react-router';
 import DocActions from '../../../actions/DocActions';
-import RoleActions from '../../../actions/RoleActions';
 import DocStore from '../../../stores/DocStore';
-import RoleStore from '../../../stores/RoleStore';
 import CreateDocument from '../index.jsx';
 
 describe('CreateDocument', function() {
