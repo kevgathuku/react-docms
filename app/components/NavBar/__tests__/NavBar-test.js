@@ -12,6 +12,10 @@ import { browserHistory } from 'react-router';
 describe('NavBar', function() {
 
   describe('Component Rendering', function() {
+    beforeEach(function() {
+      localStorage.clear();
+    });
+
     it('renders the correct mobile links', function() {
       // It should find the correct title
       expect(shallow(<NavBar />).text()).toMatch(/Docue/);
@@ -145,11 +149,17 @@ describe('NavBar', function() {
         });
         expect(browserHistory.push.called).toBe(true);
         expect(browserHistory.push.withArgs('/dashboard').called).toBe(true);
+        browserHistory.push.restore();
       });
     });
     });
 
     describe('afterLoginUpdate', function() {
+      beforeEach(function() {
+        // Start with an empty localStorage instance
+        localStorage.clear();
+      });
+
       it('sets the correct state after login', function() {
         let navBar = mount(<NavBar />);
         // Trigger a change in the UserStore
@@ -227,6 +237,7 @@ describe('NavBar', function() {
         expect(navBar.state().user).toNotExist();
         expect(localStorage.removeItem.withArgs('user').called).toBe(true);
         expect(localStorage.removeItem.withArgs('userInfo').called).toBe(true);
+        UserStore.getSession.restore();
       });
 
       it('should call the logout action on click', function() {

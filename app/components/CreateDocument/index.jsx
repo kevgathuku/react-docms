@@ -54,6 +54,7 @@
       event.preventDefault();
       if (!this.state.role) {
         window.Materialize.toast('Please Select a Role', 2000, 'error-toast');
+        return;
       }
       let documentPayload = {
         title: this.state.title,

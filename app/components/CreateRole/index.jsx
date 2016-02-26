@@ -24,7 +24,6 @@
       RoleStore.removeChangeListener(this.handleRoleCreateResult);
     }
 
-
     handleRoleCreateResult = () => {
       let data = RoleStore.getCreatedRole();
       if (data) {
