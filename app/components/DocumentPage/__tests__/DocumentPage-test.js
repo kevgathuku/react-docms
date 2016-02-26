@@ -36,21 +36,9 @@ describe('DocumentPage', function() {
     window.Materialize = {};
 
     var docPage;
-    let doc = {
-      content: 'Hello from the other side',
-      dateCreated: '2016-02-15T15:10:34.000Z',
-      ownerId: {
-        _id: 3,
-        name: {
-          first: 'Kevin',
-          last: 'wkejbfekjwbf'
-        }
-      }
-    };
 
     beforeEach(function() {
       window.Materialize.toast = sinon.spy();
-      window.swal = sinon.spy();
       docPage = mount(<DocumentPage params={{id: 4}}/>);
     });
 
@@ -87,6 +75,7 @@ describe('DocumentPage', function() {
 
     describe('handleDeleteResult', function() {
       it('should set state correctly on doc fetch', function() {
+        window.swal = sinon.spy();
         sinon.spy(DocStore, 'getDocDeleteResult');
         sinon.spy(browserHistory, 'push');
         let result = {
@@ -103,6 +92,17 @@ describe('DocumentPage', function() {
     });
 
     describe('onEditUpdate', function() {
+      let doc = {
+        content: 'Hello from the other side',
+        dateCreated: '2016-02-15T15:10:34.000Z',
+        ownerId: {
+          _id: 3,
+          name: {
+            first: 'Kevin',
+            last: 'wkejbfekjwbf'
+          }
+        }
+      };
       it('should correctly update the state', function() {
         const instance = docPage.instance();
         sinon.spy(instance, 'onEditUpdate');
