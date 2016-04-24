@@ -1,3 +1,4 @@
+/* @flow */
 (() => {
   'use strict';
 
@@ -5,7 +6,7 @@
       BaseActions  = require('./BaseActions');
 
   module.exports = {
-    createDoc: (body, token) => {
+    createDoc: (body, token: ?string) => {
       BaseActions.post(
         '/api/documents',
         body,
@@ -14,7 +15,7 @@
       );
     },
 
-    getDocs: (token) => {
+    getDocs: (token: ?string) => {
       BaseActions.get(
         '/api/documents',
         AppConstants.USER_DOCS,
@@ -22,7 +23,7 @@
       );
     },
 
-    fetchDoc: (docId, token) => {
+    fetchDoc: (docId, token: ?string) => {
       BaseActions.get(
         `/api/documents/${docId}`,
         AppConstants.GET_DOC,
@@ -30,7 +31,7 @@
       );
     },
 
-    deleteDoc: (docID, token) => {
+    deleteDoc: (docID, token: ?string) => {
       BaseActions.delete(
         `/api/documents/${docID}`,
         AppConstants.DELETE_DOC,
@@ -38,7 +39,7 @@
       );
     },
 
-    editDoc: (docID, updatedDoc, token) => {
+    editDoc: (docID, updatedDoc, token: ?string) => {
       BaseActions.put(
         `/api/documents/${docID}`,
         updatedDoc,
