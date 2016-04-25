@@ -16,8 +16,8 @@
     // Makes sure errors in console map to the correct file and line number
     devtool: 'eval',
     entry: [
-      'webpack/hot/dev-server',
       'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
       mainPath
     ],
     target: 'web',
@@ -57,8 +57,7 @@
     // from Node
     plugins: [
       new ExtractTextPlugin('styles.css'),
-      new Webpack.HotModuleReplacementPlugin(),
-      new Webpack.NoErrorsPlugin()
+      new Webpack.HotModuleReplacementPlugin()
     ]
   };
 })();
