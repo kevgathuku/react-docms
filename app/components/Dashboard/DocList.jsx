@@ -7,7 +7,6 @@
   class DocList extends React.Component {
 
     static propTypes = {
-      deleteDoc: React.PropTypes.func,
       docs:  React.PropTypes.arrayOf(React.PropTypes.object)
     };
 
