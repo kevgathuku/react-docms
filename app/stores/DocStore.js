@@ -1,7 +1,8 @@
 (() => {
   'use strict';
 
-  let AppConstants = require('../constants/AppConstants'),
+  let Immutable = require('immutable'),
+    AppConstants = require('../constants/AppConstants'),
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     BaseStore = require('./BaseStore');
 
@@ -10,7 +11,7 @@
   }
 
   let DocStore = Object.assign({}, BaseStore, {
-    doc: null,
+    doc: Immutable.Map(),
     docs: null,
     docCreateResult: null,
     docDeleteResult: null,
@@ -26,7 +27,7 @@
     },
 
     setDoc(doc) {
-      this.doc = doc;
+      this.doc = this.doc.merge(doc).toJS();
       this.emitChange('getDoc');
     },
 
