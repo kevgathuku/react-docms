@@ -63,7 +63,7 @@ describe('DocumentPage', function() {
         DocStore.setDoc(result);
         // Should set the state correctly
         expect(DocStore.getDoc.called).toBe(true);
-        expect(docPage.state().doc).toBe(result);
+        expect(docPage.state().doc).toEqual(result);
         // Ensure the content is displayed
         expect(docPage.find('div.col.s10.offset-s1').text())
           .toInclude(result.content);

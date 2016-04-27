@@ -23,6 +23,7 @@
 .*/flow/include/FluxStoreGroup.js
 .*/flow/include/fetchWithRetries.js
 .*/flow/include/PromiseMap.js
+.*/react/node_modules/.*
 
 [include]
 ./node_modules
