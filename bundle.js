@@ -28,7 +28,7 @@
       // We need to tell Webpack to serve our bundled application
       // from the build path. When proxying:
       // http://localhost:3000/build -> http://localhost:8080/build
-      publicPath: '/build/',
+      publicPath: webpackConfig.output.publicPath,
       headers: {
         'Access-Control-Allow-Origin': '*'
       },

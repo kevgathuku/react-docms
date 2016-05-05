@@ -5,7 +5,7 @@
   let request = require('superagent');
 
   module.exports = {
-    get: (url, actionType, token=null) => {
+    get: (url: string, actionType: string, token: ?string =null) => {
       request
         .get(url)
         .set('x-access-token', token)
@@ -17,7 +17,7 @@
         });
     },
 
-    delete: (url, actionType, token=null) => {
+    delete: (url: string, actionType: string, token: ?string =null) => {
       request
         .delete(url)
         .set('x-access-token', token)
@@ -30,7 +30,7 @@
         });
     },
 
-    put: (url, data, actionType, token=null) => {
+    put: (url: string, data: Object, actionType: string, token: ?string =null) => {
       request
         .put(url)
         .set('x-access-token', token)
@@ -44,7 +44,7 @@
         });
     },
 
-    post: (url, data, actionType, token=null) => {
+    post: (url: string, data: Object, actionType: string, token: ?string =null) => {
       request
         .post(url)
         .set('x-access-token', token)
