@@ -54,8 +54,6 @@
                   <i className="material-icons">play_arrow</i>
                 </a>
               </div>
-              <div className="card-action">
-              </div>
             </div>
           </div>
         );
