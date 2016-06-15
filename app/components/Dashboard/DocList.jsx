@@ -48,6 +48,7 @@
                     data-position="top"
                     data-delay="50"
                     data-tooltip="View"
+                    style={{position: 'relative', top: '-22px'}}
                     href={`/documents/${doc._id}`}
                 >
                   <i className="material-icons">play_arrow</i>
