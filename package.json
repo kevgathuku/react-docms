@@ -19,7 +19,7 @@
     "postinstall": "if [ -n \"$npm_config_production\" ]; then ./node_modules/bower/bin/bower install && npm run deploy; fi"
   },
   "dependencies": {
-    "babel-cli": "^6.5.1",
+    "babel-cli": "^6.10.1",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",
     "babel-plugin-syntax-flow": "^6.5.0",
