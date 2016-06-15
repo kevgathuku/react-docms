@@ -50,7 +50,7 @@
     "keymirror": "^0.1.1",
     "migrate": "^0.2.2",
     "moment": "^2.11.2",
-    "mongoose": "^4.4.3",
+    "mongoose": "^4.5.0",
     "morgan": "~1.7.0",
     "nodemon": "^1.8.1",
     "nyc": "^6.4.0",
