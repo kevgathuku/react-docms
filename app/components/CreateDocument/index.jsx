@@ -15,8 +15,8 @@
       super();
       this.state = {
         token: localStorage.getItem('user'),
-        title: null,
-        content: null,
+        title: '',
+        content: '',
         role: null,
         roles: null
       };
