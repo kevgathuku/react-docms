@@ -89,7 +89,7 @@
     "ignore-styles": "^4.0.0",
     "isparta-loader": "^2.0.0",
     "jsdom": "^9.2.1",
-    "karma": "^0.13.21",
+    "karma": "^1.0.0",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-cli": "1.0.0",
     "karma-coverage": "^1.0.0",
