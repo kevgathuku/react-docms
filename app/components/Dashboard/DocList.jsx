@@ -21,9 +21,11 @@
     }
 
     componentDidMount() {
-      // The document has finished loading and the document has been parsed
+      // Checks whether the document is fully loaded
+      // Sometimes this is 'interactive' or 'complete'
+      // Complete - Page Navigation. Interactive - Page Reload
       // Credit: jamestease (http://bit.ly/29HSeYl)
-      if (document.readyState === 'interactive') {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         // Activate the materialize tooltips
         window.$('.tooltipped').tooltip();
       }
