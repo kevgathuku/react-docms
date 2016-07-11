@@ -2,7 +2,7 @@
   'use strict';
 
   let React = require('react'),
-      cardImage = require('../../images/abstract.jpeg');
+    cardImage = require('../../images/abstract.jpeg');
 
   class DocList extends React.Component {
 
@@ -21,12 +21,12 @@
     }
 
     componentDidMount() {
-      // Activate the materialize tooltips
-      setTimeout(function() {
-        window.$('.tooltipped').each(function() {
-          window.$(this).tooltip();
-        });
-      }, 1000);
+      // The document has finished loading and the document has been parsed
+      // Credit: jamestease (http://bit.ly/29HSeYl)
+      if (document.readyState === 'interactive') {
+        // Activate the materialize tooltips
+        window.$('.tooltipped').tooltip();
+      }
     }
 
     componentWillUnmount() {
