@@ -3,7 +3,7 @@
   'use strict';
 
   let AppConstants = require('../constants/AppConstants'),
-      BaseActions  = require('./BaseActions');
+    BaseActions  = require('./BaseActions');
 
   module.exports = {
     createDoc: (body, token: ?string) => {

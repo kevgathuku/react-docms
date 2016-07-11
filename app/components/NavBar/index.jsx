@@ -2,10 +2,10 @@
   'use strict';
 
   let React = require('react'),
-      UserActions = require('../../actions/UserActions'),
-      browserHistory = require('react-router').browserHistory,
-      UserStore = require('../../stores/UserStore'),
-      logoSrc = require('../../images/favicon.png');
+    UserActions = require('../../actions/UserActions'),
+    browserHistory = require('react-router').browserHistory,
+    UserStore = require('../../stores/UserStore'),
+    logoSrc = require('../../images/favicon.png');
 
   class NavBar extends React.Component {
     constructor(props) {

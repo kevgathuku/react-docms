@@ -52,11 +52,11 @@
 
     handleSubmit = (event) => {
       event.preventDefault();
-        let loginPayload = {
-          username: this.state.email,
-          password: this.state.password
-        };
-        UserActions.login(loginPayload);
+      let loginPayload = {
+        username: this.state.email,
+        password: this.state.password
+      };
+      UserActions.login(loginPayload);
     };
 
     render() {

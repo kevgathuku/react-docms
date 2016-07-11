@@ -2,9 +2,9 @@
   'use strict';
 
   let React = require('react'),
-      DocActions = require('../../actions/DocActions'),
-      DocStore = require('../../stores/DocStore'),
-      DocList = require('./DocList.jsx');
+    DocActions = require('../../actions/DocActions'),
+    DocStore = require('../../stores/DocStore'),
+    DocList = require('./DocList.jsx');
 
   class Dashboard extends React.Component {
     constructor(props) {

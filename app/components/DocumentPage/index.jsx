@@ -2,13 +2,13 @@
   'use strict';
 
   let browserHistory = require('react-router').browserHistory,
-      React = require('react'),
-      moment = require('moment'),
-      DocEdit = require('./DocEdit.jsx'),
-      DocActions = require('../../actions/DocActions'),
-      DocStore = require('../../stores/DocStore'),
-      RoleActions = require('../../actions/RoleActions'),
-      RoleStore = require('../../stores/RoleStore');
+    React = require('react'),
+    moment = require('moment'),
+    DocEdit = require('./DocEdit.jsx'),
+    DocActions = require('../../actions/DocActions'),
+    DocStore = require('../../stores/DocStore'),
+    RoleActions = require('../../actions/RoleActions'),
+    RoleStore = require('../../stores/RoleStore');
 
   class DocumentPage extends React.Component {
     static propTypes = {
