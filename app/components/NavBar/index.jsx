@@ -25,16 +25,17 @@
       UserStore.addChangeListener(this.afterLoginUpdate, 'login');
       UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
-      setTimeout(() => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         window.$('.dropdown-button').dropdown();
         window.$('.button-collapse').sideNav();
-      }, 1000);
+      }
     }
 
     componentDidUpdate() {
-      setTimeout(() => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         window.$('.dropdown-button').dropdown();
-      }, 1000);
+        window.$('.button-collapse').sideNav();
+      }
     }
 
     componentWillUnmount() {
