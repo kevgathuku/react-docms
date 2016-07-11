@@ -65,28 +65,28 @@
 
   AppDispatcher.register(function(action) {
     switch (action.actionType) {
-      case AppConstants.USER_DOCS:
-        DocStore.setDocs(action.data);
-        break;
-      case AppConstants.CREATE_DOC:
-        DocStore.setDocCreateResult(action.data);
-        break;
-      case AppConstants.DELETE_DOC:
-        DocStore.setDocDeleteResult({
-          data: action.data,
-          statusCode: action.statusCode
-        });
-        break;
-      case AppConstants.EDIT_DOC:
-        DocStore.setDocEditResult({
-          data: action.data,
-          statusCode: action.statusCode
-        });
-        break;
-      case AppConstants.GET_DOC:
-        DocStore.setDoc(action.data);
-        break;
-      default:
+    case AppConstants.USER_DOCS:
+      DocStore.setDocs(action.data);
+      break;
+    case AppConstants.CREATE_DOC:
+      DocStore.setDocCreateResult(action.data);
+      break;
+    case AppConstants.DELETE_DOC:
+      DocStore.setDocDeleteResult({
+        data: action.data,
+        statusCode: action.statusCode
+      });
+      break;
+    case AppConstants.EDIT_DOC:
+      DocStore.setDocEditResult({
+        data: action.data,
+        statusCode: action.statusCode
+      });
+      break;
+    case AppConstants.GET_DOC:
+      DocStore.setDoc(action.data);
+      break;
+    default:
         // no default action
     }
 

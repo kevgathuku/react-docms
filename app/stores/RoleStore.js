@@ -5,9 +5,9 @@
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     BaseStore = require('./BaseStore');
 
-    if (!Object.assign) {
-      Object.assign = require('object-assign');
-    }
+  if (!Object.assign) {
+    Object.assign = require('object-assign');
+  }
 
   let RoleStore = Object.assign({}, BaseStore, {
     createdRole: null,
@@ -35,13 +35,13 @@
 
   AppDispatcher.register((action) => {
     switch (action.actionType) {
-      case AppConstants.CREATE_ROLE:
-        RoleStore.setCreatedRole(action.data);
-        break;
-      case AppConstants.GET_ROLES:
-        RoleStore.setRoles(action.data);
-        break;
-      default:
+    case AppConstants.CREATE_ROLE:
+      RoleStore.setCreatedRole(action.data);
+      break;
+    case AppConstants.GET_ROLES:
+      RoleStore.setRoles(action.data);
+      break;
+    default:
         // no default action
     }
     return true;

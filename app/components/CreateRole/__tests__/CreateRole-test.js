@@ -116,7 +116,7 @@ describe('CreateRole', function() {
         const instance = createRole.instance();
         sinon.spy(instance, 'handleSubmit');
         createRole.setState({
-            title: 'viewer'
+          title: 'viewer'
         });
         // Submit the form
         createRole.find('form').simulate('submit', createRoleEvent);
