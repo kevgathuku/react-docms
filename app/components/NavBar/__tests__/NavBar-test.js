@@ -16,6 +16,17 @@ describe('NavBar', function() {
       localStorage.clear();
     });
 
+    before(function() {
+      window.$ = sinon.stub();
+
+      window.$.withArgs('.dropdown-button').returns(sinon.stub({
+        dropdown: function() {}
+      }));
+      window.$.withArgs('.button-collapse').returns(sinon.stub({
+        sideNav: function() {}
+      }));
+    });
+
     it('renders the correct mobile links', function() {
       // It should find the correct title
       expect(shallow(<NavBar />).text()).toMatch(/Docue/);
@@ -76,6 +87,14 @@ describe('NavBar', function() {
       });
       expect(navBar.text()).toMatch(/Settings/);
       expect(navBar.text()).toMatch(/Profile/);
+    });
+
+    it('should activate the materialize dropdowns', function(done) {
+      mount(<NavBar />); // Mount the component
+      // The menu activators should be activated after component mount & update
+      expect(window.$.withArgs('.dropdown-button').called).toBe(true);
+      expect(window.$.withArgs('.button-collapse').called).toBe(true);
+      done();
     });
 
   });
