@@ -39,11 +39,13 @@ describe('CreateRole', function() {
     var createRole;
 
     beforeEach(function() {
+      sinon.stub(RoleActions, 'create').returns(true);
       window.Materialize.toast = sinon.spy();
       createRole = mount(<CreateRole />);
     });
 
     afterEach(function() {
+      RoleActions.create.restore();
       createRole.unmount();
     });
 
@@ -107,7 +109,6 @@ describe('CreateRole', function() {
       });
 
       it('should successfully submit if the form is valid', function() {
-        sinon.stub(RoleActions, 'create').returns(true);
         // simulate the submit form event
         let createRoleEvent = {
           preventDefault: function() {}
@@ -124,7 +125,6 @@ describe('CreateRole', function() {
         expect(instance.handleSubmit.calledOnce).toBe(true);
         expect(RoleActions.create.called).toBe(true);
         instance.handleSubmit.restore();
-        RoleActions.create.restore();
       });
     });
   });

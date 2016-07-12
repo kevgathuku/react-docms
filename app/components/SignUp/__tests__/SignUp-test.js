@@ -100,7 +100,9 @@ describe('SignUp', function() {
         expect(localStorage.setItem.withArgs('user').called).toBe(true);
         expect(localStorage.setItem.withArgs('userInfo').called).toBe(true);
         expect(browserHistory.push.withArgs('/dashboard').called).toBe(true);
-        localStorage.removeItem.restore();
+        localStorage.setItem.restore();
+        browserHistory.push.restore();
+        UserStore.getSession.restore();
       });
 
       it('should return the correct result if signup raised error', function() {
