@@ -6,7 +6,8 @@
 
   class Main extends React.Component {
     static propTypes = {
-      children: React.PropTypes.element.isRequired
+      children: React.PropTypes.element.isRequired,
+      location: React.PropTypes.object
     };
 
     constructor(props) {
@@ -16,7 +17,7 @@
     render() {
       return (
         <div>
-          <NavBar />
+          <NavBar pathname={this.props.location.pathname}/>
           {this.props.children}
         </div>
       );
