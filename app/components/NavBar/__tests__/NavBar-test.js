@@ -43,10 +43,11 @@ describe('NavBar', function() {
     });
 
     it('has the correct initial state', function() {
-      const navBar = shallow(<NavBar />);
+      const navBar = shallow(<NavBar pathname='/'/>);
       expect(navBar.state().token).toEqual(null);
       expect(navBar.state().loggedIn).toEqual(null);
       expect(navBar.state().user).toEqual(null);
+      expect(navBar.state().pathname).toEqual('/');
     });
 
     it('calls componentDidMount', () => {
@@ -102,14 +103,25 @@ describe('NavBar', function() {
   describe('Class functions:', function() {
 
     describe('userSession', function() {
-      it('calls the user session change listener', () => {
+
+      beforeEach(function() {
+        sinon.stub(UserActions, 'getSession').returns(true);
         sinon.spy(UserStore, 'getSession');
+        sinon.spy(browserHistory, 'push');
+      });
+
+      afterEach(function() {
+        UserActions.getSession.restore();
+        UserStore.getSession.restore();
+        browserHistory.push.restore();
+      });
+
+      it('calls the user session change listener', () => {
         shallow(<NavBar />); // Mount the component
         // Trigger a change in the UserStore
         UserStore.setSession({});
         // The getSession function should be called
         expect(UserStore.getSession.called).toBe(true);
-        UserStore.getSession.restore();
       });
 
       it('sets the correct state if the response is valid', function() {
@@ -153,9 +165,7 @@ describe('NavBar', function() {
       });
 
       it('responds correctly if the user is logged in', function() {
-        sinon.spy(browserHistory, 'push');
-        // sinon.spy(localStorage, 'removeItem');
-        shallow(<NavBar />);
+        const wrapper = mount(<NavBar pathname={'/'}/>);
         // Trigger a change in the UserStore
         UserStore.setSession({
           loggedIn: 'true',
@@ -166,9 +176,8 @@ describe('NavBar', function() {
             }
           }
         });
-        expect(browserHistory.push.called).toBe(true);
+        expect(wrapper.state().pathname).toBe('/');
         expect(browserHistory.push.withArgs('/dashboard').called).toBe(true);
-        browserHistory.push.restore();
       });
     });
   });
@@ -203,6 +212,7 @@ describe('NavBar', function() {
       UserStore.setLoginResult({
         error: 'Error!'
       });
+      expect(UserStore.getLoginResult()).toBeA('object');
       expect(navBar.state().loggedIn).toNotExist();
       expect(navBar.state().user).toNotExist();
       expect(navBar.state().token).toNotExist();
@@ -284,6 +294,7 @@ describe('NavBar', function() {
       expect(mockEvent.preventDefault.called).toBe(true);
       expect(UserActions.logout.withArgs({}, user.token).called).toBe(true);
       expect(inst.handleLogoutSubmit.calledOnce).toBe(true);
+      UserActions.logout.restore();
     });
   });
 });
