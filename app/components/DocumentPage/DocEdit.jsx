@@ -2,9 +2,9 @@
   'use strict';
 
   let React = require('react'),
-      Select = require('react-select'),
-      DocActions = require('../../actions/DocActions'),
-      DocStore = require('../../stores/DocStore');
+    Select = require('react-select'),
+    DocActions = require('../../actions/DocActions'),
+    DocStore = require('../../stores/DocStore');
 
   class DocEdit extends React.Component {
     static propTypes = {

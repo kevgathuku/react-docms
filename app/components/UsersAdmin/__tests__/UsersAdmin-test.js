@@ -6,6 +6,7 @@ import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import RoleStore from '../../../stores/RoleStore';
 import UserStore from '../../../stores/UserStore';
+import RoleActions from '../../../actions/RoleActions';
 import UserActions from '../../../actions/UserActions';
 import UsersAdmin from '../index.jsx';
 
@@ -39,17 +40,22 @@ describe('UsersAdmin', function() {
     var usersAdmin;
 
     beforeEach(function() {
+      sinon.stub(RoleActions, 'getRoles').returns(true);
+      sinon.stub(UserActions, 'fetchAllUsers').returns(true);
+      sinon.stub(UserActions, 'update').returns(true);
       window.Materialize.toast = sinon.spy();
       usersAdmin = mount(<UsersAdmin />);
     });
 
     afterEach(function() {
+      RoleActions.getRoles.restore();
+      UserActions.fetchAllUsers.restore();
+      UserActions.update.restore();
       usersAdmin.unmount();
     });
 
     describe('handleSelectChange', function() {
       it('should correctly update the state', function() {
-        sinon.stub(UserActions, 'update').returns(true);
         let user = {
           _id: 1,
           role: {

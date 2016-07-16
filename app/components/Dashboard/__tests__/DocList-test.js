@@ -4,6 +4,7 @@ import React from 'react';
 import expect from 'expect';
 import { mount } from 'enzyme';
 import DocList from '../DocList.jsx';
+import sinon from 'sinon';
 
 describe('DocList', function() {
 
@@ -11,6 +12,11 @@ describe('DocList', function() {
     var docList;
 
     before(function() {
+      window.$ = sinon.stub();
+
+      window.$.withArgs('.tooltipped').returns(sinon.stub({
+        tooltip: function() {}
+      }));
       this.docs = [
         {
           _id: 2,
@@ -29,12 +35,17 @@ describe('DocList', function() {
     });
 
     after(function() {
-      // docList.unmount();
+      docList.unmount();
     });
 
     it('displays the correct contents', function() {
       // It should find the correct content
       expect(docList.text()).toInclude(this.docs[0].ownerId.name.first);
+    });
+
+    it('should activate the materialize tooltips', function() {
+      // The tooltips should be activated once after the component is mounted
+      expect(window.$.withArgs('.tooltipped').calledOnce).toBe(true);
     });
 
     it('renders the correct component', function() {

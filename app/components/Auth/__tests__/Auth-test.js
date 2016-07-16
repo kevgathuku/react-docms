@@ -28,5 +28,5 @@ describe('Auth', function() {
       expect(auth.contains(<SignUp />)).toEqual(true);
     });
 
-    });
+  });
 });

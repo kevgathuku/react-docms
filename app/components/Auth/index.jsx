@@ -2,8 +2,8 @@
   'use strict';
 
   let React = require('react'),
-      Login = require('../Login/index.jsx'),
-      SignUp = require('../SignUp/index.jsx');
+    Login = require('../Login/index.jsx'),
+    SignUp = require('../SignUp/index.jsx');
 
   class Authenticate extends React.Component {
     constructor() {

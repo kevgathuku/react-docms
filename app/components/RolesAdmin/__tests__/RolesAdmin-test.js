@@ -5,8 +5,17 @@ import expect from 'expect';
 import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import RolesAdmin from '../index.jsx';
+import RoleActions from '../../../actions/RoleActions';
 
 describe('RolesAdmin', function() {
+
+  beforeEach(function() {
+    sinon.stub(RoleActions, 'getRoles').returns(true);
+  });
+
+  afterEach(function() {
+    RoleActions.getRoles.restore();
+  });
 
   describe('Component Rendering', function() {
     it('renders the correct component', function() {
