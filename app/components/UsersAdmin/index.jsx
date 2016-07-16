@@ -2,11 +2,11 @@
   'use strict';
 
   let React = require('react'),
-      Select = require('react-select'),
-      RoleActions = require('../../actions/RoleActions'),
-      RoleStore = require('../../stores/RoleStore'),
-      UserActions = require('../../actions/UserActions'),
-      UserStore = require('../../stores/UserStore');
+    Select = require('react-select'),
+    RoleActions = require('../../actions/RoleActions'),
+    RoleStore = require('../../stores/RoleStore'),
+    UserActions = require('../../actions/UserActions'),
+    UserStore = require('../../stores/UserStore');
 
   class UsersAdmin extends React.Component {
     constructor() {
@@ -97,7 +97,7 @@
           <td>{description}</td>
         </tr>
       );
-    };
+      };
       return (
         <div className="container">
           <div className="card-panel">

@@ -2,10 +2,10 @@
   'use strict';
 
   let React = require('react'),
-      UserActions = require('../../actions/UserActions'),
-      browserHistory = require('react-router').browserHistory,
-      UserStore = require('../../stores/UserStore'),
-      logoSrc = require('../../images/favicon.png');
+    UserActions = require('../../actions/UserActions'),
+    browserHistory = require('react-router').browserHistory,
+    UserStore = require('../../stores/UserStore'),
+    logoSrc = require('../../images/favicon.png');
 
   class NavBar extends React.Component {
     constructor(props) {
@@ -25,16 +25,17 @@
       UserStore.addChangeListener(this.afterLoginUpdate, 'login');
       UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
-      setTimeout(() => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         window.$('.dropdown-button').dropdown();
         window.$('.button-collapse').sideNav();
-      }, 1000);
+      }
     }
 
     componentDidUpdate() {
-      setTimeout(() => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         window.$('.dropdown-button').dropdown();
-      }, 1000);
+        window.$('.button-collapse').sideNav();
+      }
     }
 
     componentWillUnmount() {
