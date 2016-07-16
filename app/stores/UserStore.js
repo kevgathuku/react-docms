@@ -2,8 +2,8 @@
   'use strict';
 
   let AppConstants = require('../constants/AppConstants'),
-      AppDispatcher = require('../dispatcher/AppDispatcher'),
-      BaseStore = require('./BaseStore');
+    AppDispatcher = require('../dispatcher/AppDispatcher'),
+    BaseStore = require('./BaseStore');
 
   if (!Object.assign) {
     Object.assign = require('object-assign');
@@ -74,25 +74,25 @@
 
   AppDispatcher.register((action) => {
     switch (action.actionType) {
-      case AppConstants.USER_LOGIN:
-        UserStore.setLoginResult(action.data);
-        break;
-      case AppConstants.USER_LOGOUT:
-        UserStore.setLogoutResult(action.data);
-        break;
-      case AppConstants.USER_SIGNUP:
-        UserStore.setSignupResult(action.data);
-        break;
-      case AppConstants.USER_SESSION:
-        UserStore.setSession(action.data);
-        break;
-      case AppConstants.USER_UPDATE:
-        UserStore.setUpdateResult(action.data);
-        break;
-      case AppConstants.GET_USERS:
-        UserStore.setUsers(action.data);
-        break;
-      default:
+    case AppConstants.USER_LOGIN:
+      UserStore.setLoginResult(action.data);
+      break;
+    case AppConstants.USER_LOGOUT:
+      UserStore.setLogoutResult(action.data);
+      break;
+    case AppConstants.USER_SIGNUP:
+      UserStore.setSignupResult(action.data);
+      break;
+    case AppConstants.USER_SESSION:
+      UserStore.setSession(action.data);
+      break;
+    case AppConstants.USER_UPDATE:
+      UserStore.setUpdateResult(action.data);
+      break;
+    case AppConstants.GET_USERS:
+      UserStore.setUsers(action.data);
+      break;
+    default:
         // no default action
     }
 

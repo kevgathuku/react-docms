@@ -2,7 +2,7 @@
   'use strict';
 
   let React = require('react'),
-      cardImage = require('../../images/abstract.jpeg');
+    cardImage = require('../../images/abstract.jpeg');
 
   class DocList extends React.Component {
 
@@ -21,12 +21,14 @@
     }
 
     componentDidMount() {
-      // Activate the materialize tooltips
-      setTimeout(function() {
-        window.$('.tooltipped').each(function() {
-          window.$(this).tooltip();
-        });
-      }, 1000);
+      // Checks whether the document is fully loaded
+      // Sometimes this is 'interactive' or 'complete'
+      // Complete - Page Navigation. Interactive - Page Reload
+      // Credit: jamestease (http://bit.ly/29HSeYl)
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        // Activate the materialize tooltips
+        window.$('.tooltipped').tooltip();
+      }
     }
 
     componentWillUnmount() {

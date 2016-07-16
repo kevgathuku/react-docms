@@ -2,8 +2,8 @@
   'use strict';
 
   let React = require('react'),
-      RoleActions = require('../../actions/RoleActions'),
-      RoleStore = require('../../stores/RoleStore');
+    RoleActions = require('../../actions/RoleActions'),
+    RoleStore = require('../../stores/RoleStore');
 
   class RolesAdmin extends React.Component {
     constructor() {
@@ -36,7 +36,7 @@
           <td>{role.accessLevel}</td>
         </tr>
       );
-    };
+      };
       return (
         <div className="container">
           <div className="card-panel">

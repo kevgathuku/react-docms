@@ -5,6 +5,8 @@ import expect from 'expect';
 import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import { browserHistory } from 'react-router';
+import DocActions from '../../../actions/DocActions';
+import RoleActions from '../../../actions/RoleActions';
 import DocStore from '../../../stores/DocStore';
 import DocumentPage from '../index.jsx';
 
@@ -39,10 +41,16 @@ describe('DocumentPage', function() {
 
     beforeEach(function() {
       window.Materialize.toast = sinon.spy();
+      sinon.stub(DocActions, 'deleteDoc').returns(true);
+      sinon.stub(DocActions, 'fetchDoc').returns(true);
+      sinon.stub(RoleActions, 'getRoles').returns(true);
       docPage = mount(<DocumentPage params={{id: 4}}/>);
     });
 
     afterEach(function() {
+      DocActions.deleteDoc.restore();
+      DocActions.fetchDoc.restore();
+      RoleActions.getRoles.restore();
       docPage.unmount();
     });
 
@@ -63,7 +71,7 @@ describe('DocumentPage', function() {
         DocStore.setDoc(result);
         // Should set the state correctly
         expect(DocStore.getDoc.called).toBe(true);
-        expect(docPage.state().doc).toEqual(result);
+        expect(docPage.state().doc).toBe(result);
         // Ensure the content is displayed
         expect(docPage.find('div.col.s10.offset-s1').text())
           .toInclude(result.content);

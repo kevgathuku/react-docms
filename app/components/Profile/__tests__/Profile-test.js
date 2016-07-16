@@ -171,10 +171,10 @@ describe('Profile', function() {
             profile.state().passwordConfirm
           ).called).toBe(true);
         let payload = {
-            firstname: profile.state().firstname,
-            lastname: profile.state().lastname,
-            email: profile.state().email,
-            password: profile.state().password
+          firstname: profile.state().firstname,
+          lastname: profile.state().lastname,
+          email: profile.state().email,
+          password: profile.state().password
         };
         expect(UserActions.update.withArgs(profile.state().user._id, payload, profile.state().token).called).toBe(true);
         expect(UserActions.update.called).toBe(true);
@@ -201,9 +201,9 @@ describe('Profile', function() {
         expect(editProfileEvent.preventDefault.called).toBe(true);
         expect(instance.handleSubmit.calledOnce).toBe(true);
         let payload = {
-            firstname: profile.state().firstname,
-            lastname: profile.state().lastname,
-            email: profile.state().email
+          firstname: profile.state().firstname,
+          lastname: profile.state().lastname,
+          email: profile.state().email
         };
         expect(UserActions.update.called).toBe(true);
         expect(UserActions.update.withArgs(profile.state().user._id, payload, profile.state().token).called).toBe(true);

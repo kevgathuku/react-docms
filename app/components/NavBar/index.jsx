@@ -2,16 +2,22 @@
   'use strict';
 
   let React = require('react'),
-      UserActions = require('../../actions/UserActions'),
-      browserHistory = require('react-router').browserHistory,
-      UserStore = require('../../stores/UserStore'),
-      logoSrc = require('../../images/favicon.png');
+    UserActions = require('../../actions/UserActions'),
+    browserHistory = require('react-router').browserHistory,
+    UserStore = require('../../stores/UserStore'),
+    logoSrc = require('../../images/favicon.png');
 
   class NavBar extends React.Component {
+    // Receive the current pathname as a prop
+    static propTypes = {
+      pathname: React.PropTypes.string
+    };
+
     constructor(props) {
       super(props);
 
       this.state = {
+        pathname: this.props.pathname,
         token: localStorage.getItem('user'),
         loggedIn: null,
         user: null
@@ -25,16 +31,17 @@
       UserStore.addChangeListener(this.afterLoginUpdate, 'login');
       UserStore.addChangeListener(this.afterSignupUpdate, 'signup');
       UserStore.addChangeListener(this.handleLogoutResult);
-      setTimeout(() => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         window.$('.dropdown-button').dropdown();
         window.$('.button-collapse').sideNav();
-      }, 1000);
+      }
     }
 
     componentDidUpdate() {
-      setTimeout(() => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
         window.$('.dropdown-button').dropdown();
-      }, 1000);
+        window.$('.button-collapse').sideNav();
+      }
     }
 
     componentWillUnmount() {
@@ -83,11 +90,11 @@
           localStorage.removeItem('userInfo');
           // If the user is not logged in and is not on the homepage
           // redirect them to the login page
-          if (window.location.pathname !== '/') {
+          if (this.state.pathname !== '/') {
             browserHistory.push('/auth');
           }
         } else if (response.loggedIn === 'true') {
-          if (window.location.pathname === '/auth' || window.location.pathname === '/') {
+          if (this.state.pathname === '/auth' || this.state.pathname === '/') {
             browserHistory.push('/dashboard');
           }
         }
