@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 AppConstants = require('../constants/AppConstants')
 BaseActions = require('./BaseActions')

@@ -51,7 +51,7 @@ class UsersAdmin extends React.Component
 
   # Prepend the user object to the function arguments through bind
   handleSelectChange: (user, val) =>
-    stateObject = () ->
+    stateObject = ->
       returnObj = {}
       returnObj[user._id] = val
       return returnObj
