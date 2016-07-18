@@ -14,7 +14,7 @@
 
   module.exports = {
     // Makes sure errors in console map to the correct file and line number
-    devtool: 'eval',
+    devtool: 'source-map',
     entry: [
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
