@@ -59,7 +59,12 @@
     // from Node
     plugins: [
       new ExtractTextPlugin('styles.css'),
-      new Webpack.HotModuleReplacementPlugin()
+      new Webpack.HotModuleReplacementPlugin(),
+      new Webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('development')
+        }
+      })
     ]
   };
 })();
