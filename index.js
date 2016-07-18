@@ -90,7 +90,11 @@
   });
 
   // START THE SERVER
-  app.listen(port);
+  if (isProduction) {
+    app.listen(port);
+  } else {
+    app.listen(port, 'localhost');
+  }
   console.log('Listening on port', port);
 
   // Export the app object
