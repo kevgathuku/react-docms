@@ -26,7 +26,9 @@
         'react': pathToReact,
         'react-dom': pathToReactDOM
       },
-      root: __dirname
+      // Enable requiring these file extensions without including their extension
+      extensions: ['', '.js', '.jsx', '.coffee'],
+      root: path.resolve(__dirname)
     },
     output: {
       //We use the buildPath as that points to where the files will eventually

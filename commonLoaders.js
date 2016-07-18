@@ -11,6 +11,9 @@
       presets: ['es2015', 'react', 'stage-0']
     }
   }, {
+    test: /\.coffee$/,
+    loader: 'coffee'
+  }, {
     test: /\.json$/,
     loader: 'json-loader'
   }, {
