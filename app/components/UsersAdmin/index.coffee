@@ -39,7 +39,7 @@ class UsersAdmin extends React.Component
     users = UserStore.getUsers()
     @setState {users: users}
 
-  getOptions: (input, callback) ->
+  getOptions: (input, callback) =>
     setTimeout(() =>
       callback(null, {
         options: @state.roles,
