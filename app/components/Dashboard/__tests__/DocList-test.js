@@ -3,7 +3,7 @@
 import React from 'react';
 import expect from 'expect';
 import { mount } from 'enzyme';
-import DocList from '../DocList.jsx';
+import DocList from '../DocList';
 import sinon from 'sinon';
 
 describe('DocList', function() {
