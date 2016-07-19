@@ -1,11 +1,13 @@
 'use strict'
 
-React = require('react')
-Select = require('react-select')
-RoleActions = require('../../actions/RoleActions')
-RoleStore = require('../../stores/RoleStore')
-UserActions = require('../../actions/UserActions')
-UserStore = require('../../stores/UserStore')
+React = require 'react'
+Select = require 'react-select'
+RoleActions = require '../../actions/RoleActions'
+RoleStore = require '../../stores/RoleStore'
+UserActions = require '../../actions/UserActions'
+UserStore = require '../../stores/UserStore'
+
+{ div, h2, table, thead, tbody, td, th, tr } = React.DOM
 
 class UsersAdmin extends React.Component
   constructor: ->
@@ -67,10 +69,10 @@ class UsersAdmin extends React.Component
     access = if @state[user._id] then @state[user._id].title else user.role.title
     description = @state.access[access]
     return (
-      React.DOM.tr({'key': (user._id)},
-        React.DOM.td(null, ("#{user.name.first} #{user.name.last}")),
-        React.DOM.td(null, (user.email)),
-        React.DOM.td(null,
+      tr({'key': (user._id)},
+        td(null, ("#{user.name.first} #{user.name.last}")),
+        td(null, (user.email)),
+        td(null,
           React.createElement(Select.Async, { \
             'clearable': (false), \
             'labelKey': 'title', \
@@ -82,27 +84,27 @@ class UsersAdmin extends React.Component
             'placeholder': 'Select Role', \
             'value': (user.role)
             })),
-        React.DOM.td(null, (description))
+        td(null, (description))
       )
   )
 
   render: ->
     return (
-      React.DOM.div({'className': 'container'},
-        React.DOM.div({'className': 'card-panel'},
-          React.DOM.h2({'className': 'header center-align'}, 'Manage Users'),
-            React.DOM.div({'className': 'row'},
-              React.DOM.div({'className': 'col s10 offset-s1 center-align'},
-                React.DOM.table({'className': 'centered'},
-                  React.DOM.thead(null,
-                    React.DOM.tr(null,
-                      React.DOM.th({'data-field': 'id'}, 'Name'),
-                      React.DOM.th({'data-field': 'name'}, 'Email'),
-                      React.DOM.th({'data-field': 'role'}, 'Role'),
-                      React.DOM.th({'data-field': 'role'}, 'Access')
+      div({'className': 'container'},
+        div({'className': 'card-panel'},
+          h2({'className': 'header center-align'}, 'Manage Users'),
+            div({'className': 'row'},
+              div({'className': 'col s10 offset-s1 center-align'},
+                table({'className': 'centered'},
+                  thead(null,
+                    tr(null,
+                      th({'data-field': 'id'}, 'Name'),
+                      th({'data-field': 'name'}, 'Email'),
+                      th({'data-field': 'role'}, 'Role'),
+                      th({'data-field': 'role'}, 'Access')
                     )
                   ),
-                  React.DOM.tbody(null,
+                  tbody(null,
                     (if @state.users then @state.users.map(@renderUser) else null)
                   )
                 )
