@@ -15,7 +15,7 @@ class UsersAdmin extends React.Component
     @state =
       token: localStorage.getItem('user')
       selectedRole: null
-      users: null
+      users: []
       roles: null
       access:
         'viewer': 'Public Documents',
@@ -105,7 +105,7 @@ class UsersAdmin extends React.Component
                     )
                   ),
                   tbody(null,
-                    (if @state.users then @state.users.map(@renderUser) else null)
+                    (@state.users.map(@renderUser))
                   )
                 )
               )

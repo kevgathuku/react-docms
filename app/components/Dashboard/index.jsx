@@ -7,8 +7,8 @@
     DocList = require('./DocList.jsx');
 
   class Dashboard extends React.Component {
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
 
       this.state = {
         docs: null
