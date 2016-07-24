@@ -8,7 +8,7 @@ import RoleStore from '../../../stores/RoleStore';
 import UserStore from '../../../stores/UserStore';
 import RoleActions from '../../../actions/RoleActions';
 import UserActions from '../../../actions/UserActions';
-import UsersAdmin from '../index.jsx';
+import UsersAdmin from '../index';
 
 describe('UsersAdmin', function() {
 

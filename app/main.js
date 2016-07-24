@@ -9,18 +9,18 @@
     Route = ReactRouter.Route,
     Router = ReactRouter.Router,
     browserHistory = ReactRouter.browserHistory,
-    Auth = require('./components/Auth/index.jsx'),
-    Admin = require('./components/Admin/index.jsx'),
-    CreateDocument = require('./components/CreateDocument/index.jsx'),
-    CreateRole = require('./components/CreateRole/index.jsx'),
-    DocumentPage = require('./components/DocumentPage/index.jsx'),
-    Dashboard = require('./components/Dashboard/index.jsx'),
-    Landing = require('./components/Landing/index.jsx'),
-    Profile = require('./components/Profile/index.jsx'),
-    Main = require('./components/Landing/Main.jsx'),
-    NotFound = require('./components/NotFound/index.jsx'),
-    RolesAdmin = require('./components/RolesAdmin/index.jsx'),
-    UsersAdmin = require('./components/UsersAdmin/index.jsx');
+    Auth = require('./components/Auth/index'),
+    Admin = require('./components/Admin/index'),
+    CreateDocument = require('./components/CreateDocument/index'),
+    CreateRole = require('./components/CreateRole/index'),
+    DocumentPage = require('./components/DocumentPage/index'),
+    Dashboard = require('./components/Dashboard/index'),
+    Landing = require('./components/Landing/index'),
+    Profile = require('./components/Profile/index'),
+    Main = require('./components/Landing/Main'),
+    NotFound = require('./components/NotFound/index'),
+    RolesAdmin = require('./components/RolesAdmin/index'),
+    UsersAdmin = require('./components/UsersAdmin/index');
 
   ReactDOM.render((
     <Router history={browserHistory}>

@@ -4,11 +4,11 @@
   let React = require('react'),
     DocActions = require('../../actions/DocActions'),
     DocStore = require('../../stores/DocStore'),
-    DocList = require('./DocList.jsx');
+    DocList = require('./DocList');
 
   class Dashboard extends React.Component {
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
 
       this.state = {
         docs: null

@@ -14,7 +14,7 @@
 
   module.exports = {
     // Makes sure errors in console map to the correct file and line number
-    devtool: 'eval',
+    devtool: 'source-map',
     entry: [
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
@@ -26,7 +26,9 @@
         'react': pathToReact,
         'react-dom': pathToReactDOM
       },
-      root: __dirname
+      // Enable requiring these file extensions without including their extension
+      extensions: ['', '.js', '.jsx', '.coffee'],
+      root: path.resolve(__dirname)
     },
     output: {
       //We use the buildPath as that points to where the files will eventually
@@ -57,7 +59,12 @@
     // from Node
     plugins: [
       new ExtractTextPlugin('styles.css'),
-      new Webpack.HotModuleReplacementPlugin()
+      new Webpack.HotModuleReplacementPlugin(),
+      new Webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('development')
+        }
+      })
     ]
   };
 })();
