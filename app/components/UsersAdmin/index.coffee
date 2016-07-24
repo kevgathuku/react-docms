@@ -66,7 +66,7 @@ class UsersAdmin extends React.Component
       UserActions.update(user._id, user, @state.token)
 
   renderUser: (user) =>
-    access = if @state[user._id] then @state[user._id].title else user.role.title
+    access = @state[user._id]?.title or user.role.title
     description = @state.access[access]
     return (
       tr({'key': (user._id)},
