@@ -10,8 +10,6 @@ describe('Documents Spec', () => {
   let token = null;
   let defaultRole = Roles.schema.paths.title.default();
 
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-
   beforeEach((done) => {
     // Promise that returns a generatedToken
     helper.beforeEach()
@@ -23,7 +21,7 @@ describe('Documents Spec', () => {
         console.log('Error running the beforeEach function', err);
         done();
       });
-  });
+  }, 10000);
 
   describe('Document Creation', () => {
     it('should create a document successfully', (done) => {
@@ -33,7 +31,6 @@ describe('Documents Spec', () => {
           title: 'Doc 1',
           content: 'JS Curriculum'
         })
-        .set('Accept', 'application/json')
         .set('x-access-token', token)
         .end((err, res) => {
           expect(err).toBeNull();
