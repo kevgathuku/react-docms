@@ -90,7 +90,7 @@
     "mocha": "^2.5.3",
     "react-addons-test-utils": "^15.1.0",
     "sessionstorage": "0.0.1",
-    "sinon": "^1.17.3",
+    "sinon": "^1.17.5",
     "sinon-spy-react": "^2.0.0",
     "supertest": "^1.2.0",
     "supertest-as-promised": "^3.1.0",
