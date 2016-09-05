@@ -3,6 +3,7 @@
 
   let path = require('path');
   let ExtractTextPlugin = require('extract-text-webpack-plugin');
+  let Purify = require('purifycss-webpack-plugin');
   let Webpack = require('webpack');
   let nodeModulesPath = path.resolve(__dirname, 'node_modules');
   let pathToReact = path.resolve(nodeModulesPath, 'react/dist/react.js');
@@ -57,7 +58,13 @@
     // from Node
     plugins: [
       new ExtractTextPlugin('styles.css'),
-      new Webpack.HotModuleReplacementPlugin()
+      new Webpack.HotModuleReplacementPlugin(),
+      new Purify({
+            basePath: __dirname,
+            paths: [
+                "public/*.html"
+            ]
+        })
     ]
   };
 })();
