@@ -22,6 +22,8 @@
     RolesAdmin = require('./components/RolesAdmin/index.jsx'),
     UsersAdmin = require('./components/UsersAdmin/index.jsx');
 
+  require('normalize.css/normalize.css');
+
   ReactDOM.render((
     <Router history={browserHistory}>
       <Route path="/" component={Main} >
