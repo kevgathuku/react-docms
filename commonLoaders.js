@@ -15,10 +15,9 @@
     loader: 'json-loader'
   }, {
     test: /\.css$/,
-    exclude: /node_modules/,
     loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
   }, {
-    test: /\.(png|jpg|jpeg)$/,
+    test: /\.jpe?g$|\.gif$|\.png$/,
     exclude: /node_modules/,
     loader: 'url-loader?limit=8192' // limit of 8kb
   }];
